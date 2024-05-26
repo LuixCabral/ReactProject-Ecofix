@@ -1,6 +1,6 @@
 import '../styles/LoginPage.css'
 import { useEffect, useState } from 'react';
-import { supabase } from '../components/DatabaseConnection';
+import {supabase} from '../components/DatabaseConnection'
 
 export default function LoginPage(){
     const [email, setEmail] = useState('');
