@@ -1,13 +1,13 @@
 import '../styles/LoginPage.css'
 import { useEffect, useState } from 'react';
-import { supabase } from '../components/DatabaseConnection';
+import {supabase} from '../components/DatabaseConnection'
 
 export default function LoginPage(){
     const [email, setEmail] = useState('');
     //const [password, setPassword] = useState('');
     const [profiles, setProfiles] = useState([]);
 
-   //Não remova o colchete vazio: causará um loop.
+   //Não remova o colchete vazio: causará um loop ->.
     useEffect(() => {
         getProfiles();
     // eslint-disable-next-line react-hooks/exhaustive-deps
