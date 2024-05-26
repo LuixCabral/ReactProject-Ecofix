@@ -1,0 +1,38 @@
+
+
+eu criei a função SwitchPage para fazer essa troca, veja que acima eu coloquei o botao e ao clicar ele chama a função SwitchPage
+
+agora basta voce fazer sua pagina, a minha pagina de LoginPage.jsx ta assim:
+
+export default function LoginPage(){
+    resto do codigo...
+}
+
+eu dei export em LoginPage, entao o nome da função que eu vou importar é LoginPage
+
+quando criou tua pagina tu vai chamar a funçao que tu criou em main.jsx, mais uma vez usando meu loginpage como exemplo:
+
+import LoginPage from './routes/LoginPage.jsx'
+
+substitua loginpage pelo nome de sua pagina 
+
+e ai abaixo voce vai adicionar um codigo assim
+
+{
+  //Página de login.
+  path: 'nomedapagina/',
+  element: <nomedapagina />
+    }, <- essa virgula aqui é importante, nao se esquece dela
+
+agora no return com o codigo que tu vai criar para tu chamar a pagina basta colocar um evento, por exemplo adicionei no App o evento onClick que me leva para a página, adicione o nome da sua pagina e pronto, pagina criada com a rota.
+
+function App() {
+  return (
+    <>
+    <h1>Bem-vindo a ecofix</h1>
+    <button onClick={SwitchPage('entrar')}>Login</button>
+    </>
+  )
+}
+
+NÃO SE ESQUECE DE IMPORTAR SwitchPage PARA A PAGINA.
