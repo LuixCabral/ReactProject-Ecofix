@@ -10,7 +10,7 @@ lerna-debug.log*
 .gitignore
 node_modules
 dist
-*.env
+.env
 dist-ssr
 *.local
 
