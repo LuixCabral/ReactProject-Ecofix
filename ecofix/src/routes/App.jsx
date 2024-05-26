@@ -1,5 +1,5 @@
-import './App.css';
-import { SwitchPage } from './components/SwitchPage.js';
+import '../styles/App.css';
+import { SwitchPage } from '../components/SwitchPage.js';
 
 
 function App() {
