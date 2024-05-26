@@ -85,6 +85,14 @@ h1 {
     -webkit-animation: wobble 0.3s ease-in;
 }
 
+#email-confirmation{
+    color: red;
+    text-align: left;
+    text-wrap: nowrap;
+    margin-top: -26px;
+    font-weight: bolder;
+    font-size: 15px;
+}
 .login-container form button {
     background-color: var(--primary-color);
     color: var(--color);
