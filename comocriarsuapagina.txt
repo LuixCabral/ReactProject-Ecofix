@@ -36,3 +36,5 @@ function App() {
 }
 
 NÃO SE ESQUECE DE IMPORTAR SwitchPage PARA A PAGINA.
+
+
