@@ -1,63 +1,49 @@
 import '../styles/LoginPage.css'
-import { useEffect, useState } from 'react';
-import {supabase} from '../components/DatabaseConnection'
+import ChangeForm from '../components/ChangeForm';
+import { useState, useEffect } from 'react';
+
 
 export default function LoginPage(){
-    const[isLoginClicked, setLoginClicked] = useState(true);
-    const [email, setEmail] = useState('');
-    //const [password, setPassword] = useState('');
-    const [profiles, setProfiles] = useState([]);
+    const [isLoginClicked, setLoginClicked] = useState(true);
+    let switchForm = (event) => {
+        // eslint-disable-next-line no-undef
+        const signIn = document.getElementById('signin');
+        // eslint-disable-next-line no-undef
+        const signUp = document.getElementById('signup');
 
-   //Não remova o colchete vazio: causará um loop ->.
-    useEffect(() => {
-        getProfiles();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
-
-    async function getProfiles() {
-        //not working yet
-        const {data} = await supabase.from('profiles').select();
-        setProfiles(data);
-        console.log("this: " ,profiles)
-    }
-
-    let changeToSignUp = (event) =>{
         event.preventDefault();
-        setLoginClicked(false);
-    }
-    const notReloadThePageEvent = (event) => {
-        event.preventDefault();
-    }
-
-    function changeForm(){
-        //incompleto
-        if(isLoginClicked == true){
-            <form onSubmit={notReloadThePageEvent}>
-                <input type="text" />
-                <input type="password" />
-                <input type="text" />
-            </form>
+        if(event.target.innerHTML == ' Entrar '){
+            setLoginClicked(true);
+        }else{
+            setLoginClicked(false);
         }
-        <form onSubmit={notReloadThePageEvent} >
-            <input type="text" id="login" className="fadeIn second" name="login" placeholder="Email" onChange={e => setEmail(e.target.value)}/>
-            <input type="password" id="password" className="fadeIn third" name="login" placeholder="Senha"/>
-            <input type="submit" className="fadeIn fourth" value="Log In"/>
-        </form> 
+
+        // eslint-disable-next-line no-undef
+        if(isLoginClicked == true){
+            signIn.className = 'active'
+            signUp.className = 'inactive underlineHover'
+        }else{
+            signIn.className = 'inactive underlineHover'
+            signUp.className = 'active'
+        }
     }
+    useEffect(() => {
+        // Re-render ChangeForm when isLoginClicked changes
+        console.log('ChangeForm re-rendered');
+      }, [isLoginClicked]);
+
     
     return(
         <body>
             <div className="wrapper fadeInDown">
             <div id="formContent">
 
-                <h2 className="active"> Entrar </h2>
-                <h2 onClick={changeToSignUp} className="inactive underlineHover">Cadastrar </h2>
-
-
+                <h2 id="signin" onClick={switchForm} className={isLoginClicked ? 'active' : 'inactive underlineHover'}> Entrar </h2>
+                <h2 id="signup" onClick={switchForm} className={isLoginClicked ? 'inactive underlineHover' : 'active'}>Cadastrar </h2>
+                <ChangeForm isLoginClicked={isLoginClicked} />
                 <div className="fadeIn first">
                 <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
                 </div>
-                    <changeForm/>
                 <div id="formFooter">
                 <a className="underlineHover" href="#">Esqueceu a senha?</a>
                 </div>
