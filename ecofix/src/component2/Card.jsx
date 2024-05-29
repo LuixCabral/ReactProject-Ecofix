@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 //aqui foi alterado retirada de {}
 import  Users  from './Users';  
 
-function Card() {
+export default function Card() {
     const [query, setQuery] = useState("");
 
     const filteredUsers = Users.filter(user => user.name.toLowerCase().includes(query.toLowerCase()));
 
     return (
         <div className="Card">
-            <input
+            <input 
                 type="text"
-                placeholder="pesquise..."
+                placeholder="Pesquise..."
                 className="pesquisa"
                 onChange={(e) => setQuery(e.target.value)}
             />
@@ -24,6 +24,4 @@ function Card() {
             </ul>
         </div>
     );
-}
-
-export default Card;
+};
