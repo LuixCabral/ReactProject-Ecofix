@@ -1,6 +1,6 @@
-import axios from "axios"
-import fileDownload from 'js-file-download'
-import config from "./configs"
+import axios from "axios";
+import fileDownload from 'js-file-download';
+import config from "./configs";
 
 
 function handleDownload(configs) {
