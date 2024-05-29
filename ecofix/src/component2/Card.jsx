@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Users } from './Users';  
+//aqui foi alterado retirada de {}
+import  Users  from './Users';  
 
 function Card() {
     const [query, setQuery] = useState("");

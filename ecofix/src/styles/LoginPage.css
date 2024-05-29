@@ -120,7 +120,16 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active  
   -ms-transform: scale(0.95);
   transform: scale(0.95);
 }
-
+#passwordfield, #emailfield{
+  width: 80%;
+  height: 100%;
+  margin-left: 15px;
+  border: none;
+  background-color: blue;
+}
+.eye{
+  right: -2px;
+}
 #password, #email, #confirmpassword {
   height: 40px;
   width: 80%;

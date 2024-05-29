@@ -1,6 +1,6 @@
 // src/data/initialDetails.js
-
-const User = [
+//Aqui foi alterado de User para Users e no export tambem
+const Users = [
     {
       id: 1,
       imgPath: "",
@@ -38,4 +38,4 @@ const User = [
     },
   ];
   
-  export default User;
+  export default Users;

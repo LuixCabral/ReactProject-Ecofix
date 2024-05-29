@@ -34,8 +34,13 @@ export default function ChangeForm({isLoginClicked}){
         
           {!isLoginClicked ? (
             <form onSubmit={notReloadThePageEvent}>
-              <input id="email" placeholder="Digite seu email" type="text" />
-              <input id="password" placeholder="Digite sua senha" type="password" />
+              <div id='email'>
+              <input id="emailfield" placeholder="Digite seu email" type="text" />
+              <img className="eye" rel="icon" type="image/svg+xml" href="assets/opened-eye.svg" />
+              </div>
+              <div id="password">
+              <input id="passwordfield" placeholder="Digite sua senha" type="password" />
+              </div>
               <input onChange={changeConfirmPassword} id="confirmpassword" value={confirmPassword} placeholder="Digine novamente sua senha" type="password" />
               <input type="submit" className="fadeIn fourth" value="Cadastrar" />
             </form>

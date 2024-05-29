@@ -1,4 +1,3 @@
-import React from 'react';
 import Card from '../component2/Card';  // Ajuste o caminho de importação conforme necessário
 
 function CardTestPage() {
