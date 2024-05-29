@@ -2,7 +2,6 @@ import '../styles/LoginPage.css'
 import ChangeForm from '../components/ChangeForm';
 import { useState, useEffect } from 'react';
 
-
 export default function LoginPage(){
     const [isLoginClicked, setLoginClicked] = useState(true);
     let switchForm = (event) => {

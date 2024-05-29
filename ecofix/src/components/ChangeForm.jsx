@@ -5,8 +5,9 @@ import { supabase } from "./DatabaseConnection";
 export default function ChangeForm({isLoginClicked}){
 
     const [profiles, setProfiles] = useState([]);
+    const [loginPassword, setLoginPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    //const [email, setEmail] = useState('');
+    const [email, setEmail] = useState('');
     //Não remova o colchete vazio: causará um loop ->.
      useEffect(() => {
          getProfiles();
@@ -15,7 +16,8 @@ export default function ChangeForm({isLoginClicked}){
  
      async function getProfiles() {
          //not working yet
-         const {data} = await supabase.from('profiles').select();
+        console.log("sending", email)
+         const {data} = await supabase.from('profiles').select().eq("username", email);
          setProfiles(data);
          console.log("this: " ,profiles)
      }
@@ -28,15 +30,23 @@ export default function ChangeForm({isLoginClicked}){
         //Por algum motivo o label de confirmar senha colocava um "value", por isso eu criei essa função, atualiza os valores corretamente
         setConfirmPassword(event.target.value);
      }
+     
+     function updateEmailField(event){
+        console.log(email)
+        setEmail(event.target.value);
+     }
 
+     function updateLoginPasswordField(event){
+        setLoginPassword(event.target.value);
+     }
     return (
         <div>
         
           {!isLoginClicked ? (
             <form onSubmit={notReloadThePageEvent}>
               <div id='email'>
-              <input id="emailfield" placeholder="Digite seu email" type="text" />
-              <img className="eye" rel="icon" type="image/svg+xml" href="assets/opened-eye.svg" />
+              <input id="emailfield"  placeholder="Digite seu email" type="text" />
+              <img className="eye" onChange={updateLoginPasswordField} rel="icon" type="image/svg+xml" href="assets/opened-eye.svg" />
               </div>
               <div id="password">
               <input id="passwordfield" placeholder="Digite sua senha" type="password" />
@@ -46,9 +56,9 @@ export default function ChangeForm({isLoginClicked}){
             </form>
           ) : (
             <form onSubmit={notReloadThePageEvent}>
-              <input type="text" id="email" className="fadeIn second" name="login" placeholder="Email" />
-              <input type="password" id="password" className="fadeIn third" name="login" placeholder="Senha" />
-              <input type="submit" className="fadeIn fourth" value="Entrar" />
+              <input type="text" onChange={updateEmailField} id="email" className="fadeIn second" name="login" placeholder="Email" />
+              <input type="password" id="password" onChange={updateLoginPasswordField} className="fadeIn third" name="login" placeholder="Senha" />
+              <input type="submit" onClick={getProfiles} className="fadeIn fourth" value="Entrar" />
             </form>
           )
           
