@@ -26,6 +26,7 @@ h2 {
   display:inline-block;
   margin: 40px 8px 10px 8px; 
   color: #cccccc;
+  cursor: pointer;
 }
 
 
@@ -85,6 +86,7 @@ h2.active {
 /* FORM TYPOGRAPHY*/
 
 input[type=button], input[type=submit], input[type=reset]  {
+
   background-color: #56baed;
   border: none;
   color: white;
@@ -98,7 +100,7 @@ input[type=button], input[type=submit], input[type=reset]  {
   box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
-  margin: 5px 20px 40px 20px;
+  margin-bottom: 20px;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
@@ -108,6 +110,7 @@ input[type=button], input[type=submit], input[type=reset]  {
 
 input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
   background-color: #39ace7;
+  cursor: pointer;
 }
 
 input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
@@ -117,17 +120,27 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active  
   -ms-transform: scale(0.95);
   transform: scale(0.95);
 }
-
-#password, #login {
+#passwordfield, #emailfield{
+  width: 80%;
+  height: 100%;
+  margin-left: 15px;
   border: none;
+  background-color: blue;
+}
+.eye{
+  right: -2px;
+}
+#password, #email, #confirmpassword {
+  height: 40px;
+  width: 80%;
+  background-color: #eee7e7;
   color: #0d0d0d;
-
-  text-align: center;
+  text-align: left;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 5px;
-  border: 2px solid #f6f6f6;
+  margin-bottom: 40px;
+  border: 0px hsl(0, 0%, 100%);
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
   -ms-transition: all 0.5s ease-in-out;
@@ -137,14 +150,13 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active  
   border-radius: 5px 5px 5px 5px;
 }
 
-#password:focus, #login:focus {
+#password:focus, #confirmpassword:focus ,#email:focus {
   background-color: #fff;
-  border-bottom: 2px solid #5fbae9;
+  border: 2px solid #f6f6f6;
+  padding: 4px;
+  border-bottom: 2px solid #048f0f;
 }
 
-#password, #login:placeholder {
-  color: #cccccc;
-}
 
 
 
