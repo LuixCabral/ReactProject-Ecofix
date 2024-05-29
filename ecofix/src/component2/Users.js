@@ -1,6 +1,6 @@
-// src/data/initialDetails.js
+// src/component2/User.js
 
-const User = [
+const Users = [
     {
       id: 1,
       imgPath: "",
@@ -38,4 +38,4 @@ const User = [
     },
   ];
   
-  export default User;
+  export default Users;

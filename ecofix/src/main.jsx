@@ -4,7 +4,7 @@ import App from './routes/App.jsx'
 import './styles/index.css'
 import LoginPage from './routes/LoginPage.jsx'
 import { Component2 } from './Component2/Card'
-import CardTestPage from './routes/CardTestPage.jsx';  // Importe a nova página de teste
+import CardTestPage from './routes/CardTestPage.jsx';
 
 //Configuração do "router" para trocar de páginas.
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
