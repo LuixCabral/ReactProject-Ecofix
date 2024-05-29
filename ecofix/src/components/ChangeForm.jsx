@@ -1,10 +1,12 @@
 import { useState,useEffect } from "react"
 import { supabase } from "./DatabaseConnection";
 
+// eslint-disable-next-line react/prop-types
 export default function ChangeForm({isLoginClicked}){
 
     const [profiles, setProfiles] = useState([]);
-    const [email, setEmail] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    //const [email, setEmail] = useState('');
     //Não remova o colchete vazio: causará um loop ->.
      useEffect(() => {
          getProfiles();
@@ -21,22 +23,31 @@ export default function ChangeForm({isLoginClicked}){
      const notReloadThePageEvent = (event) => {
          event.preventDefault();
      }
-    //incompleto
+     
+     function changeConfirmPassword(event){
+        //Por algum motivo o label de confirmar senha colocava um "value", por isso eu criei essa função, atualiza os valores corretamente
+        setConfirmPassword(event.target.value);
+     }
+
     return (
         <div>
-          {isLoginClicked ? (
+        
+          {!isLoginClicked ? (
             <form onSubmit={notReloadThePageEvent}>
-              <input placeholder="value" type="text" />
-              <input placeholder="pass" type="password" />
-              <input placeholder="confirm pass" type="text" />
+              <input id="email" placeholder="Digite seu email" type="text" />
+              <input id="password" placeholder="Digite sua senha" type="password" />
+              <input onChange={changeConfirmPassword} id="confirmpassword" value={confirmPassword} placeholder="Digine novamente sua senha" type="password" />
+              <input type="submit" className="fadeIn fourth" value="Cadastrar" />
             </form>
           ) : (
             <form onSubmit={notReloadThePageEvent}>
-              <input type="text" id="login" className="fadeIn second" name="login" placeholder="Email" />
+              <input type="text" id="email" className="fadeIn second" name="login" placeholder="Email" />
               <input type="password" id="password" className="fadeIn third" name="login" placeholder="Senha" />
-              <input type="submit" className="fadeIn fourth" value="Log In" />
+              <input type="submit" className="fadeIn fourth" value="Entrar" />
             </form>
-          )}
+          )
+          
+          }
         </div>
       );
     }

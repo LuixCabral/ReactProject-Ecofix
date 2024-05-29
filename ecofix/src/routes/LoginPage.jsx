@@ -36,19 +36,17 @@ export default function LoginPage(){
     return(
         <body>
             <div className="wrapper fadeInDown">
-            <div id="formContent">
+                <div id="formContent">
 
-                <h2 id="signin" onClick={switchForm} className={isLoginClicked ? 'active' : 'inactive underlineHover'}> Entrar </h2>
-                <h2 id="signup" onClick={switchForm} className={isLoginClicked ? 'inactive underlineHover' : 'active'}>Cadastrar </h2>
-                <ChangeForm isLoginClicked={isLoginClicked} />
-                <div className="fadeIn first">
-                <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
+                    <h2 id="signin" onClick={switchForm} className={isLoginClicked ? 'active' : 'inactive underlineHover'}> Entrar </h2>
+                    <h2 id="signup" onClick={switchForm} className={isLoginClicked ? 'inactive underlineHover' : 'active'}>Cadastrar </h2>
+                    <ChangeForm isLoginClicked={isLoginClicked} />
+                    <div className="fadeIn first">
+                        <div id="formFooter">
+                        <a className="underlineHover" href="#">Esqueceu a senha?</a>
+                        </div>
+                    </div>
                 </div>
-                <div id="formFooter">
-                <a className="underlineHover" href="#">Esqueceu a senha?</a>
-                </div>
-
-            </div>
             </div>
         </body>
         
