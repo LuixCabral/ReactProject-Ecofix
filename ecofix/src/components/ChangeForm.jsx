@@ -31,7 +31,7 @@ export default function ChangeForm({isLoginClicked}){
             <form onSubmit={notReloadThePageEvent}>
               <input type="text" onChange={updateEmailField} id="email" className="fadeIn second" name="login" placeholder="Email" />
               <input type="password" id="password" onChange={updateLoginPasswordField} className="fadeIn third" name="login" placeholder="Senha" />
-              <input type="submit" onClick={getProfiles} className="fadeIn fourth" value="Entrar" />
+              <input type="submit" className="fadeIn fourth" value="Entrar" />
             </form>
           )
           

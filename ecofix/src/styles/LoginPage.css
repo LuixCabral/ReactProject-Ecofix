@@ -55,6 +55,7 @@ h2 {
   -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   text-align: center;
+  width: 400px;
 }
 
 #formFooter {
@@ -89,7 +90,7 @@ input[type=button], input[type=submit], input[type=reset]  {
 
   background-color: #56baed;
   border: none;
-  color: white;
+  color: rgb(0, 0, 0);
   padding: 15px 80px;
   text-align: center;
   text-decoration: none;
@@ -122,22 +123,27 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active  
 }
 #passwordfield, #emailfield{
   width: 80%;
+  color: black;
   height: 100%;
-  margin-left: 15px;
   border: none;
-  background-color: blue;
+  background-color: #eee7e7;
 }
 .eye{
-  right: -2px;
+  position: relative;
+  right: -10px;
+  cursor: pointer;
 }
 #password, #email, #confirmpassword {
   height: 40px;
+  margin-left: 40px;
   width: 80%;
   background-color: #eee7e7;
+  cursor: text;
   color: #0d0d0d;
   text-align: left;
   text-decoration: none;
-  display: inline-block;
+  display: flex;
+  flex-direction: row;
   font-size: 16px;
   margin-bottom: 40px;
   border: 0px hsl(0, 0%, 100%);
@@ -150,12 +156,14 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active  
   border-radius: 5px 5px 5px 5px;
 }
 
-#password:focus, #confirmpassword:focus ,#email:focus {
+#password:focus, #confirmpassword:focus ,#email:focus,#passwordfield:focus {
+  
   background-color: #fff;
   border: 2px solid #f6f6f6;
   padding: 4px;
   border-bottom: 2px solid #048f0f;
 }
+
 
 
 
