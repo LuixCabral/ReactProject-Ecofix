@@ -1,6 +1,6 @@
 import { useState,useEffect } from "react"
 import { supabase } from "./DatabaseConnection";
-
+import RegisterForm from "./forms/RegisterForm.1";
 // eslint-disable-next-line react/prop-types
 export default function ChangeForm({isLoginClicked}){
 
@@ -8,28 +8,11 @@ export default function ChangeForm({isLoginClicked}){
     const [loginPassword, setLoginPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [email, setEmail] = useState('');
-    //Não remova o colchete vazio: causará um loop ->.
-     useEffect(() => {
-         getProfiles();
-     // eslint-disable-next-line react-hooks/exhaustive-deps
-     },[])
  
-     async function getProfiles() {
-         //not working yet
-        console.log("sending", email)
-         const {data} = await supabase.from('profiles').select().eq("username", email);
-         setProfiles(data);
-         console.log("this: " ,profiles)
-     }
-
      const notReloadThePageEvent = (event) => {
          event.preventDefault();
      }
      
-     function changeConfirmPassword(event){
-        //Por algum motivo o label de confirmar senha colocava um "value", por isso eu criei essa função, atualiza os valores corretamente
-        setConfirmPassword(event.target.value);
-     }
      
      function updateEmailField(event){
         console.log(email)
@@ -43,17 +26,7 @@ export default function ChangeForm({isLoginClicked}){
         <div>
         
           {!isLoginClicked ? (
-            <form onSubmit={notReloadThePageEvent}>
-              <div id='email'>
-              <input id="emailfield"  placeholder="Digite seu email" type="text" />
-              <img className="eye" onChange={updateLoginPasswordField} rel="icon" type="image/svg+xml" href="assets/opened-eye.svg" />
-              </div>
-              <div id="password">
-              <input id="passwordfield" placeholder="Digite sua senha" type="password" />
-              </div>
-              <input onChange={changeConfirmPassword} id="confirmpassword" value={confirmPassword} placeholder="Digine novamente sua senha" type="password" />
-              <input type="submit" className="fadeIn fourth" value="Cadastrar" />
-            </form>
+            <RegisterForm/>
           ) : (
             <form onSubmit={notReloadThePageEvent}>
               <input type="text" onChange={updateEmailField} id="email" className="fadeIn second" name="login" placeholder="Email" />
