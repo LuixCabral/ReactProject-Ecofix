@@ -3,6 +3,7 @@ import { supabase } from "../DatabaseConnection";
 import openedEyeImage from '../../assets/opened-eye.svg';
 
 function RegisterForm() {
+
   const mailWhiteList = [
     "@hotmail.com",
     "@gmail.com",
@@ -19,9 +20,10 @@ function RegisterForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [emailError, setEmailError] = useState(true);
+  const [emailError, setEmailError] = useState(false);
   const [check, setCheck] = useState(true);
-
+  const [emailExists, setEmailExists] = useState(false);
+  const [isLoginCompleted, setLoginCompleted] = useState(false);
   const notReloadThePageEvent = (event) => event.preventDefault();
 
   function passwordsMatch() {
@@ -30,41 +32,62 @@ function RegisterForm() {
 
   function isEmailValid(){
     let isInWhiteList = false;
+    let invalideMail = email.split('@')[1].split('.').length !== 2;
+    if (invalideMail) {
+        setEmailError(true);
+        return false;
+    }
+
     for (let index = 0; index < mailWhiteList.length; index++) {
         isInWhiteList = email.includes(mailWhiteList[index]);
         if(isInWhiteList){
             return true;
         }
     }
+    setEmailError(true);
     return false;
   }
-  async function handleSignup(email, password) {
+  async function wait(delayInMs) {
+      return new Promise(resolve => setTimeout(resolve, delayInMs));
+    }
     
-
+  async function reload(){
+        await wait(2000);
+        // eslint-disable-next-line no-undef
+        window.location.reload();
+    }
+  async function handleSignup() {
+    
+    console.log(isEmailValid() && passwordsMatch());
     if (isEmailValid() && passwordsMatch()) {
-      try {
-        await supabase.from('profiles').ffds
-
-        if (error) {
-          // Handle specific errors (e.g., email already exists, etc.)
-          console.error("Signup failed:", error.error_description || error.message);
-          // Show user-friendly error message based on error code
-        } else {
-          console.log("Signup successful!", user);
-          // Redirect to confirmation page or perform other actions
+        const {data,error} = await supabase.from('profiles').select('email').eq('email',email);
+        console.log(data);
+        if((data.length > 0)){
+            setEmailExists(true);
+            return;
         }
-      } catch (error) {
-        console.log(error)
-      }
+        try {
+            await supabase.from('profiles').insert([{email:email, password:password}]).select();
+            
+            setLoginCompleted(true);
+            reload();
+
+        } catch (error) {
+            // eslint-disable-next-line no-undef
+            alert(error);
+        }
     }
   }
 
   const updateEmailField = (event) => {
+    setEmailExists(false);
+    setEmailError(false);
     setEmail(event.target.value);
   };
 
   function changePassType() {
     setCheck(!check);
+    // eslint-disable-next-line no-undef
     document.getElementById("passwordfield").type = check ? "password" : "text";
   }
 
@@ -73,42 +96,51 @@ function RegisterForm() {
     document.getElementById("passwordfield").focus();
   }
 
-  return (
-    <form onSubmit={notReloadThePageEvent}>
-      <input
-        id="email"
-        placeholder="Digite seu email"
-        onChange={updateEmailField}
-        type="text"
-      />
-      {emailError && <p>Email Inválido!</p>}
-      <div id="password" onClick={focus}>
+    return (
+        <>
+        {!isLoginCompleted ? (
+        <form onSubmit={notReloadThePageEvent}>
         <input
-          id="passwordfield"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-          placeholder="Digite sua senha"
-          type={check ? "password" : "text"}
+            id="email"
+            placeholder="Digite seu email"
+            onChange={updateEmailField}
+            type="text"
         />
-        <img
-          onClick={changePassType}
-          className="eye"
-          rel="icon"
-          type="image/svg+xml"
-          src={openedEyeImage}
+        {emailError && <p className="messageError">Email Inválido!</p>}
+        {emailExists && <p className="messageError">Email já cadastrado!</p>}
+        <div id="password" onClick={focus}>
+            <input
+            id="passwordfield"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            placeholder="Digite sua senha"
+            type={check ? "password" : "text"}
+            />
+            <img
+            onClick={changePassType}
+            className="eye"
+            rel="icon"
+            type="image/svg+xml"
+            src={openedEyeImage}
+            />
+        </div>
+        <input
+            onChange={(event) => setConfirmPassword(event.target.value)}
+            id="confirmpassword"
+            value={confirmPassword}
+            placeholder="Digite novamente sua senha"
+            type="password"
         />
-      </div>
-      <input
-        onChange={(event) => setConfirmPassword(event.target.value)}
-        id="confirmpassword"
-        value={confirmPassword}
-        placeholder="Digite novamente sua senha"
-        type="password"
-      />
-      {!passwordsMatch() && <p>Senhas não coincidem!</p>}
-      <input type="submit" onClick={handleSignup} className="fadeIn fourth" value="Cadastrar" />
-    </form>
-  );
+        {!passwordsMatch() && <p className="messageError">Senhas não coincidem!</p>}
+        <input type="submit" onClick={handleSignup} className="fadeIn fourth" value="Cadastrar" />
+        </form>):(
+        <div>
+            <h1 className="fadeIn first">Cadastrado com sucesso!</h1>
+        </div>
+        )
+    } 
+    </>
+);
 }
 
 export default RegisterForm;

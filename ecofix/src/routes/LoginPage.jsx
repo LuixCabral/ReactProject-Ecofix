@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 
 export default function LoginPage(){
     const [isLoginClicked, setLoginClicked] = useState(true);
+    
     let switchForm = (event) => {
         // eslint-disable-next-line no-undef
         const signIn = document.getElementById('signin');
@@ -27,7 +28,6 @@ export default function LoginPage(){
         }
     }
     useEffect(() => {
-        // Re-render ChangeForm when isLoginClicked changes
         console.log('ChangeForm re-rendered');
       }, [isLoginClicked]);
 
