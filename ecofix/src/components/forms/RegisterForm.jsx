@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { supabase } from "../DatabaseConnection";
 import openedEyeImage from '../../assets/opened-eye.svg';
+import PasswordHasher from "../../passwordhandler/PasswordHashing";
 
 function RegisterForm() {
-
+  const passwordHandler = new PasswordHasher();
   const mailWhiteList = [
     "@hotmail.com",
     "@gmail.com",
@@ -60,18 +61,18 @@ function RegisterForm() {
     
     console.log(isEmailValid() && passwordsMatch());
     if (isEmailValid() && passwordsMatch()) {
-        const {data,error} = await supabase.from('profiles').select('email').eq('email',email);
+        const {data} = await supabase.from('profiles').select('email').eq('email',email);
         console.log(data);
+        const hashedPassword = passwordHandler.hashPassword(password);
+        console.log(hashedPassword[0], hashedPassword[1]);
         if((data.length > 0)){
             setEmailExists(true);
             return;
         }
         try {
-            await supabase.from('profiles').insert([{email:email, password:password}]).select();
-            
+            await supabase.from('profiles').insert([{email:email, password:password, salt:'6565'}]).select(); 
             setLoginCompleted(true);
-            reload();
-
+            //reload();
         } catch (error) {
             // eslint-disable-next-line no-undef
             alert(error);

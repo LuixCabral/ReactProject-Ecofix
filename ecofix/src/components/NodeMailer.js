@@ -14,7 +14,7 @@ let transporter = createTransport({
 
 transporter.sendMail({
     from:"ecofix <naorespondaecofix@gmail.com>",
-    to:"andrelucas160500@gmail.com",
+    to:"p.vitordias@outlook.com",
     subject: "Confirme seu email",
     text:"olá confirme seu email",
     html:"<h1>Bem-vindo a ecofix!</h1>\n <a href='www.google.com'>Confirmar email</a>"

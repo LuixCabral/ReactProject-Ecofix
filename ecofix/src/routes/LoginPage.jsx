@@ -40,7 +40,7 @@ export default function LoginPage(){
                     <h2 id="signin" onClick={switchForm} className={isLoginClicked ? 'active' : 'inactive underlineHover'}> Entrar </h2>
                     <h2 id="signup" onClick={switchForm} className={isLoginClicked ? 'inactive underlineHover' : 'active'}>Cadastrar </h2>
                     <ChangeForm isLoginClicked={isLoginClicked} />
-                    <div className="fadeIn first">
+                    <div className="fadeIn first">0drr
                         <div id="formFooter">
                         <a className="underlineHover" href="#">Esqueceu a senha?</a>
                         </div>
