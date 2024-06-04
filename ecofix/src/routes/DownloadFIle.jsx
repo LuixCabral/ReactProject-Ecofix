@@ -1,14 +1,27 @@
 import { useState } from 'react'
-import './App.css'
+import './cssBotaoDownload'
+import config from './configs'
 import handleDownload from './Botao'
+
 
 function DownloadFile() {  
 
   return (
     <>
-    <div>
+    <div class = "container">
       <h3>Download de Arquivos</h3>
-      <button id= "botao download" onClick={handleDownload}>Download</button>
+      <div class = "Arquivo">
+        <button class ="BotaoDownload" onClick={handleDownload}>Download</button>
+      </div>
+      <div class = "Arquivo">
+        <button class ="BotaoDownload" onClick={handleDownload}>Download</button>
+      </div>
+      <div class = "Arquivo">
+        <button class ="BotaoDownload" onClick={handleDownload}>Download</button>
+      </div>
+      <div class = "Arquivo">
+        <button class ="BotaoDownload" onClick={handleDownload}>Download</button>
+      </div>
     </div>
     </>
   )
