@@ -1,15 +1,16 @@
 import axios from "axios";
 import fileDownload from 'js-file-download';
-import config from "./configs";
 
+function handleDownload(url,filename){
+    axios.get(url)
+      .then(response => {
+        fileDownload(response.data, filename);
+      })
+      .catch(error => {
+        console.error('Erro ao baixar o arquivo:', error);
+      });
 
-function handleDownload(configs) {
-    const {url, filename} = config
-    console.log(config.url)
-    axios.get(config.url)
-    .then((res =>{fileDownload(res.data,filename)}))
-
-}
-
+      console.log(url)
+  };
 
 export default handleDownload
