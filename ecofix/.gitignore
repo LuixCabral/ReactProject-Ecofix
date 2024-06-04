@@ -11,6 +11,7 @@ lerna-debug.log*
 dist
 dist-ssr
 *.local
+/src/componentst/DatabaseCoonection.js
 
 # Editor directories and files
 .vscode/*

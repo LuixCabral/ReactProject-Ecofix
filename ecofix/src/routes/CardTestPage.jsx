@@ -1,4 +1,4 @@
-import Card from '../component2/Card';  // Ajuste o caminho de importação conforme necessário
+/*import Card from '../component2/Card';  // Ajuste o caminho de importação conforme necessário
 
 function CardTestPage() {
     return (
@@ -9,4 +9,4 @@ function CardTestPage() {
     );
 }
 
-export default CardTestPage;
+export default CardTestPage;*/

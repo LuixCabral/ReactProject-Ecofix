@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import {Firestore} from 'firebase/firestore';
+import { doc, setDoc,getFirestore, Firestore } from "firebase/firestore";
 import openedEyeImage from '../../assets/opened-eye.svg';
 import app from '../DatabaseConnection'
 
 
 function RegisterForm() {
-  
+  const dataBase = getFirestore(app)
   const auth = getAuth();
   const mailWhiteList = [
     "@hotmail.com",
@@ -28,6 +28,9 @@ function RegisterForm() {
   const [check, setCheck] = useState(true);
   const [emailExists, setEmailExists] = useState(false);
   const [isLoginCompleted, setLoginCompleted] = useState(false);
+  const [role, setRole] = useState("usuario");
+  const [name, setName] = useState("");
+  const [isEspecialist, setEspecialist] = useState(true);
   const notReloadThePageEvent = (event) => event.preventDefault();
 
   function passwordsMatch() {
@@ -64,16 +67,23 @@ function RegisterForm() {
     
     console.log(isEmailValid() && passwordsMatch());
     if (isEmailValid() && passwordsMatch()) {
-      createUserWithEmailAndPassword(auth,email,password).then((userCredential)=>{
+      createUserWithEmailAndPassword(auth,email,password).then(async(userCredential)=>{
         const userID = userCredential.user.uid;
         console.log("id",userID)
-
+        await setDoc(doc(dataBase,"usuarios",userID),{
+          name:name,
+          role:role,
+          uid:userID,
+          verified: false
+        });
+        
       }).catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.log(errorMessage, errorCode);
       });
-        }
     }
+  }
 
   const updateEmailField = (event) => {
     setEmailExists(false);
@@ -92,10 +102,18 @@ function RegisterForm() {
     document.getElementById("passwordfield").focus();
   }
 
+  function changeRole(event){
+    setRole(event);
+  }
+
+  function changeName(event){
+    setName(event.target.value)
+  }
     return (
         <>
         {!isLoginCompleted ? (
         <form onSubmit={notReloadThePageEvent}>
+        <input type="text" id="name" onChange={(event) => changeName(event)}/>
         <input
             id="email"
             placeholder="Digite seu email"
@@ -104,6 +122,10 @@ function RegisterForm() {
         />
         {emailError && <p className="messageError">Email Inválido!</p>}
         {emailExists && <p className="messageError">Email já cadastrado!</p>}
+        <select onChange={(event) => changeRole(event.target.value)} id="role" name="role">
+          <option value="usuario">Usuário</option>
+          <option value="especialista">Especialista</option>
+        </select>
         <div id="password" onClick={focus}>
             <input
             id="passwordfield"
