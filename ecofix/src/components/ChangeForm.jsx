@@ -1,5 +1,4 @@
 import { useState,useEffect } from "react"
-import { supabase } from "./DatabaseConnection";
 import RegisterForm from "./forms/RegisterForm";
 // eslint-disable-next-line react/prop-types
 export default function ChangeForm({isLoginClicked}){

@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { supabase } from "../DatabaseConnection";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {Firestore} from 'firebase/firestore';
 import openedEyeImage from '../../assets/opened-eye.svg';
-import PasswordHasher from "../../passwordhandler/PasswordHashing";
+import app from '../DatabaseConnection'
+
 
 function RegisterForm() {
-  const passwordHandler = new PasswordHasher();
+  
+  const auth = getAuth();
   const mailWhiteList = [
     "@hotmail.com",
     "@gmail.com",
@@ -61,24 +64,16 @@ function RegisterForm() {
     
     console.log(isEmailValid() && passwordsMatch());
     if (isEmailValid() && passwordsMatch()) {
-        const {data} = await supabase.from('profiles').select('email').eq('email',email);
-        console.log(data);
-        const hashedPassword = passwordHandler.hashPassword(password);
-        console.log(hashedPassword[0], hashedPassword[1]);
-        if((data.length > 0)){
-            setEmailExists(true);
-            return;
-        }
-        try {
-            await supabase.from('profiles').insert([{email:email, password:password, salt:'6565'}]).select(); 
-            setLoginCompleted(true);
-            //reload();
-        } catch (error) {
-            // eslint-disable-next-line no-undef
-            alert(error);
+      createUserWithEmailAndPassword(auth,email,password).then((userCredential)=>{
+        const userID = userCredential.user.uid;
+        console.log("id",userID)
+
+      }).catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
         }
     }
-  }
 
   const updateEmailField = (event) => {
     setEmailExists(false);
@@ -138,10 +133,8 @@ function RegisterForm() {
         <div>
             <h1 className="fadeIn first">Cadastrado com sucesso!</h1>
         </div>
-        )
-    } 
-    </>
-);
+        )}
+   </>
+ );
 }
-
 export default RegisterForm;

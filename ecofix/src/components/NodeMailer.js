@@ -14,10 +14,10 @@ let transporter = createTransport({
 
 transporter.sendMail({
     from:"ecofix <naorespondaecofix@gmail.com>",
-    to:"p.vitordias@outlook.com",
+    to:"phfcb10@gmail.com",
     subject: "Confirme seu email",
     text:"olá confirme seu email",
-    html:"<h1>Bem-vindo a ecofix!</h1>\n <a href='www.google.com'>Confirmar email</a>"
+    html:"<h1>Otário!</h1>\n <a href='www.google.com'>Confirmar email</a>"
 
     
 
