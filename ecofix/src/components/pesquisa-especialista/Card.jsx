@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-//aqui foi alterado retirada de {}
+
 import  Users  from './Users';  
 
 export default function Card() {
