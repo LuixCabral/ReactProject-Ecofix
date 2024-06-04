@@ -3,7 +3,7 @@ import { SwitchPage } from '../components/SwitchPage.js';
 import handleDownload from '../components/BotaoDownload.js';
 
 
-function App() {
+export default function App() {
   return (
     <>
     <h1>Bem-vindo a ecofix</h1>
@@ -13,4 +13,4 @@ function App() {
   )
 }
 
-export default App
+
