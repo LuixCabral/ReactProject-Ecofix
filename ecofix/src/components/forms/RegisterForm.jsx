@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc,getFirestore, Firestore } from "firebase/firestore";
+import { doc, setDoc,getFirestore } from "firebase/firestore";
 import openedEyeImage from '../../assets/opened-eye.svg';
 import app from '../DatabaseConnection'
 
@@ -27,10 +27,10 @@ function RegisterForm() {
   const [emailError, setEmailError] = useState(false);
   const [check, setCheck] = useState(true);
   const [emailExists, setEmailExists] = useState(false);
-  const [isLoginCompleted, setLoginCompleted] = useState(false);
+  const [isRegisterDone, setRegisterDone] = useState(false);
   const [role, setRole] = useState("usuario");
   const [name, setName] = useState("");
-  const [isEspecialist, setEspecialist] = useState(true);
+  const [passwordError,setPasswordError] = useState(false);
   const notReloadThePageEvent = (event) => event.preventDefault();
 
   function passwordsMatch() {
@@ -54,15 +54,7 @@ function RegisterForm() {
     setEmailError(true);
     return false;
   }
-  async function wait(delayInMs) {
-      return new Promise(resolve => setTimeout(resolve, delayInMs));
-    }
-    
-  async function reload(){
-        await wait(2000);
-        // eslint-disable-next-line no-undef
-        window.location.reload();
-    }
+
   async function handleSignup() {
     
     console.log(isEmailValid() && passwordsMatch());
@@ -76,11 +68,11 @@ function RegisterForm() {
           uid:userID,
           verified: false
         });
-        
+        setRegisterDone(true);
       }).catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorMessage, errorCode);
+        errorCode == errorCode[1]?setEmailError(true):setPasswordError(true);
+        
       });
     }
   }
@@ -111,9 +103,9 @@ function RegisterForm() {
   }
     return (
         <>
-        {!isLoginCompleted ? (
+        {!isRegisterDone ? (
         <form onSubmit={notReloadThePageEvent}>
-        <input type="text" id="name" onChange={(event) => changeName(event)}/>
+        <input type="text" placeholder="Digite seu nome!" id="name" onChange={(event) => changeName(event)}/>
         <input
             id="email"
             placeholder="Digite seu email"
@@ -142,6 +134,7 @@ function RegisterForm() {
             src={openedEyeImage}
             />
         </div>
+        {passwordError ?<p className="messageError">Senha deve conter pelo menos 6 caracteres!</p>:<p className="messagePass">Senha deve conter pelo menos 6 caracteres!</p>}
         <input
             onChange={(event) => setConfirmPassword(event.target.value)}
             id="confirmpassword"

@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom/client'
 import App from './routes/App.jsx'
 import './styles/index.css'
 import LoginPage from './routes/LoginPage.jsx'
-//import CardTestPage from './routes/CardTestPage.jsx';  // Importe a nova página de teste
+import HomePage from './routes/HomePage.jsx'
+//import CardTestPage from './routes/CardTestPage.jsx';  
+// Importe a nova página de teste
 
 //Configuração do "router" para trocar de páginas.
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
@@ -17,6 +19,10 @@ const router = createBrowserRouter([
   //Página de login.
   path: 'entrar/',
   element: <LoginPage />
+  },
+  {
+  path: 'home/',
+  element: <HomePage />
   },
 
   //{
