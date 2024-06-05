@@ -1,0 +1,10 @@
+/* src/styles/NewsFeed.css */
+
+.news-feed {
+    background-color: rgb(78, 78, 174);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column nowrap;
+}

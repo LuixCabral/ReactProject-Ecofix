@@ -1,0 +1,13 @@
+/* src/styles/FeedItem.css */
+
+.news-tem {
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+}
+.news-tem h2 {
+    margin: 0 0 10px;
+}
+
+.news-tem p {
+    margin: 0;
+}

@@ -15,6 +15,7 @@ export default function App() {
     <h1>Bem-vindo a ecofix</h1>
     <button onClick={switchPage}>Login</button>
     <button onClick={handleDownload}>Download</button>
+    
     </>
   )
 }
