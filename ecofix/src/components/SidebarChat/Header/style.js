@@ -9,7 +9,7 @@ export const StyledSidebarHeader = styled('div', {
         width:'100%',
         height: '8%',
         backgroundColor: 'white',
-        boxShadow: '0 1px 3px grey',
+        boxShadow: '0 4px 8px black',
 
         '.photo':{
             display:'flex',
@@ -17,6 +17,7 @@ export const StyledSidebarHeader = styled('div', {
             height:'45px',
             borderRadius: '50%',
             backgroundColor:'grey',
+            border:'3px solid black'
         },
 
         '.photo:hover':{

@@ -34,8 +34,6 @@ export function SidebarHeader(){
                </ul>
             </nav>) }
             </div>
-            
-            
         </StyledSidebarHeader>
     )
 }
