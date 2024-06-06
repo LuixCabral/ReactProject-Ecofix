@@ -25,7 +25,7 @@ export function Chats(){
 
     return(
         <>
-         { user? <StyledRedirect/> : <StyledChats/> }
+         {user? <StyledChats>Você está logado!</StyledChats> : <StyledRedirect>Faça Login para acessar o chat</StyledRedirect> }
         </>
     )
 
