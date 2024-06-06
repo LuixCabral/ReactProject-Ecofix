@@ -1,0 +1,37 @@
+/* Contêiner que envolve os botões */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    height: 100vh; 
+}
+
+/* Estilo para a div Arquivo */
+.Arquivo {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    padding: 20px;
+    margin: 10px;
+    background-color: white; 
+    border-radius: 15px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 1); 
+}
+
+/* Estilo para os botões */
+.BotaoDownload {
+    margin: 10px; 
+    padding: 10px 20px;
+    background-color: darkgreen;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Estilo para o botão quando estiver com o mouse em cima */
+.BotaoDownload:hover {
+    background-color: green;
+}
