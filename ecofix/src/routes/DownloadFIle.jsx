@@ -20,6 +20,9 @@ function DownloadFile() {
         <div className="Arquivo">
           <button className="BotaoDownload" onClick={() => handleDownload("./testes/teste1.txt", "teste1.txt")}>Download</button>
         </div>
+        <div className="upload">
+          <input type='files' id='uploadArquivos' onClick={()=>uploadArquivos}>Upload</input>
+        </div>
     </div>
     </>
   )
