@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './cssBotaoDownload'
 import handleDownload from './Botao'
+import uploadArquivos from  './upload'
 
 
 function DownloadFile() {  
