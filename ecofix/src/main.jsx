@@ -10,6 +10,7 @@ import NewsFeedPage from './routes/NewsFeedTest.jsx'
 
 //Configuração do "router" para trocar de páginas.
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
+import ChatPage from './routes/ChatPage.jsx'
 const router = createBrowserRouter([
   {
   //Página inicial.
@@ -32,6 +33,13 @@ const router = createBrowserRouter([
     // Página de feed de notícias.
     path: 'news/',
     element: <NewsFeedPage />
+  },
+
+  {
+    // Página do Chat
+    path:'chat/',
+    element: <ChatPage/>
+
   },
 
   //{
