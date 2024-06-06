@@ -1,4 +1,3 @@
-/* Contêiner que envolve os botões */
 .container {
     display: flex;
     flex-direction: column;
@@ -16,7 +15,7 @@
     padding: 20px;
     margin: 10px;
     background-color: white; 
-    border-radius: 15px 0;
+    border-radius: 10px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 1); 
 }
 
@@ -29,6 +28,19 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+#uploadArquivos{
+    margin: 10px; 
+    padding: 10px 20px;
+    background-color: darkgreen;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
+#uploadArquivos:hover {
+    background-color: green;
 }
 
 /* Estilo para o botão quando estiver com o mouse em cima */
