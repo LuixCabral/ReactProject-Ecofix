@@ -1,5 +1,6 @@
 function fecharCaixa() {
-    document.getElementById("caixaflutuante").style.display="none"
+    var caixa =document.getElementById("caixaflutuante")
+    caixa.style.display="none"
     
 }
 
