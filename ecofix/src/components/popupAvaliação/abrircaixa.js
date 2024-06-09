@@ -1,5 +1,6 @@
 function abrircaixa(){
-    document.getElementById("caixaFlutuante").style.display = "block";
+    var caixa = document.getElementById("caixaFlutuante")
+    caixa.style.display = "block";
 }
 
 export default abrircaixa
