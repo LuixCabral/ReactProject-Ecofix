@@ -1,15 +1,20 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { getAuth } from "firebase/auth"; 
 import { StyledChats, StyledRedirect } from "./style";
 import app from "../../DatabaseConnection";
+import example from '/src/assets/example.svg'
+import { getFirestore, collection, getDocs, addDoc, query, where, Timestamp, serverTimestamp, onSnapshot, QuerySnapshot } from "firebase/firestore";
 
+
+
+const auth = getAuth(app);
+const db = getFirestore(app);
 
 export function Chats(){
-    
-    const auth = getAuth(app);
 
     const [user, setUser] = useState(null);
+    const [chats, setChats] = useState([]);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth,(user) =>{
@@ -23,13 +28,67 @@ export function Chats(){
         return () => unsubscribe();
     }, []);
 
+
+    useEffect(() => {
+        if(auth.currentUser){
+            getChats(auth.currentUser.email, setChats);
+        }
+    })
+
+
+
     return(
         <>
-         {user? <StyledChats>Você está logado!</StyledChats> : <StyledRedirect>Faça Login para acessar o chat</StyledRedirect> }
+         {user? (
+         <StyledChats>
+           {chats.map((chat) => (
+             <div className="chat" key={chat.id}>
+             <img src={example} alt="" className="photo" />
+             <span className="contactName">{chat.chatName}</span>
+            </div>
+           ))
+           
+
+           } 
+            
+         </StyledChats>
+         ):(
+         <StyledRedirect>Faça Login para acessar o chat</StyledRedirect> 
+         )}
         </>
     )
+}
 
-    
+export const addChat = async (user1, user2) => {
+ 
+    const q = query(collection(db, 'chats'), where('participants', 'array-contains', user1))
+    const chatSnapshot = await getDocs(q);
+    const existingChat = chatSnapshot.docs.find(doc => doc.data().participants.includes(user2));
 
+    if(existingChat){
+        return existingChat.id;
+    } else {
+        const chatDoc = await addDoc(collection(db, 'chats'), {
+            participants: [user1, user2],
+            lastMessage: '',
+            timestamp: serverTimestamp()
+        });
+        return { id: chatDoc.id};
+    }
+}
+
+export const getChats = (email, callback) => {
+    const q = query(collection(db, 'chats'), where('participants', 'array-contains', email));
+    onSnapshot(q, (querySnapshot) => {
+        const chats = [];
+        querySnapshot.forEach((doc) => {
+            const chatName = doc.data().participants.find(participant => participant != email);
+            chats.push({...doc.data(), id: doc.id, chatName: chatName.split('@')[0]});
+        });
+        callback(chats);    
+    });
+};
+
+const openChat = () => {
 
 }

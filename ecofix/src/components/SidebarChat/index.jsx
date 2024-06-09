@@ -1,5 +1,5 @@
 import { StyledSidebar } from "./style";
-import { SidebarHeader } from "./Header/";
+import  SidebarHeader  from "./Header/";
 import { Chats } from "./Chats";
 
 
