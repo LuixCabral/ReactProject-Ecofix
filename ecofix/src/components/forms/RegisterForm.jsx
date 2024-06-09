@@ -66,7 +66,8 @@ function RegisterForm() {
           name:name,
           role:role,
           uid:userID,
-          verified: false
+          verified: false,
+          email:email,
         });
         setRegisterDone(true);
       }).catch((error) => {

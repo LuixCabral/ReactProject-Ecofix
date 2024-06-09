@@ -57,7 +57,7 @@ export const StyledSidebarHeader = styled('div', {
             borderRadius:'10px',
             boxShadow:'0px 2px 5px rgba(2,3,1,0.7)'
         },
-        '#caixaLinks':{
+        '#boxLinks':{
             display:'flex',
             margin:'0px',
             padding:'0',
@@ -66,15 +66,23 @@ export const StyledSidebarHeader = styled('div', {
             alignItems:'center',
             justifyContent:'center',
         },
-        '.caixa':{
+        '.box':{
             display:'flex',
             alignItems:'center',
             justifyContent:'center',
             width:'100%',
             borderBottom:'1px solid grey',
-            padding:'3px',
+            padding:'0px',
         },
-        '.caixa:hover':{
+        '.boxTop': {
+            borderTopRightRadius:'6px',
+            borderTopLeftRadius:'6px',
+        },
+        '.boxBottom':{
+            borderBottomLeftRadius:'6px',
+            borderBottomRightRadius:'6px',
+        },
+        '.box:hover':{
             backgroundColor:'grey',
         },
         '.link':{
@@ -83,6 +91,14 @@ export const StyledSidebarHeader = styled('div', {
             flexDirection:'column',
             justifyContent:'center',
             alignItems:'center',
-            
+            width:'100%',
+            backgroundColor:'rgba(0,0,0,0)',
+            border: '0px',
+        },
+        '.link:hover':{
+            border:'0px',
+        },
+        '.link:focus':{
+            outline:'none',
         }
 })
