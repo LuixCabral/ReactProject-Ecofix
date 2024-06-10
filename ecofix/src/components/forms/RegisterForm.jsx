@@ -67,13 +67,12 @@ function RegisterForm() {
           role:role,
           uid:userID,
           verified: false,
-          email:email,
+          email:email,                                  
         });
         setRegisterDone(true);
       }).catch((error) => {
         const errorCode = error.code;
         errorCode == errorCode[1]?setEmailError(true):setPasswordError(true);
-        
       });
     }
   }

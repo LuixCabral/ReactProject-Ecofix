@@ -2,13 +2,27 @@
 
 /* BASIC */
 
-html {
-  background-color: #56baed;
-}
-
 body {
   font-family: "Poppins", sans-serif;
   height: 100vh;
+  overflow: hidden;
+
+}
+#loginForm{
+  margin-left:20px;
+}
+p{
+  left: -350px;
+  margin-top: -20px;
+  position: relative;
+}
+#welcome{
+  font-weight: bolder;
+  font-size: 26px;
+  color: #1a1a1a;
+  position: relative;
+  left: -376px;
+  top:70px;
 }
 .messagePass{
   margin-top: -39px;
@@ -22,8 +36,8 @@ body {
   font: -webkit-control;
   text-align: -webkit-center;
   margin-left: -50px;
-}
-a {
+  }
+  a {
   color: #92badd;
   display:inline-block;
   text-decoration: none;
@@ -39,10 +53,12 @@ h2 {
   margin: 40px 8px 10px 8px; 
   color: #cccccc;
   cursor: pointer;
-}
+  font-weight: bold;
+  z-index: 10;
+  }
 
-
-
+  
+  
 /* STRUCTURE */
 
 .wrapper {
@@ -53,21 +69,30 @@ h2 {
   width: 100%;
   min-height: 100%;
   padding: 20px;
-}
-
+  }
+  
+  #tree{
+    z-index: 10;
+    width: 400px;
+    position:absolute;
+    right: 0;
+    margin-right:240px;
+    top: 50px;
+  }
 #formContent {
   -webkit-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
-  background: #fff;
+  background: rgb(235,242,244);
+  background: linear-gradient(90deg, #EBEFFF 65%, rgba(41,123,69,1) 35%);
   padding: 30px;
-  width: 90%;
-  max-width: 450px;
+  height: 100vh;
+
+  width: 100vw;
   position: relative;
   padding: 0px;
   -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   text-align: center;
-  width: 400px;
 }
 
 #formFooter {
@@ -122,7 +147,7 @@ input[type=button], input[type=submit], input[type=reset]  {
 }
 
 input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
-  background-color: #39ace7;
+  background-color: rgb(53, 165, 90);
   cursor: pointer;
 }
 
@@ -133,22 +158,51 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active  
   -ms-transform: scale(0.95);
   transform: scale(0.95);
 }
-#passwordfield, #emailfield{
-  width: 80%;
-  color: black;
-  height: 100%;
-  border: none;
-  background-color: #eee7e7;
-}
+
 .eye{
   position: relative;
   right: -10px;
   cursor: pointer;
 }
-#password, #email, #confirmpassword, #role, #name {
+label{
+  left: 0;
+  position: relative;
+  margin-left: -90%;
+}
+#loginForm{
+  margin-top: 110px;
+  margin-left:40px;
+}
+.register {
+  display: flex; 
+  align-items: center; 
+  margin-left: -330px;
+  margin-top: 24px;
+  font-size: 20px;
+  font-weight: lighter;
+}
+
+.register-link {
+  margin-left: 10px; 
+  cursor: pointer; 
+  font-weight: bolder;
+  text-decoration: underline;
+}
+
+.register-link:hover{
+  text-decoration: underline;
+  font-weight: bolder;
+  cursor: pointer;
+}
+#emailLabel, #passLabel{
+  margin-left: -1120px;
+}
+#passwordLogin, #emailLogin {
   height: 40px;
-  margin-left: 40px;
-  width: 80%;
+  margin-left: -400px;
+  width: 400px;
+  border-color: #656ED3;
+  border-radius: 50px;
   background-color: #eee7e7;
   cursor: text;
   color: #0d0d0d;
@@ -158,22 +212,18 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active  
   flex-direction: row;
   font-size: 16px;
   margin-bottom: 40px;
-  border: 0px hsl(0, 0%, 100%);
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
   -ms-transition: all 0.5s ease-in-out;
   -o-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
-  -webkit-border-radius: 5px 5px 5px 5px;
-  border-radius: 5px 5px 5px 5px;
 }
 
-#password:focus, #confirmpassword:focus ,#email:focus,#passwordfield:focus {
-  
-  background-color: #fff;
-  border: 2px solid #f6f6f6;
+#passwordLogin:focus,#emailLogin:focus {
+
+  border: solid #656ED3;
   padding: 4px;
-  border-bottom: 2px solid #048f0f;
+  border-bottom:solid #5e67cc;
 }
 
 
@@ -236,6 +286,7 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active  
   -webkit-animation-duration:1s;
   -moz-animation-duration:1s;
   animation-duration:1s;
+
 }
 
 .fadeIn.first {
@@ -257,11 +308,45 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active  
 }
 
 .fadeIn.fourth {
+  outline: none;
   -webkit-animation-delay: 1s;
   -moz-animation-delay: 1s;
   animation-delay: 1s;
+  left: -402px;
+  position: relative;
+  width: 400px;
+  height: 40px;
+  background-color: rgb(41,123,69);
+  border-radius: 50px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+#struct {
+  position: absolute;
+  width: 600px;
+  height: 141.4px;
+  left: -299px;
+  bottom: -190px;
+  z-index: 10;
+  background: #297B45;
+  border-radius: 105.53px;
+  transform: rotate(-41.1deg);
 
+}
+#secondStruct{
+  position: absolute;
+  width: 600px;
+  height: 141.4px;
+  left: -290px;
+  bottom: -190px;
+  z-index: 9;
+  background: #13dd56;
+  border-radius: 105.53px;
+  transform: rotate(-41.1deg);
+
+}
 /* Simple CSS3 Fade-in Animation */
 .underlineHover:after {
   display: block;
