@@ -11,7 +11,7 @@ import { getFirestore, collection, getDocs, addDoc, query, where, Timestamp, ser
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-export function Chats(){
+export function Chats({onChatClick}){
 
     const [user, setUser] = useState(null);
     const [chats, setChats] = useState([]);
@@ -33,8 +33,7 @@ export function Chats(){
         if(auth.currentUser){
             getChats(auth.currentUser.email, setChats);
         }
-    })
-
+    },[auth.currentUser])
 
 
     return(
@@ -42,7 +41,7 @@ export function Chats(){
          {user? (
          <StyledChats>
            {chats.map((chat) => (
-             <div className="chat" key={chat.id}>
+             <div className="chat" key={chat.id} onClick={() => onChatClick(chat)}>
              <img src={example} alt="" className="photo" />
              <span className="contactName">{chat.chatName}</span>
             </div>

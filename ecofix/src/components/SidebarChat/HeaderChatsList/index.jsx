@@ -6,7 +6,8 @@ import { useState } from "react";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getDocs, getFirestore, collection, query, where } from 'firebase/firestore';
 import app from '../../DatabaseConnection';
-import { addChat } from "../Chats";
+import { addChat } from "../ChatsList";
+import {Link} from 'react-router-dom' 
 
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -90,11 +91,12 @@ export default function SidebarHeader(){
             <button onClick={toggleShowDropdown} className="buttonMenu">
                 <img src={options} alt="opções" width='30px' height='30px'/>
             </button>
-           { showDropdown && (<nav className="dropdown" >
+           { showDropdown &&
+              (<nav className="dropdown" >
                <ul id='boxLinks' type='none'>
                 <li className="box boxTop"><button className="link" onClick={addChatButton} >Adicionar chat</button></li>
-                <li className="box"><button className="link" >Home Page</button></li>
-                <li className="box boxBottom"><button className="link" >News Page</button></li>
+                <li className="box"><Link to='/home'><button className="link" >Home Page</button></Link></li>
+                <li className="box boxBottom"><Link to='/news'><button className="link" >News Page</button></Link></li>
                </ul>
             </nav>) }
             </div>
