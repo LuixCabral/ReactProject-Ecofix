@@ -5,32 +5,10 @@ import {styled} from '@stitches/react';
 export const StyledSidebar = styled('div',{
     display: 'flex',
     flexDirection: 'column',
-    width:'25vw',
+    width:'30vw',
     height:'100vh',
     backgroundColor:'rgb(254,253,249,0.9)',
-    margin: '0',
-    padding: '0',
+    paddingBottom:'0px',
 
-    '.goBack':{
-        backgroundColor:'rgba(150,200,140)',
-        display:'flex',
-    },
-    '.buttonGoBack':{
-        width:'auto',
-        display:'flex',
-        alignItems:'center',
-        justifyContent:'center',
-        marginTop:'1vh',
-        marginLeft:'0.5vw',
-        fontSize:'13px',
-        backgroundColor:'rgba(70,180,100)',
-        border:'0px',
-    },
-    '.buttonGoBack:hover':{
-        border:'0px',
-        backgroundColor:'rgba(160,200,160)',
-    },
-    '.buttoGoback:focus':{
-        outline:'none'
-    }
+    
 })

@@ -2,8 +2,15 @@
 
 .footer {
     display: flex;
-    flex-flow: column nowrap;
-    justify-self: center;
+    justify-content: center;
     align-items: center;
-    
+    background-color: rgb(57, 65, 55);
+    height: 7vh;
+    width: 100%;
+}
+
+#copy{
+    margin: 0px;
+    left: auto;
+    padding: 0px;
 }
