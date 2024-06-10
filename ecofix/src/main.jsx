@@ -11,6 +11,7 @@ import NewsFeedPage from './routes/NewsFeedTest.jsx'
 //Configuração do "router" para trocar de páginas.
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import ChatPage from './routes/ChatPage.jsx'
+import RegisterForm from './routes/RegisterPage.jsx'
 const router = createBrowserRouter([
   {
   //Página inicial.
@@ -41,6 +42,12 @@ const router = createBrowserRouter([
     element: <ChatPage/>
 
   },
+
+  {
+    //Pagina de registro
+    path:'cadastro/',
+    element:<RegisterForm/>
+  }
 
   //{
     // pagina pesquisa teste

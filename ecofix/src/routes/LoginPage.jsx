@@ -1,53 +1,59 @@
-import '../styles/LoginPage.css'
-import ChangeForm from '../components/ChangeForm';
+import '../styles/LoginPage.css';
 import { useState, useEffect } from 'react';
+import tree from "../assets/tree.png";
+import { useNavigate } from 'react-router-dom';
+import { getAuth , signInWithEmailAndPassword} from "firebase/auth";
+import openedEyeImage from '../assets/opened-eye.svg';
+import app from '../components/DatabaseConnection'
 
-export default function LoginPage(){
-    const [isLoginClicked, setLoginClicked] = useState(true);
-    
-    let switchForm = (event) => {
-        // eslint-disable-next-line no-undef
-        const signIn = document.getElementById('signin');
-        // eslint-disable-next-line no-undef
-        const signUp = document.getElementById('signup');
+function LoginForm(){
+    const navigate = useNavigate();
+    const auth = getAuth(app);
+    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [isValid, setIsValid] = useState(true);
+    const [isClicked , setClicked] = useState(false);
 
-        event.preventDefault();
-        if(event.target.innerHTML == ' Entrar '){
-            setLoginClicked(true);
-        }else{
-            setLoginClicked(false);
-        }
+    async function userLogin(){
+        await signInWithEmailAndPassword(auth,email,password).then(() => {
+            navigate('/home/')
+        }).catch(() => {
+            setIsValid(false);
+            return;
+        })
 
-        // eslint-disable-next-line no-undef
-        if(isLoginClicked == true){
-            signIn.className = 'active'
-            signUp.className = 'inactive underlineHover'
-        }else{
-            signIn.className = 'inactive underlineHover'
-            signUp.className = 'active'
-        }
     }
-    useEffect(() => {
-        console.log('ChangeForm re-rendered');
-      }, [isLoginClicked]);
+    const notReloadThePageEvent = (event) => {
+        event.preventDefault();
+    }
+    
+    
+    function updateEmailField(event){
+       console.log(email)
+       setEmail(event.target.value);
+    }
+
+    function updateLoginPasswordField(event){
+       setPassword(event.target.value);
+    }
 
     
     return(
-        <body>
-            <div className="wrapper fadeInDown">
-                <div id="formContent">
-
-                    <h2 id="signin" onClick={switchForm} className={isLoginClicked ? 'active' : 'inactive underlineHover'}> Entrar </h2>
-                    <h2 id="signup" onClick={switchForm} className={isLoginClicked ? 'inactive underlineHover' : 'active'}>Cadastrar </h2>
-                    <ChangeForm isLoginClicked={isLoginClicked} />
-                    <div className="fadeIn first">
-                        <div id="formFooter">
-                        <a className="underlineHover" href="#">Esqueceu a senha?</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </body>
-        
+        <>
+            <h3 id="welcome">Seja bem-vindo</h3>
+            <form id="loginForm" onSubmit={notReloadThePageEvent}>
+              <label id='emailLabel' htmlFor="emailLogin">Email</label>
+              <input type="text" onChange={updateEmailField} id="emailLogin" className="fadeIn second" name="login" />
+              <label id='passLabel' htmlFor="passwordLogin">Senha</label>
+              <input type="password" id="passwordLogin" onChange={updateLoginPasswordField} className="fadeIn third" name="login" />
+              {!isValid && <p>Email ou senha inválidos!</p>}
+              <button type="submit" onClick={userLogin} className="fadeIn fourth">Entrar</button>
+            </form>
+            <h5 className="register">
+            Não tem uma conta? <span onClick={() => navigate('/cadastro/')} className="register-link">Registre-se</span>
+            </h5>
+            
+        </>
     )
 }
+export default LoginForm;
