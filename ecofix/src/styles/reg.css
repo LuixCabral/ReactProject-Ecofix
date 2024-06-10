@@ -1,10 +1,4 @@
 /* Register Page */
-body {
-    position: relative;
-    width: 1280px;
-    height: 720px;
-    background: #EBEFFF;
-}
 label{
     margin-left: 0;
 }
@@ -15,7 +9,7 @@ label{
     -webkit-animation-delay: 1s;
     -moz-animation-delay: 1s;
     animation-delay: 1s;
-    left: 345px;
+    left: 689px;
     position: relative;
     width: 367px;
     height: 34px;
@@ -111,7 +105,7 @@ label{
 
 .question{
     position: relative;
-    left: 318px;
+    left: 345px;
     top: -226px;
     font-weight: bold;
 }
@@ -120,11 +114,16 @@ label{
     position: absolute;
     left: 756px;
     top: 300px;
-    margin-top: 20px;
+    margin-top: 9px;
 }
-
+#commonUser{
+    position: relative;
+    left: -81px;
+}
 #user{
     color: green;
+    left: -81px;
+    word-wrap: break-word;
 }
 
 /* Senha */
@@ -284,6 +283,7 @@ label{
 }
 #name-label,#email-label,#password-label,#confirmpassword-label{
     margin-top:1px;
+    margin-left: -32px;
 }
 /* Vector icons */
 .vector {
@@ -297,7 +297,11 @@ label{
     top: 88.33%;
     bottom: 8.32%;
 }
-
+.eye{
+    right: -562px;
+    top: -171px;
+    width: 40px;
+}
 #vector-2 {
     position: absolute;
     left: 74.22%;

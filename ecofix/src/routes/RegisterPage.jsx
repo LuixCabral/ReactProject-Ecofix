@@ -4,6 +4,7 @@ import { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc,getFirestore } from "firebase/firestore";
 import openedEyeImage from '../assets/opened-eye.svg';
+import closedEyeImage from "../assets/closed-eye.svg";
 import app from '../components/DatabaseConnection'
 import art from '../assets/art.png'
 import {useNavigate} from 'react-router-dom'
@@ -87,10 +88,15 @@ function RegisterForm() {
     setEmail(event.target.value);
   };
 
-  function changePassType() {
+  function changePassType(event) {
     setCheck(!check);
     // eslint-disable-next-line no-undef
     document.getElementById("passwordfield").type = check ? "password" : "text";
+    if(event.target.src == openedEyeImage){
+      event.target.src = closedEyeImage;
+      return
+    }
+    event.target.src = openedEyeImage;
   }
 
   function focus() {
@@ -155,7 +161,7 @@ function RegisterForm() {
                 </li>
                 <li className='user'>
                     <input onClick={roleSelection} type="radio" name="userRole" id="commonUser"/>
-                    <label onClick={roleSelection} htmlFor="commonUser" id="user">Não, quero me cadastrar como um usuário comum! </label>
+                    <label onClick={roleSelection} htmlFor="commonUser" id="user">Não, eu não sou um especialita! </label>
                 </li>
               </ul>
               
@@ -173,6 +179,7 @@ function RegisterForm() {
                   className="eye"
                   rel="icon"
                   type="image/svg+xml"
+   
                   src={openedEyeImage}
                   style={{ cursor: 'pointer' }}
                 />

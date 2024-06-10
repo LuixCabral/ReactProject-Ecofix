@@ -39,7 +39,8 @@ function LoginForm(){
 
     
     return(
-        <>
+        <div id="loginDiv">
+            <img id="tree" srcSet={tree}/>
             <h3 id="welcome">Seja bem-vindo</h3>
             <form id="loginForm" onSubmit={notReloadThePageEvent}>
               <label id='emailLabel' htmlFor="emailLogin">Email</label>
@@ -52,8 +53,10 @@ function LoginForm(){
             <h5 className="register">
             Não tem uma conta? <span onClick={() => navigate('/cadastro/')} className="register-link">Registre-se</span>
             </h5>
-            
-        </>
+            <div id='loginBody'></div>
+            <div id="struct"></div>
+            <div id="secondStruct"></div>
+        </div>
     )
 }
 export default LoginForm;
