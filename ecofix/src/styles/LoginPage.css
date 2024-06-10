@@ -1,15 +1,30 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 
 /* BASIC */
+#loginBody{
+  top: 297px;
+  right: -435px;
+  width: 40vw;
+  height: 150vh;
+  background-color: green;
+  position: absolute;
+
+}
+#loginDiv{
+  position: relative;
+  top: -233px;
+  right: -34px;
+}
 
 body {
   font-family: "Poppins", sans-serif;
   height: 100vh;
   overflow: hidden;
+ 
 
-}
-#loginForm{
-  margin-left:20px;
+  }
+  #loginForm{
+    margin-left:20px;
 }
 p{
   left: -350px;
@@ -73,12 +88,10 @@ h2 {
   }
   
   #tree{
-    z-index: 10;
-    width: 400px;
-    position:absolute;
-    right: 0;
-    margin-right:240px;
-    top: 50px;
+    position: relative;
+    top: 411px;
+    right: -141px;
+    z-index: 1;
   }
 #formContent {
   -webkit-border-radius: 10px 10px 10px 10px;
@@ -328,8 +341,8 @@ label{
   position: absolute;
   width: 600px;
   height: 141.4px;
-  left: -299px;
-  bottom: -190px;
+  left: -832px;
+  bottom: -321px;
   z-index: 10;
   background: #297B45;
   border-radius: 105.53px;
@@ -340,8 +353,8 @@ label{
   position: absolute;
   width: 600px;
   height: 141.4px;
-  left: -290px;
-  bottom: -190px;
+  left: -814px;
+  bottom: -323px;
   z-index: 9;
   background: #13dd56;
   border-radius: 105.53px;
