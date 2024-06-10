@@ -1,8 +1,8 @@
 /* Register Page */
 body {
     position: relative;
-    width: 1280px;
-    height: 720px;
+    width: 100vw;
+    height: 100vh;
     background: #EBEFFF;
 }
 label{
