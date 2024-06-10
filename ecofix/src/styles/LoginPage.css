@@ -2,30 +2,22 @@
 
 /* BASIC */
 #loginBody{
-  top: 297px;
-  right: -435px;
-  width: 40vw;
-  height: 150vh;
+  top: 175px;
+  right: -369px;
+  width: 34vw;
+  height: 110vh;
   background-color: green;
   position: absolute;
 
 }
 #loginDiv{
-  position: relative;
+  position: absolute;
   top: -233px;
-  right: -34px;
+  right: 360px;
+  max-height: 100vh;
+  max-width: 100vw;
 }
 
-body {
-  font-family: "Poppins", sans-serif;
-  height: 100vh;
-  overflow: hidden;
- 
-
-  }
-  #loginForm{
-    margin-left:20px;
-}
 p{
   left: -350px;
   margin-top: -20px;
@@ -37,7 +29,7 @@ p{
   color: #1a1a1a;
   position: relative;
   left: -376px;
-  top:70px;
+  top:25px;
 }
 .messagePass{
   margin-top: -39px;
@@ -184,7 +176,7 @@ label{
   margin-left: -90%;
 }
 #loginForm{
-  margin-top: 110px;
+  margin-top: 25px;
   margin-left:40px;
 }
 .register {
@@ -341,8 +333,8 @@ label{
   position: absolute;
   width: 600px;
   height: 141.4px;
-  left: -832px;
-  bottom: -321px;
+  left: -893px;
+  bottom: -388px;
   z-index: 10;
   background: #297B45;
   border-radius: 105.53px;
@@ -353,8 +345,8 @@ label{
   position: absolute;
   width: 600px;
   height: 141.4px;
-  left: -814px;
-  bottom: -323px;
+  left: -886px;
+  bottom: -376px;
   z-index: 9;
   background: #13dd56;
   border-radius: 105.53px;
