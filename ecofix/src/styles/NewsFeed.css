@@ -2,9 +2,20 @@
 
 .news-feed {
     background-color: rgb(78, 78, 174);
+    width: 80vw;
+    height: 580px;
 
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
+    flex-flow: column wrap;
+}
+.news-items {
+    display: flex;
     flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-evenly;
+
+    background-color: blueviolet;
+    height: 200px;
 }

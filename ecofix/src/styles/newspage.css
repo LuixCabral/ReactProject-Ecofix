@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    overflow: auto;
+}
+
+#root {
+    display: flex;
+    align-items: center;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    
+    width: 100vw;
+    height: fit-content;
+    margin: 0;
+    padding: 0; 
+}
+
+.NewsFeedPage {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 100vw;
+    height: 500px;
+    
+}
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.main-content {
+    display: flex;
+    flex-flow: column wrap;
+    height: fit-content;
+}
