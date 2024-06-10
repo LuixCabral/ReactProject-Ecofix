@@ -5,14 +5,18 @@ import '../../styles/NewsFeed.css'
 const NewsFeed = () => {
     const news = [
         { id: 1, title: 'News Title 1', description: 'Descricao da noticia 1' },
+        
         { id: 2, title: 'News Title 2', description: 'Descricao da noticia 2' },
-        { id: 3, title: 'News Title 3', description: 'Descricao da noticia 3' }
+
+        { id: 3, title: 'titulo da notica', description: 'Descricao da noticia 3' },
+
+        { id: 4, title: 'titulo da notica', description: 'Descricao da noticia 4' }
     ];
 
     return (
         <div className="news-feed">
             {news.map((item) => (
-                <FeedItem key={item.id} title={item.title} description={item.description} />
+                <FeedItem key={item.id} title={item.title} description={item.description}/>
             ))}
         </div>
     );

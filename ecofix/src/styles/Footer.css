@@ -1,10 +1,9 @@
 /* src/components/Footer.js */
 
 .footer {
-    background-color: #333;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    width: 100%;
-    bottom: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-self: center;
+    align-items: center;
+    
 }
