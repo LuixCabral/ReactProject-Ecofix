@@ -15,12 +15,12 @@ export default function PrivateChat(){
         <StyledMessagesField>
         <div className="msgBox">
         <span className="userName">User</span>
-        <p className="msg">Mensagem teste</p>
+        <span className="msg">Mensagem teste</span>
         <span className="time">Time</span>
         </div>      
         </StyledMessagesField>
         <StyledInput>
-        <input type="text" className="inputBox" />
+        <input type="text" className="inputBox" placeholder="Digite uma mensagem..." />
         <button className="send">Enviar</button>
         </StyledInput>
         </>

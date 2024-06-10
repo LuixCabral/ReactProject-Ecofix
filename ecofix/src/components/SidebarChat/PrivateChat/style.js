@@ -42,7 +42,8 @@ export const StyledMessagesField = styled('div',{
         backgroundColor:'beige',
         borderRadius:'23px',
         fontSize:'13px',
-        boxShadow:'2px 2px 10px 0px rgba(0,0,0,0.3)'
+        boxShadow:'2px 2px 10px 0px rgba(0,0,0,0.3)',
+        gap:'1vh',
     },
     
 
@@ -72,6 +73,9 @@ export const StyledInput = styled('div',{
         height:'80%',
         width:'70%',
         color:'black',
+    },
+    '.inputBox::placeholder':{
+        color:'rgb(0,0,0,0.5)'
     },
     '.send':{
         display:'flex',
