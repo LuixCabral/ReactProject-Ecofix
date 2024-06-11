@@ -37,13 +37,7 @@ p{
   text-align: -webkit-center;
   margin-left: -50px;
 }
-.messageError{
-  color:red;
-  margin-top: -39px;
-  font: -webkit-control;
-  text-align: -webkit-center;
-  margin-left: -50px;
-  }
+
   a {
   color: #92badd;
   display:inline-block;

@@ -15,8 +15,14 @@ function LoginForm(){
     const [isClicked , setClicked] = useState(false);
 
     async function userLogin(){
-        await signInWithEmailAndPassword(auth,email,password).then(() => {
-            navigate('/home/')
+        await signInWithEmailAndPassword(auth,email,password).then((userCredential) => {
+            const user = userCredential.user;
+            console.log(user);
+            if(user.emailVerified){
+                navigate('/home/');
+                return;
+            }
+            navigate('/confirmar-email/')
         }).catch(() => {
             setIsValid(false);
             return;

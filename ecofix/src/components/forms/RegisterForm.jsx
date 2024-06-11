@@ -39,7 +39,7 @@ function RegisterForm() {
 
   function isEmailValid(){
     let isInWhiteList = false;
-    let invalideMail = email.split('@')[1].split('.').length !== 2;
+    let invalideMail = email.split('@')[1].split('.').length !== 2 && email.split('@').length !== 2;
     if (invalideMail) {
         setEmailError(true);
         return false;
@@ -112,8 +112,8 @@ function RegisterForm() {
             onChange={updateEmailField}
             type="text"
         />
-        {emailError && <p className="messageError">Email Inválido!</p>}
-        {emailExists && <p className="messageError">Email já cadastrado!</p>}
+        {emailError && <p className="mailError">Email Inválido!</p>}
+        {emailExists && <p className="mailError">Email já cadastrado!</p>}
         <select onChange={(event) => changeRole(event.target.value)} id="role" name="role">
           <option value="usuario">Usuário</option>
           <option value="especialista">Especialista</option>

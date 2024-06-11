@@ -12,6 +12,7 @@ import NewsFeedPage from './routes/NewsFeedTest.jsx'
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import ChatPage from './routes/ChatPage.jsx'
 import RegisterForm from './routes/RegisterPage.jsx'
+import VerifyPage from './routes/VerifyPage.jsx'
 const router = createBrowserRouter([
   {
   //Página inicial.
@@ -47,8 +48,12 @@ const router = createBrowserRouter([
     //Pagina de registro
     path:'cadastro/',
     element:<RegisterForm/>
-  }
-
+  },
+  {
+    //email page
+    path:'confirmar-email/',
+    element: <VerifyPage/>
+  },
   //{
     // pagina pesquisa teste
   //  path: 'test/',

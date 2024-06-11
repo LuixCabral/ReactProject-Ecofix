@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import  '../styles/reg.css';
 import { useState } from "react";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { doc, setDoc,getFirestore } from "firebase/firestore";
 import openedEyeImage from '../assets/opened-eye.svg';
 import closedEyeImage from "../assets/closed-eye.svg";
@@ -31,11 +31,14 @@ function RegisterForm() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [emailError, setEmailError] = useState(false);
   const [check, setCheck] = useState(true);
+  const [confirmCheck, setConfirmCheck] = useState(true);
   const [emailExists, setEmailExists] = useState(false);
   const [isRegisterDone, setRegisterDone] = useState(false);
   const [role, setRole] = useState("usuario");
   const [name, setName] = useState("");
   const [passwordError,setPasswordError] = useState(false);
+  const [eyeState, setEye] = useState(closedEyeImage);
+  const [confirmEyeState, setConfirmEye] = useState(closedEyeImage);
   const notReloadThePageEvent = (event) => event.preventDefault();
 
   function passwordsMatch() {
@@ -43,8 +46,17 @@ function RegisterForm() {
   }
 
   function isEmailValid(){
+    try {
+      email.split('@')[1].split('.');
+    } catch (error) {
+      setEmailError(true);
+    }
+    if(emailError == true){
+      return false;
+    }
+
     let isInWhiteList = false;
-    let invalideMail = email.split('@')[1].split('.').length !== 2;
+    let invalideMail = email.split('@')[1].split('.').length !== 2 && email.split('@').length !== 2;
     if (invalideMail) {
         setEmailError(true);
         return false;
@@ -58,29 +70,50 @@ function RegisterForm() {
     }
     setEmailError(true);
     return false;
-  }
-
-  async function handleSignup() {
-    
-    console.log(isEmailValid() && passwordsMatch());
-    if (isEmailValid() && passwordsMatch()) {
-      createUserWithEmailAndPassword(auth,email,password).then(async(userCredential)=>{
-        const userID = userCredential.user.uid;
-        console.log("id",userID)
-        await setDoc(doc(dataBase,"usuarios",userID),{
-          name:name,
-          role:role,
-          uid:userID,
-          verified: false,
-          email:email,                                  
-        });
-        setRegisterDone(true);
-      }).catch((error) => {
-        const errorCode = error.code;
-        errorCode == errorCode[1]?setEmailError(true):setPasswordError(true);
-      });
     }
+    
+    async function handleSignup() {
+    if (!isEmailValid() || !passwordsMatch()) {
+
+      return;
+    }
+    
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const userID = userCredential.user.uid;
+    const user = userCredential.user;
+    try {
+      
+      await sendEmailVerification(user);
+      sessionStorage.setItem("email",email);
+    } catch (error) {
+      const errorCode = error.code;
+      if (errorCode === 'auth/email-already-in-use') {
+        setEmailExists(true);
+      } else {
+
+        console.error("Erro ao criar a conta:", error);
+      }
+      return; 
+    }
+  
+
+    try {
+      await setDoc(doc(dataBase, "usuarios", userID), {
+        name: name,
+        role: role,
+        uid: userID,
+        verified: false,
+        email: email,
+      });
+    } catch (error) {
+      console.error("Erro ao criar o documento do usuário:", error);
+
+    }
+  
+    navigate('/confirmar-email/')
+    setRegisterDone(true);
   }
+  
 
   const updateEmailField = (event) => {
     setEmailExists(false);
@@ -88,23 +121,25 @@ function RegisterForm() {
     setEmail(event.target.value);
   };
 
-  function changePassType(event) {
+  function changePassType() {
     setCheck(!check);
-    // eslint-disable-next-line no-undef
-    document.getElementById("passwordfield").type = check ? "password" : "text";
-    if(event.target.src == openedEyeImage){
-      event.target.src = closedEyeImage;
+    document.getElementById("password").type = check ? "password" : "text";
+    if(eyeState == openedEyeImage){
+      setEye(closedEyeImage);
       return
     }
-    event.target.src = openedEyeImage;
+    setEye(openedEyeImage);
   }
-
-  function focus() {
-    // eslint-disable-next-line no-undef
-    document.getElementById("passwordfield").focus();
+  function changeConfirmPassType(){
+    setConfirmCheck(!confirmCheck);
+    document.getElementById("confirmpassword").type = confirmCheck ? "password" : "text";
+    if(confirmEyeState == openedEyeImage){
+      setConfirmEye(closedEyeImage);
+      return;
+    }
+    setConfirmEye(openedEyeImage);
+    return;
   }
-
-
   function changeName(event){
     setName(event.target.value)
   }
@@ -130,7 +165,7 @@ function RegisterForm() {
   }
 
     return (
-        <body>
+        <>
         
         <div className="wrapper fadeInDown">
           <img id="art" src={art} alt="" srcSet={art} />
@@ -151,8 +186,8 @@ function RegisterForm() {
                 onChange={updateEmailField}
                 type="text"
               />
-              {emailError && <p className="messageError">Email Inválido!</p>}
-              {emailExists && <p className="messageError">Email já cadastrado!</p>}
+              {emailError && <p className="mailError">Email Inválido!</p>}
+              {emailExists && <p className="mailError">Email já cadastrado!</p>}
               <p className='question'>Deseja se cadastrar como especialista?</p>
               <ul type="none" id="role">
                 <li className='specialist'>
@@ -160,7 +195,7 @@ function RegisterForm() {
                     <label onClick={roleSelection} htmlFor="specialist" id="specialistRole">Sim, sou especialista em sustentabilidade!</label>
                 </li>
                 <li className='user'>
-                    <input onClick={roleSelection} type="radio" name="userRole" id="commonUser"/>
+                    <input checked onClick={roleSelection} type="radio" name="userRole" id="commonUser"/>
                     <label onClick={roleSelection} htmlFor="commonUser" id="user">Não, eu não sou um especialita! </label>
                 </li>
               </ul>
@@ -173,14 +208,14 @@ function RegisterForm() {
                   placeholder="Digite sua senha"
                   type={check ? "password" : "text"}
                 />
-                  {passwordError ? <p className="msgError">Senha deve conter pelo menos 6 caracteres!</p> : <p className="msgPass">Senha deve conter pelo menos 6 caracteres!</p>}
+                  {passwordError ? <p className="msgError">Senha deve conter pelo menos 6 caracteres!</p> : <p className="msgPass">Sua senha deve conter pelo menos 6 caracteres!</p>}
                 <img
                   onClick={changePassType}
                   className="eye"
                   rel="icon"
                   type="image/svg+xml"
    
-                  src={openedEyeImage}
+                  src={eyeState}
                   style={{ cursor: 'pointer' }}
                 />
               
@@ -190,21 +225,32 @@ function RegisterForm() {
                 id="confirmpassword"
                 value={confirmPassword}
                 placeholder="Digite novamente sua senha"
-                type="password"
+                type={confirmCheck ? "password" : "text"}
+
               />
+              <img
+                onClick={changeConfirmPassType}
+                className="confirmEye"
+                rel="icon"
+                type="image/svg+xml"
+  
+                src={confirmEyeState}
+                style={{ cursor: 'pointer' }}
+              />
+
         {!passwordsMatch() && <p className="messageError">Senhas não coincidem!</p>}
 
         <button onClick={handleSignup} type="submit" className='fadeIn register'>Cadastrar</button>
        
         </form>
-        <h3>Já tem uma conta?<span onClick={() => navigate('/entrar/')}>Login</span></h3></>
+        <h3 className='loginBtn'>Já tem uma conta?<span onClick={() => navigate('/entrar/')}>Entrar</span></h3></>
         ):(
         <div>
             <h1 className="fadeIn first">Cadastrado com sucesso!</h1>
         </div>
         )}
         </div>
-   </body>
+   </>
  );
 }
 export default RegisterForm;
