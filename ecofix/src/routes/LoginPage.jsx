@@ -62,8 +62,7 @@ function LoginForm(){
             </h5>
             <p onClick={() => navigate('/password-reset/')} className='resetpass'>Esqueci a senha!</p>
             <div id='loginBody'></div>
-            <div id="struct"></div>
-            <div id="secondStruct"></div>
+
         </div>
     )
 }
