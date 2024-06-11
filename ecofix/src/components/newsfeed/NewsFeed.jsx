@@ -10,7 +10,11 @@ const NewsFeed = () => {
 
         { id: 3, title: 'titulo da notica', description: 'Descricao da noticia 3' },
 
-        { id: 4, title: 'titulo da notica', description: 'Descricao da noticia 4' }
+        { id: 4, title: 'titulo da notica', description: 'Descricao da noticia 4' },
+
+        { id: 5, title: 'titulo da notica', description: 'Descricao da noticia 5' },
+
+        { id: 6, title: 'titulo da notica', description: 'Descricao da noticia 6' }
     ];
 
     return (

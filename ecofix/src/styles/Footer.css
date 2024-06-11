@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(57, 65, 55);
+    background-color: rgba(5, 5, 5, 0.227);
     height: 7vh;
     width: 100%;
 }
@@ -13,5 +13,5 @@
     margin: 0px;
     left: auto;
     padding: 0px;
-    color: white;
+    color: rgb(0, 0, 0);
 }

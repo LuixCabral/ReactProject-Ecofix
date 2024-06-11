@@ -6,7 +6,6 @@ const FeedItem = ({title, description}) => {
     return (
         <div className='news-items'>
             <h2> {title} </h2>
-            <p> {description} </p>
         </div>
     );
 };

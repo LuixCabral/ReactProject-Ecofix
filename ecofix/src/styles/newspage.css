@@ -4,19 +4,14 @@
     box-sizing: border-box;
 }
 
-body {
-    width: 100vw;
-    overflow: hidden;
-}
-
 #root {
     display: flex;
     align-items: center;
     flex-flow: column nowrap;
     justify-content: flex-start;
     
-    width: 100vw;
     height: fit-content;
+    width: 100vw;
     margin: 0;
     padding: 0; 
 }
@@ -24,18 +19,16 @@ body {
 .NewsFeedPage {
     display: flex;
     flex-flow: column nowrap;
-    width: 100vw;
-    height: 500px;
+    align-items: center;
+    justify-content: center;
     
+    width: 100%;
+    height: fit-content;  
 }
+
 .header {
+    width: 100%;
     position: sticky;
     top: 0;
     z-index: 999;
-}
-
-.main-content {
-    display: flex;
-    flex-flow: column wrap;
-    height: fit-content;
 }

@@ -1,21 +1,32 @@
 /* src/styles/NewsFeed.css */
 
 .news-feed {
-    background-color: rgb(78, 78, 174);
-    width: 80vw;
-    height: 580px;
+    max-width: 700px;
+    height: fit-content;
 
     display: flex;
-    align-items: center;
+    flex-flow: row wrap;
+    align-items: flex-start;
     justify-content: space-evenly;
-    flex-flow: column wrap;
+    
 }
+
 .news-items {
     display: flex;
-    flex-flow: column nowrap;
     align-items: center;
-    justify-content: space-evenly;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
 
     background-color: blueviolet;
-    height: 200px;
+    width: 310px;
+    height: 220px;
+    margin-top: 60px;
+    border-radius: 5px;
+    box-shadow: 0 0 6px 2px rgb(0, 0, 0);
+    
+}
+.news-items:hover {
+    cursor: pointer;
+    box-shadow: 0 0 6px 1px black;
+    transform: translateY(1px);
 }
