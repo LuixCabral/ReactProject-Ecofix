@@ -23,11 +23,12 @@ function LoginForm(){
                 return;
             }
             navigate('/confirmar-email/')
+            
         }).catch(() => {
             setIsValid(false);
             return;
         })
-
+        return;
     }
     const notReloadThePageEvent = (event) => {
         event.preventDefault();
