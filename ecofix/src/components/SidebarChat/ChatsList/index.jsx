@@ -4,7 +4,7 @@ import { getAuth } from "firebase/auth";
 import { StyledChats, StyledRedirect } from "./style";
 import app from "../../DatabaseConnection";
 import example from '/src/assets/example.svg'
-import { getFirestore, collection, getDocs, addDoc, query, where, Timestamp, serverTimestamp, onSnapshot, QuerySnapshot } from "firebase/firestore";
+import { getFirestore, collection, doc, getDocs, addDoc, query, where, Timestamp, serverTimestamp, onSnapshot, QuerySnapshot, updateDoc } from "firebase/firestore";
 
 
 
@@ -49,8 +49,6 @@ export function Chats({onChatClick}){
              <span className="contactName">{chat.chatName}</span>
             </div>
            ))
-           
-
            } 
             
          </StyledChats>
@@ -69,6 +67,8 @@ export const addChat = async (user1, user2) => {
     const existingChat = chatSnapshot.docs.find(doc => doc.data().participants.includes(user2));
 
     if(existingChat){
+        const refDoc = doc(db, 'chats', existingChat.id);
+        await updateDoc(refDoc, {status: true});
         return existingChat.id;
     } else {
         const chatDoc = await addDoc(collection(db, 'chats'), {
