@@ -4,8 +4,7 @@ import "../styles/App.css"
 function HomePage(){
     return(
         <>
-            <h1>Welcome to the jungle!</h1>
-            <ButtonChat/>
+            <h1>Hello World</h1>
         </>
     );
 }

@@ -14,6 +14,7 @@ function RegisterForm() {
   const dataBase = getFirestore(app)
   const auth = getAuth();
   const mailWhiteList = [
+    "@somosicev.com",
     "@hotmail.com",
     "@gmail.com",
     "@yahoo.com",
