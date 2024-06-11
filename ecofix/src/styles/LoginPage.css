@@ -17,7 +17,11 @@
   max-height: 100vh;
   max-width: 100vw;
 }
-
+.invalidData{
+  position: relative;
+  top: -15px;
+  left: -405px;
+}
 p{
   left: -350px;
   margin-top: -20px;
@@ -29,7 +33,7 @@ p{
   color: #1a1a1a;
   position: relative;
   left: -376px;
-  top:25px;
+  top:-120px;
 }
 .messagePass{
   margin-top: -39px;
@@ -75,7 +79,7 @@ h2 {
   
   #tree{
     position: relative;
-    top: 411px;
+    top: 286px;
     right: -141px;
     z-index: 1;
   }
@@ -170,7 +174,7 @@ label{
   margin-left: -90%;
 }
 #loginForm{
-  margin-top: 25px;
+  margin-top: -94px;
   margin-left:40px;
 }
 .register {
@@ -346,6 +350,21 @@ label{
   border-radius: 105.53px;
   transform: rotate(-41.1deg);
 
+}
+.resetpass{
+  width: 50px;
+  position: absolute;
+  text-wrap: nowrap;
+  font-size: 17px;
+  MARGIN-TOP: 3px;
+  left: -331px;
+  
+}
+
+.resetpass:hover{
+  font-weight: bolder;
+  text-decoration: underline;
+  cursor: pointer;
 }
 /* Simple CSS3 Fade-in Animation */
 .underlineHover:after {

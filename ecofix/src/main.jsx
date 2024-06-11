@@ -5,6 +5,7 @@ import './styles/index.css'
 import LoginPage from './routes/LoginPage.jsx'
 import HomePage from './routes/HomePage.jsx'
 import NewsFeedPage from './routes/NewsFeedTest.jsx'
+import PasswordReset from './routes/PasswordReset.jsx'
 //import CardTestPage from './routes/CardTestPage.jsx';  
 // Importe a nova página de teste
 
@@ -53,6 +54,11 @@ const router = createBrowserRouter([
     //email page
     path:'confirmar-email/',
     element: <VerifyPage/>
+  },
+  {
+    //password reset page
+    path:'password-reset/',
+    element:<PasswordReset/>
   },
   //{
     // pagina pesquisa teste
