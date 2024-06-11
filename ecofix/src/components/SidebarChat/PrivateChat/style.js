@@ -12,6 +12,7 @@ export const StyledMessagesField = styled('div',{
     overflow:'hidden',
     overflowY:'auto',
     gap:'1vh',
+    
 
     '&::-webkit-scrollbar':{
         width:'1vw',
@@ -36,7 +37,7 @@ export const StyledMessagesField = styled('div',{
         display:'flex',
         flexWrap:'wrap',
         minWidth:'70%',
-        maxWidth:'fit-content',
+        maxWidth:'100%',
         height:'auto',
         padding:'1vw',
         backgroundColor:'beige',
@@ -93,4 +94,18 @@ export const StyledInput = styled('div',{
     '.send:active':{
         backgroundColor:'rgba(160,200,160)',
     }
+})
+
+
+
+export const StyledChatClosed = styled('div', {
+    display:'flex',
+    alignItems:'center',
+    justifyContent:'center',
+    width:'100%',
+    height:'6vh',
+    backgroundColor:'green',
+    paddingLeft:'2px',
+    paddingRight:'2px',
+    boxShadow:'0px -1px 10px 0px black',
 })

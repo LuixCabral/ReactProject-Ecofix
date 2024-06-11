@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { getAuth } from "firebase/auth"; 
 import { StyledChats, StyledRedirect } from "./style";
@@ -13,9 +13,11 @@ const db = getFirestore(app);
 
 export function Chats({onChatClick}){
 
+    
     const [user, setUser] = useState(null);
     const [chats, setChats] = useState([]);
 
+    // função que verifica se usuário está logado ou não
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth,(user) =>{
             if (user) {
@@ -27,8 +29,9 @@ export function Chats({onChatClick}){
         console.log(user);
         return () => unsubscribe();
     }, []);
+    // fim da função
 
-
+    // mostra a lista de chats caso esteja logado
     useEffect(() => {
         if(auth.currentUser){
             getChats(auth.currentUser.email, setChats);
@@ -58,6 +61,7 @@ export function Chats({onChatClick}){
     )
 }
 
+// funcionalidade que adiciona chat a lista e ao banco de dados
 export const addChat = async (user1, user2) => {
  
     const q = query(collection(db, 'chats'), where('participants', 'array-contains', user1))
@@ -70,12 +74,16 @@ export const addChat = async (user1, user2) => {
         const chatDoc = await addDoc(collection(db, 'chats'), {
             participants: [user1, user2],
             lastMessage: '',
-            timestamp: serverTimestamp()
+            timestamp: serverTimestamp(),
+            status: true,
         });
         return { id: chatDoc.id};
     }
 }
+// fim  da funcionalidade
 
+
+// resgata os chats do usuário
 export const getChats = (email, callback) => {
     const q = query(collection(db, 'chats'), where('participants', 'array-contains', email));
     onSnapshot(q, (querySnapshot) => {
@@ -88,6 +96,4 @@ export const getChats = (email, callback) => {
     });
 };
 
-const openChat = () => {
 
-}

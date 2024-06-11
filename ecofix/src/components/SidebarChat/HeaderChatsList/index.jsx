@@ -15,7 +15,6 @@ const db = getFirestore(app);
 
 
 export default function SidebarHeader(){
-    const [chats, setChats] = useState([]);
 
     // verificação de LogIn
     const [logado, setLogado] = useState(null);
@@ -56,10 +55,6 @@ export default function SidebarHeader(){
                         const userDoc = querySnapshot.docs[0];
                         const user2email = userDoc.data().email;
                         const chatID = await addChat(auth.currentUser.email, user2email)
-                        
-                        setSelected({id: chatID, participants: [auth.currentUser.email, user2email]})
-                        
-                        setChats(prevChats => [...prevChats, {id: chatID, participants:[auth.currentUser.email, user2email], chatName: userDoc.data().name}])
 
                         console.log('chat adicionado com sucesso. ID: ', chatID);
                     }

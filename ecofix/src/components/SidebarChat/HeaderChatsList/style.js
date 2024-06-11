@@ -9,7 +9,8 @@ export const StyledSidebarHeader = styled('div', {
         width:'100%',
         height: '8%',
         backgroundColor: 'white',
-        boxShadow: '0 4px 8px black',
+        boxShadow: '0 10px 10px -9px rgb(0,0,0,0.2)',
+        zIndex:'1',
 
         '.photo':{
             display:'flex',
