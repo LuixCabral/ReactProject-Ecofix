@@ -5,7 +5,7 @@ import './styles/index.css'
 import LoginPage from './routes/LoginPage.jsx'
 import HomePage from './routes/HomePage.jsx'
 import NewsFeedPage from './routes/NewsFeedTest.jsx'
-import CardTestPage from './routes/CardTestPage.jsx';  
+//import CardTestPage from './routes/CardTestPage.jsx';  
 // Importe a nova página de teste
 
 //Configuração do "router" para trocar de páginas.
@@ -54,7 +54,7 @@ const router = createBrowserRouter([
     path:'confirmar-email/',
     element: <VerifyPage/>
   },
-  {
+  //{
     // pagina pesquisa teste
     path: 'test/',
     element: <CardTestPage/>

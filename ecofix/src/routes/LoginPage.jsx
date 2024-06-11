@@ -54,15 +54,15 @@ function LoginForm(){
               <input type="text" onChange={updateEmailField} id="emailLogin" className="fadeIn second" name="login" />
               <label id='passLabel' htmlFor="passwordLogin">Senha</label>
               <input type="password" id="passwordLogin" onChange={updateLoginPasswordField} className="fadeIn third" name="login" />
-              {!isValid && <p>Email ou senha inválidos!</p>}
+              {!isValid && <p className='invalidData'>Email ou senha inválidos!</p>}
               <button type="submit" onClick={userLogin} className="fadeIn fourth">Entrar</button>
             </form>
             <h5 className="register">
             Não tem uma conta? <span onClick={() => navigate('/cadastro/')} className="register-link">Registre-se</span>
             </h5>
+            <p onClick={() => navigate('/password-reset/')} className='resetpass'>Esqueci a senha!</p>
             <div id='loginBody'></div>
-            <div id="struct"></div>
-            <div id="secondStruct"></div>
+
         </div>
     )
 }

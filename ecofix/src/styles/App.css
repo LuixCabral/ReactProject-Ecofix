@@ -1,5 +1,8 @@
 body{
   background-color: white;
+  position: sticky;
+  top: -15px;
+  left: -405px;
 }
 
 #root {
