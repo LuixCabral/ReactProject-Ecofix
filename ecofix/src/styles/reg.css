@@ -3,9 +3,10 @@ label{
     margin-left: 0;
 }
 .msgPass{
-    left: 287px;
+    left: 485px;
     top: -112px;
     position: relative;
+    width: 50%;
 
 }
 .messageError{
@@ -38,7 +39,7 @@ label{
     -webkit-animation-delay: 1s;
     -moz-animation-delay: 1s;
     animation-delay: 1s;
-    left: 613px;
+    left: 105px;
     position: relative;
     width: 367px;
     height: 34px;
@@ -58,16 +59,17 @@ label{
     border: hidden hidden hidden hidden;
     background-color: green;
 }
-.specialist{
+#specialist{
     position: relative;
-    left: -39px;
+    left: -185px;
+    top: 28px;
 }
 
 #name-label {
     position: absolute;
     width: 125px;
     height: 19px;
-    left: 756px;
+    left: 795px;
     top: 142px;
     font-family: 'Inter';
     font-style: normal;
@@ -164,11 +166,20 @@ ul{
 }
 #commonUser{
     position: relative;
-    left: -81px;
+    left: -193px;
+    top: -45px;
+}
+#specialistRole{
+    left: 33px;
+    top: 3px;
+}
+#specialist, #commonUser{
+    width: 15px;
 }
 #user{
     color: green;
-    left: -81px;
+    left: -71px;
+    top: -70px;
     word-wrap: break-word;
 }
 
@@ -213,7 +224,7 @@ ul{
     position: absolute;
     width: 175px;
     height: 19px;
-    left: 788px;
+    left:794px;
     top: 450px;
     font-family: 'Inter';
     font-style: normal;
@@ -329,8 +340,8 @@ ul{
     margin:-100px 600px 0 0;
 }
 #name-label,#email-label,#password-label,#confirmpassword-label{
-    margin-top:-13px;
-    margin-left: -32px;
+    margin-top:-14px;
+    margin-left: -25px;
 }
 /* Vector icons */
 .vector {

@@ -5,6 +5,8 @@ import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "
 import { doc, setDoc,getFirestore } from "firebase/firestore";
 import openedEyeImage from '../assets/opened-eye.svg';
 import closedEyeImage from "../assets/closed-eye.svg";
+import selectedradio from "../assets/selectedradio.png";
+import unselectedradio from "../assets/unselectedradio.png"
 import app from '../components/DatabaseConnection'
 import art from '../assets/art.png'
 import {useNavigate} from 'react-router-dom'
@@ -150,19 +152,19 @@ function RegisterForm() {
     if(event.target.id == 'user' || event.target.id == 'commonUser'){
         setRole("User");
         document.getElementById('user').style.color = "green";
-        document.getElementById('commonUser').checked = true;
+        document.getElementById('commonUser').src = selectedradio;
 
         document.getElementById('specialistRole').style.color = "black";
-        document.getElementById('specialist').checked = false;
+        document.getElementById('specialist').src = unselectedradio;
         return;
     }
     setRole("Specialist")
 
     document.getElementById('user').style.color = "black";
-    document.getElementById('commonUser').checked = false;
+    document.getElementById('commonUser').src = unselectedradio;
     
     document.getElementById('specialistRole').style.color = "green";
-    document.getElementById('specialist').checked = true;
+    document.getElementById('specialist').src = selectedradio;
   }
 
     return (
@@ -192,11 +194,11 @@ function RegisterForm() {
               <p className='question'>Deseja se cadastrar como especialista?</p>
               <ul type="none" id="role">
                 <li className='specialist'>
-                    <input onClick={roleSelection}  type="radio" name="specialistRole" id="specialist"/>
+                    <img onClick={roleSelection}  src={unselectedradio} name="specialistRole" id="specialist"/>
                     <label onClick={roleSelection} htmlFor="specialist" id="specialistRole">Sim, sou especialista em sustentabilidade!</label>
                 </li>
                 <li className='user'>
-                    <input checked onClick={roleSelection} type="radio" name="userRole" id="commonUser"/>
+                    <img onClick={roleSelection} src={selectedradio} name="userRole" id="commonUser"/>
                     <label onClick={roleSelection} htmlFor="commonUser" id="user">Não, eu não sou um especialita! </label>
                 </li>
               </ul>
