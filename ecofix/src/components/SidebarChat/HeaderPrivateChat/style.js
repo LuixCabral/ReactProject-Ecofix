@@ -2,7 +2,7 @@ import {styled} from '@stitches/react';
 
 
 export const StyledHeaderPC = styled('div', {
-    backgroundColor:'green',
+    backgroundColor:'#297b45',
     height:'8vh',
     display:'flex',
     width:'100%',
@@ -17,7 +17,7 @@ export const StyledHeaderPC = styled('div', {
             width:'2.3vw',
             height:'70%',
             borderRadius: '50%',
-            backgroundColor:'grey',
+            backgroundColor:'#2AA377',
             border:'3px solid black',
             marginRight:'1vw'
         },
@@ -42,7 +42,7 @@ export const StyledHeaderPC = styled('div', {
             justifyContent:'center',
             height:'40px',
             width:'45px',
-            backgroundColor:'green',
+            backgroundColor:'#297b45',
             border:'0px',
             marginLeft:'3.2vw',
         },
@@ -55,8 +55,6 @@ export const StyledHeaderPC = styled('div', {
             position:'absolute',
             top:'100%',
             right:'0',
-            backgroundColor:'white',
-            border:'1px solid grey',
             borderBottom:'0px',
             borderRadius:'10px',
             boxShadow:'0px 2px 5px rgba(2,3,1,0.7)'
@@ -69,6 +67,10 @@ export const StyledHeaderPC = styled('div', {
             flexDirection:'column',
             alignItems:'center',
             justifyContent:'center',
+            right:'0',
+            backgroundColor:'WhiteSmoke',
+            border:'1px solid grey',
+            borderRadius:'10px',
         },
         '.box':{
             display:'flex',
@@ -87,7 +89,7 @@ export const StyledHeaderPC = styled('div', {
             borderBottomRightRadius:'6px',
         },
         '.box:hover':{
-            backgroundColor:'green',
+            backgroundColor:'rgb(60, 135, 90, 0.9)',
         },
         '.link':{
             color:'rgba(2,0,3,0.7)',
@@ -111,7 +113,7 @@ export const StyledHeaderPC = styled('div', {
             display:'flex',
             alignItems:'center',
             justifyContent:'center',
-            backgroundColor:'green',
+            backgroundColor:'#297b45',
             borderRadius:'0',
             border:'none'
 

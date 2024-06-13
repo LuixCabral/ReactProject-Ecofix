@@ -1,4 +1,4 @@
-import { styled } from "@stitches/react";
+import { keyframes, styled } from "@stitches/react";
 
 
 
@@ -7,7 +7,7 @@ export const StyledMessagesField = styled('div',{
     flexDirection:'column',
     height:'100%',
     width:'100%',
-    backgroundColor:'rgba(150,200,140)',
+    backgroundColor:'#7FD99D',
     padding:'2vw',
     overflow:'hidden',
     overflowY:'auto',
@@ -50,7 +50,10 @@ export const StyledMessagesField = styled('div',{
 
 })
 
-
+const rotate = keyframes({
+    '0%':{transform:'rotate(30deg)'},
+    '100%':{transform:'rotate(360deg)'}
+})
 
 
 export const StyledInput = styled('div',{
@@ -59,32 +62,34 @@ export const StyledInput = styled('div',{
     alignItems:'center',
     justifyContent:'center',
     width:'100%',
-    height:'6vh',
-    backgroundColor:'green',
+    height:'8vh',
+    backgroundColor:'whitesmoke',
     paddingLeft:'2px',
     paddingRight:'2px',
     boxShadow:'0px -1px 10px 0px black',
     
     '.inputBox':{
-        backgroundColor:'rgba(100,150,100)',
+        backgroundColor:'white',
         borderRadius:'20px',
         border:'1px solid black',
         paddingLeft:'10px',
         paddingRight:'10px',
-        height:'80%',
+        height:'60%',
         width:'70%',
         color:'black',
+        boxShadow:'none',
     },
     '.inputBox::placeholder':{
         color:'rgb(0,0,0,0.5)'
     },
     '.send':{
         display:'flex',
-        backgroundColor:'rgba(70,180,100)',
-        height:'80%',
+        backgroundColor:'#2AA377',
+        height:'60%',
         alignItems:'center',
+        justifyContent:'center',
         fontSize:'14px',
-        marginLeft:'8px',
+        marginLeft:'20px',
         border:'0px',
         color:'black',
     },
@@ -93,7 +98,15 @@ export const StyledInput = styled('div',{
     },
     '.send:active':{
         backgroundColor:'rgba(160,200,160)',
+    },
+    '.imgSend':{
+        transform:'rotate(30deg)'
+    },
+    '.imgSend:hover':{
+        animation:`${rotate} 0.25s linear`,
     }
+
+    
 })
 
 
@@ -103,9 +116,12 @@ export const StyledChatClosed = styled('div', {
     alignItems:'center',
     justifyContent:'center',
     width:'100%',
-    height:'6vh',
-    backgroundColor:'green',
+    height:'8vh',
+    backgroundColor:'#297b45',
     paddingLeft:'2px',
     paddingRight:'2px',
     boxShadow:'0px -1px 10px 0px black',
+    fontSize:'19px',
 })
+
+

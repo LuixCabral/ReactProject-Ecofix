@@ -90,7 +90,7 @@ export default function SidebarHeader(){
               (<nav className="dropdown" >
                <ul id='boxLinks' type='none'>
                 <li className="box boxTop"><button className="link" onClick={addChatButton} >Adicionar chat</button></li>
-                <li className="box"><Link to='/home'><button className="link" >Home Page</button></Link></li>
+                <li className="box boxMiddle"><Link to='/home'><button className="link" >Home Page</button></Link></li>
                 <li className="box boxBottom"><Link to='/news'><button className="link" >News Page</button></Link></li>
                </ul>
             </nav>) }

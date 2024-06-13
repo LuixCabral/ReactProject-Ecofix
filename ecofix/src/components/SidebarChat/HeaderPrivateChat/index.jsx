@@ -54,7 +54,7 @@ export default function HeaderPrivateChat({chat, onBack}){
               (<nav className="dropdown" >
                <ul id='boxLinks' type='none'>
                 <li className="box boxTop"><button className="link">Agendamento</button></li>
-                <li className="box"><button className="link" onClick={handleCloseChat}>Finalizar chat</button></li>
+                <li className="box boxBottom"><button className="link" onClick={handleCloseChat}>Finalizar chat</button></li>
                </ul>
             </nav>) }
             </div>
