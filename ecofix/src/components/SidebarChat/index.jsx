@@ -43,7 +43,6 @@ export function Sidebar (){
                 <HeaderPrivateChat chat={selectedChat} onBack={handleBack} />       
                 <PrivateChat chat={selectedChat} />
                 </>
-                
             )
             :
             (
@@ -53,8 +52,6 @@ export function Sidebar (){
                 <Footer></Footer>
                 </>
             )}
-
-
         </StyledSidebar>
         </StyledBody>
         

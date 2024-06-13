@@ -2,16 +2,20 @@ import { styled } from '@stitches/react'
 
 export const StyledSidebarHeader = styled('div', {
         display: 'flex',
-        paddingLeft:'20px',
         paddingRight:'20px',
-        justifyContent:'space-between',
         alignItems:'center',
+        justifyContent:'space-between',
         width:'100%',
         height: '8%',
         backgroundColor: 'rgba(255,255,255,0.9)',
         boxShadow: '0 10px 10px -9px rgb(0,0,0,0.2)',
         zIndex:'1',
-
+    
+        '.boxArrowPhoto':{
+            display:'flex',
+            alignItems:'center',
+            height:'100%',
+        },
         '.photo':{
             display:'flex',
             width:'45px',
@@ -26,7 +30,8 @@ export const StyledSidebarHeader = styled('div', {
         },
 
         '.title':{
-            fontSize:'30px'
+            fontSize:'1em',
+
         },
         '.options:hover':{
             cursor:'pointer'
@@ -105,5 +110,21 @@ export const StyledSidebarHeader = styled('div', {
         },
         '.link:focus':{
             outline:'none',
+        },
+        '.backToList':{
+            width:'60%',
+            height:'100%',
+            display:'flex',
+            alignItems:'center',
+            justifyContent:'center',
+            borderRadius:'0',
+            border:'none'
+
+        },
+        '.backToList:hover':{
+            border:'0px',
+        },
+        '.backToList:focus':{
+            outline:'none'
         }
 })
