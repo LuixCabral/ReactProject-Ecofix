@@ -12,12 +12,12 @@ import Avaliacao from "../../../routes/Avaliacao";
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-export default function PrivateChat({chat}){
+export default function PrivateChat({chat, chatClosed, onCloseChat}){
 
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
-    const [chatClosed, setChatClosed] = useState(false);
     const [avaliado, setAvaliado] = useState(false);
+    const [role, setRole] = useState(null);
     const msgEndRef = useRef(null);
     const inputBox = useRef(null);
     const sendButton = useRef(null);
@@ -65,6 +65,7 @@ export default function PrivateChat({chat}){
                 
         };
     }, [])
+
 
     // função para rolar tela a baixo
     const scrollToBottom = () => {
@@ -140,13 +141,35 @@ export default function PrivateChat({chat}){
         try{
             const chatDoc = await getDoc(doc(db, 'chats', chatID));
             if(chatDoc.exists()){
-                setChatClosed(!chatDoc.data().status);
+                const status = !chatDoc.data().status;
+                if(status !== chatClosed){
+                    onCloseChat(status);
+                }
             }
         } catch (error) {
             console.error('Erro ao atualizar status: ', error)
         }
-    }
+    };
 
+        // acessando a role do usuario (especialista ou não)
+        useEffect(() => {
+            const buscarRole = async () => {
+                try {
+                    const docUser = await getDoc(doc(db, 'usuarios', auth.currentUser.uid));
+                    if(docUser.exists()){
+                        setRole(docUser.data().role);
+                        console.log('Role encontrada.')
+                    } else {
+                        console.error('Documento não encontrado');
+                    }
+                } catch (error) {
+                    console.error('Erro ao buscar a role do usuário: ', error)
+                }
+            };
+
+            buscarRole();
+        }, [])
+     
     return(
         <>
         <StyledMessagesField>
@@ -163,7 +186,7 @@ export default function PrivateChat({chat}){
         {chatClosed ? 
         (
             <>
-            {!avaliado ? 
+            {!avaliado && role === 'usuario' ? 
                 (
                 <Avaliacao onClose={toogleAvaliado}/>   
                 )

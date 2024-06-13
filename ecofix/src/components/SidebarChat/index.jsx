@@ -11,6 +11,9 @@ import Footer from '../footer/Footer'
 
 export function Sidebar (){
 
+    //verifica e manipula se chat está abertou ou fechado
+    const [chatClosed, setChatClosed] = useState(false);
+
     // variável que armazena o chat clicado na lista de chats
     const [selectedChat, setSelectedChat] = useState(null);
     
@@ -33,6 +36,9 @@ export function Sidebar (){
         }
     },[selectedChat])
 
+    const handleCloseChat = (status) => {
+        setChatClosed(status);
+    }
 
     return(
         <>
@@ -40,8 +46,8 @@ export function Sidebar (){
         <StyledSidebar>
             {selectedChat ? (
                 <>
-                <HeaderPrivateChat chat={selectedChat} onBack={handleBack} />       
-                <PrivateChat chat={selectedChat} />
+                <HeaderPrivateChat chat={selectedChat} onBack={handleBack} onCloseChat={() => handleCloseChat(true)} />       
+                <PrivateChat chat={selectedChat} chatClosed={chatClosed} onCloseChat={handleCloseChat}/>
                 </>
             )
             :
