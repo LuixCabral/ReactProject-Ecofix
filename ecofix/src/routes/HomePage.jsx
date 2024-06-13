@@ -56,90 +56,7 @@ export default function HomePage(){
 
     return(
 <div className="app-wrapper">
-  <div className="left-area hide-on-mobile">
-    <div className="app-header">Ecofix
-
-      <button className="close-menu">
-        <svg width="24" height="24" fill="none" stroke="#51a380" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="feather feather-x">
-          <defs />
-          <path d="M18 6L6 18M6 6l12 12" />
-        </svg>
-      </button>
-    </div>
-    <img className="burguerMenu" src={back} onClick={switchMenuBack} />
-    <div className="left-area-content">
-      <div className="profile">
-        <img src={userPhoto} alt=""/>
-        <div className="profile-info">
-          <span className="profile-name">{name}</span>
-          <span className="country">Country</span>
-        </div>
-      </div>
-      <div className="page-link-list">
-        <a href="#" className="item-link active" id="pageLink">
-          <svg className="link-icon feather feather-heart" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"  viewBox="0 0 24 24">
-            <defs />
-            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-            <path d="M9 22V12h6v10" /></svg>
-          Home</a>
-        <a href="#" className="item-link feather feather-heart" id="pageLink">
-          <svg className="link-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" >
-            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
-          </svg>
-          Favourites</a>
-        <a href="#" className="item-link" id="pageLink">
-          <svg className="link-icon feather feather-list" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" >
-            <path d="M5 3l14 9-14 9V3z" />
-          </svg>
-          My Contents</a>
-        <a href="#" className="item-link feather feather-list" id="pageLink">
-          <svg className="link-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" >
-            <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
-          </svg>
-          Playlist</a>
-        <a href="#" className="item-link" id="pageLink">
-          <svg className="link-icon feather feather-clock" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" >
-            <circle cx="12" cy="12" r="10" />
-            <polyline points="12 6 12 12 16 14" /></svg>
-          History</a>
-      </div>
-      <div className="list-header">
-        <span className="">Private</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-plus-circle">
-          <circle cx="12" cy="12" r="10" />
-          <line x1="12" y1="8" x2="12" y2="16" />
-          <line x1="8" y1="12" x2="16" y2="12" /></svg>
-      </div>
-      <a href="#" className="item-link" id="pageLink">
-        <svg className="link-icon feather feather-folder" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" >
-          <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-          <path d="M7 11V7a5 5 0 0110 0v4" />
-        </svg>
-        Studio Records</a>
-      <a href="#" className="item-link " id="pageLink">
-        <svg className="link-icon feather feather-folder" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" >
-          <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-          <path d="M7 11V7a5 5 0 0110 0v4" />
-        </svg>
-        Personal</a>
-      <div className="list-header">
-        <span className="">Public</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-plus-circle">
-          <circle cx="12" cy="12" r="10" />
-          <line x1="12" y1="8" x2="12" y2="16" />
-          <line x1="8" y1="12" x2="16" y2="12" /></svg>
-      </div>
-      <a href="#" className="item-link" id="pageLink">
-        <svg className="link-icon feather feather-folder" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" >
-          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" /></svg>
-        Vlogs</a>
-      <a href="#" className="item-link feather feather-folder" id="pageLink">
-        <svg className="link-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" >
-          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" /></svg>
-        Dance</a>
-    </div>
-    <button className="btn-invite">Invite Team</button>
-  </div>
+      
   <div className="right-area">
     <div className="right-area-upper">
       <button className="menu-button">
@@ -169,7 +86,13 @@ export default function HomePage(){
         <img src={chatIcon} alt="" width='30' height='30' />
       </Link>
       </button>
-      
+      <div className="profile">
+        <img src={userPhoto} alt=""/>
+        <div className="profile-info">
+          <span className="profile-name">{name}</span>
+          <span className="country">Country</span>
+        </div>
+      </div>
       
       <div className="action-buttons-wrapper">
 
@@ -397,6 +320,6 @@ export default function HomePage(){
       </div>
     </div>
   </div>
-    </div>
-    )
-}
+  </div>
+  )
+  }
