@@ -1,69 +1,60 @@
-import '../styles/LoginPage.css';
-import { useState, useEffect } from 'react';
-import tree from "../assets/tree.png";
-import { useNavigate } from 'react-router-dom';
-import { getAuth , signInWithEmailAndPassword} from "firebase/auth";
-import openedEyeImage from '../assets/opened-eye.svg';
-import app from '../components/DatabaseConnection'
+import '../styles/LoginPage.scss';
+import cn from "https://cdn.skypack.dev/classnames@2.3.2";
+import LoginForm from './forms/LoginForm';
+import RegisterForm from './forms/RegisterForm'
+import { useState } from 'react';
 
-function LoginForm(){
-    const navigate = useNavigate();
-    const auth = getAuth(app);
-    const [password, setPassword] = useState('');
-    const [email, setEmail] = useState('');
-    const [isValid, setIsValid] = useState(true);
-    const [isClicked , setClicked] = useState(false);
-
-    async function userLogin(){
-        await signInWithEmailAndPassword(auth,email,password).then((userCredential) => {
-            const user = userCredential.user;
-            console.log(user);
-            if(user.emailVerified){
-                navigate('/home/');
-                return;
-            }
-            navigate('/confirmar-email/')
-            
-        }).catch(() => {
-            setIsValid(false);
-            return;
-        })
-        return;
-    }
-    const notReloadThePageEvent = (event) => {
-        event.preventDefault();
-    }
-    
-    
-    function updateEmailField(event){
-       console.log(email)
-       setEmail(event.target.value);
-    }
-
-    function updateLoginPasswordField(event){
-       setPassword(event.target.value);
-    }
-
-    
-    return(
-        <div id="loginDiv">
-            <img id="tree" srcSet={tree}/>
-            <h3 id="welcome">Seja bem-vindo</h3>
-            <form id="loginForm" onSubmit={notReloadThePageEvent}>
-              <label id='emailLabel' htmlFor="emailLogin">Email</label>
-              <input type="text" onChange={updateEmailField} id="emailLogin" className="fadeIn second" name="login" />
-              <label id='passLabel' htmlFor="passwordLogin">Senha</label>
-              <input type="password" id="passwordLogin" onChange={updateLoginPasswordField} className="fadeIn third" name="login" />
-              {!isValid && <p className='invalidData'>Email ou senha inválidos!</p>}
-              <button type="submit" onClick={userLogin} className="fadeIn fourth">Entrar</button>
-            </form>
-            <h5 className="register">
-            Não tem uma conta? <span onClick={() => navigate('/cadastro/')} className="register-link">Registre-se</span>
-            </h5>
-            <p onClick={() => navigate('/password-reset/')} className='resetpass'>Esqueci a senha!</p>
-            <div id='loginBody'></div>
-
+function LoginPage(){
+    const [switched, setSwitched] = useState(false);
+    return (
+        <div className="local-container">
+          <div className={cn('demo', { 's--switched': switched })}>
+            <div className="demo__inner">
+              <div className="demo__forms">
+                <div className="demo__form">
+                <div className="demo__form-content">
+                    <LoginForm/>
+                  </div>
+                </div>
+                <div className="demo__form">
+                  <div className="demo__form-content">
+                    <RegisterForm/>
+                  </div>
+                </div>
+              </div>
+              <div className="demo__switcher">
+                <div className="demo__switcher-inner">
+                  <div className="demo__switcher-content" >
+                    <div className="demo__switcher-text">
+                      <div>
+                        <h3>Não tem conta?</h3>
+                        <p>
+                          Cadastre-se e conecte-se com várias comunidades e especialistas!
+                        </p>
+                      </div>
+                      <div>
+                        <h3>Já tem uma conta?</h3>
+                        <p>
+                            Seja bem-vindo novamente!
+                        </p>
+                      </div>
+                    </div>
+                    <button
+                      className="demo__switcher-btn"
+                      onClick={() => setSwitched(!switched)}
+                    >
+                      <span className="animated-border" />
+                      <span className="demo__switcher-btn-inner">
+                        <span>Cadastrar</span>
+                        <span>Entrar</span>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    )
+      );
 }
-export default LoginForm;
+export default LoginPage;

@@ -1,0 +1,360 @@
+// global rules
+* {
+  box-sizing: border-box;
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100vh;
+  background: #fff;
+  color: #333;
+  line-height: 1.5;
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+}
+
+input, button {
+  border: none;
+  outline: none;
+  background: none;
+  font-family: inherit;
+}
+
+.demo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 100vh;
+  padding: 20px;
+  background: #ededed;
+  border: 1px solid #ccc;
+}
+
+.animated-border {
+  // allows you to override it with higher level variable
+  --bw: var(--border-width, 3px);
+
+  z-index: 2;
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(
+    0 0, 100% 0, 100% 100%, 0 100%, 0 0, // first lap
+    var(--bw) var(--bw), // init position for second lap
+    var(--bw) calc(100% - var(--bw)), // go down
+    calc(100% - var(--bw)) calc(100% - var(--bw)), // to the right
+    calc(100% - var(--bw)) var(--bw), // up
+    var(--bw) var(--bw) // finish lap
+  );
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 150%;
+    padding-bottom: 150%;
+    transform: translate(-50%, -50%);
+    background: conic-gradient(from 270deg, #ff4800 10%, #dfd902 35%, #20dc68, #0092f4, #da54d8 72% 75%, #ff4800 95%);
+    animation: rotateBtnBg 2s linear infinite;
+  }
+}
+
+// DEMO STYLES
+// if reading scss styles with &__ is too problematic, you can always click on the arrow in top right corner and select "View complited CSS" to see final classes and styles
+
+.local-container { // not critical for the demo, just setting boundries for it
+  width: 800px;
+  max-width: 100%;
+}
+
+.demo {
+  $demoRef: &; // saving reference in a variable is a good way to avoid issues if you'll decide to rename the main class after and forget to rename it in all places inside
+  --switcher-width: 260px;
+  --arrow-offset: 30px;
+  --anim-time: 1.2s;
+  --transition-transform: transform var(--anim-time) ease-in-out;
+  --transition-opacity: opacity 0s calc(var(--anim-time) / 2);
+  background: #13aa1d59;
+  top: 39px;
+  --btn-height: 36px;
+
+  height: 550px; // can be fluid also
+  filter: drop-shadow(0 0 10px rgba(0,0,0,0.3)); // it's basically a box-shadow, but can be applied to complex shapes like clip-path, unlike regular box-shadow
+
+  button {
+    display: block;
+    margin: 0 auto;
+    height: var(--btn-height);
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+  @mixin switched { // I'm using mixins to apply rules when state class is active, used via "@include switched"
+    #{$demoRef}.s--switched & {
+      @content;
+    }
+  }
+
+  &__inner { // inner container is required to make drop-shadow work with clip-path (of nested element), as per https://css-tricks.com/using-box-shadows-and-clip-path-together/ 
+    --demoX1: 0;
+    --demoX2: calc(100% - var(--arrow-offset));
+    --demoX3: 100%;
+    --demoX4: calc(100% - var(--arrow-offset));
+    --demoX5: 0;
+    --demoX6: 0;
+
+    overflow: hidden;
+    height: 100%;
+    padding-right: var(--switcher-width);
+    background: #fff;
+    transition: clip-path var(--anim-time) ease-in-out;
+    will-change: clip-path;
+    // clip the main container to match the arrow shape, otherwise there will be white corners
+    clip-path: polygon(var(--demoX1) 0, var(--demoX2) 0, var(--demoX3) 50%, var(--demoX4) 100%, var(--demoX5) 100%, var(--demoX6) 50%);
+
+    @include switched {
+      --demoX1: var(--arrow-offset);
+      --demoX2: 100%;
+      --demoX3: 100%;
+      --demoX4: 100%;
+      --demoX5: var(--arrow-offset);
+      --demoX6: 0;
+    }
+  }
+
+  &__forms { // this container nests both of our forms and moves during animation from side to side
+    height: 100%;
+    transition: var(--transition-transform);
+    will-change: transform;
+
+    @include switched {
+      transform: translateX(var(--switcher-width));
+    }
+  }
+
+  &__form { // specific form container that swaps opacity and pointer-events during animation for active/inactive forms
+    position: absolute;
+    inset: 0;
+    transition: var(--transition-opacity);
+
+    &:first-child {
+      @include switched {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+
+    &:last-child {
+      opacity: 0;
+      pointer-events: none;
+
+      @include switched {
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
+
+    &-content { // nested wrapper for form content that forces it to be centered with width of the switcher
+      width: var(--switcher-width);
+      margin: 0 auto;
+    }
+  }
+
+  &__switcher {
+    // switcher is essentially a top-level overlay, that gets cropped via clip-path to make it look like an arrow with some content inside
+    --x1: calc(100% - var(--switcher-width));
+    --x2: calc(100% - var(--arrow-offset));
+    --x3: 100%;
+    --x4: calc(100% - var(--arrow-offset));
+    --x5: calc(100% - var(--switcher-width));
+    --x6: calc(100% - var(--switcher-width) + var(--arrow-offset));
+
+    z-index: 2;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(../assets/bgimagelogin.png);
+    background-size: cover;
+    background-position: center center;
+    clip-path: polygon(var(--x1) 0, var(--x2) 0, var(--x3) 50%, var(--x4) 100%, var(--x5) 100%, var(--x6) 50%);
+    transition: clip-path var(--anim-time) ease-in-out;
+    will-change: clip-path;
+
+    @include switched {
+      --x1: var(--arrow-offset);
+      --x2: var(--switcher-width);
+      --x3: calc(var(--switcher-width) - var(--arrow-offset));
+      --x4: var(--switcher-width);
+      --x5: var(--arrow-offset);
+      --x6: 0;
+    }
+
+    &:before { // overlay to make image background darker, which improves readability of the text
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+    }
+
+    &-inner {
+      // I'm using this sub-container with full-width to allow animating switcher content position with transforms, instead of left/right, because of performance difference
+      // but transforms got severe limitation - relative % values are tied to element's own width/height, not parent's, so that's why we need this sub-container
+      // thanks to calc, we can shift it all the way to the left minus switcher width, which will end up an equivalent of animating from left: calc(100% - var(--switcher-width)) to left: 0
+      height: 100%;
+      transition: var(--transition-transform);
+      will-change: transform;
+
+      @include switched {
+        transform: translateX(calc((100% - var(--switcher-width)) * -1));
+      }
+    }
+
+    &-content {
+      // our content is always positioned in the same place on right, we are just moving its parent instead, as explained above
+      overflow: hidden;
+      position: absolute;
+      right: 0;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      column-gap: 20px;
+      width: var(--switcher-width);
+      height: 100%;
+    }
+
+    &-text {
+      display: flex;
+      flex-wrap: nowrap;
+      height: 140px;
+      color: #fff;
+      transition: var(--transition-transform);
+      will-change: transform;
+
+      @include switched {
+        transform: translateX(-100%);
+      }
+
+      > div {
+        width: 100%;
+        flex-shrink: 0;
+        text-align: center;
+
+        // shift text to better match shape of the arrow
+        &:first-child {
+          padding-left: calc(var(--arrow-offset) + 10px);
+          padding-right: calc(var(--arrow-offset) - 10px);
+        }
+
+        &:last-child {
+          padding-left: calc(var(--arrow-offset) - 10px);
+          padding-right: calc(var(--arrow-offset) + 10px);
+        }
+
+        h3 {
+          margin-bottom: 20px;
+        }
+
+        p {
+          font-size: 14px;
+        }
+      }
+    }
+
+    &-btn {
+      // I will be covering button with animated border in a separate tutorial, stay tuned :)
+      --btn-width: 100px;
+      --border-width: 3px;
+
+      overflow: hidden;
+      width: var(--btn-width);
+
+      @keyframes rotateBtnBg {
+        to {
+          transform: translate(-50%, -50%) rotate(360deg);
+        }
+      }
+
+      &-inner {
+        z-index: 1;
+        position: absolute;
+        inset: 0;
+        font-weight: 500;
+
+        span {
+          display: block;
+          height: 100%;
+          line-height: var(--btn-height);
+          text-align: center;
+          text-transform: uppercase;
+          transition: var(--transition-transform);
+          will-change: transform;
+
+          @include switched {
+            transform: translateY(-100%);
+          }
+        }
+      }
+    }
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 50px 0;
+  row-gap: 20px;
+  text-align: center;
+  transition: transform var(--anim-time, 1.2s);
+  will-change: transform;
+
+  &__heading {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  &__field {
+    width: 100%;
+
+    &-label {
+      font-size: 12px;
+      color: #cfcfcf;
+      text-transform: uppercase;
+    }
+
+    &-input {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      margin-top: 5px;
+      padding-bottom: 5px;
+      font-size: 16px;
+      border-bottom: 1px solid rgba(0,0,0,0.4);
+      text-align: center;
+    }
+  }
+
+  &__submit {
+    width: 100%;
+    background: #d4af7a;
+  }
+}
