@@ -186,7 +186,7 @@ export default function PrivateChat({chat, chatClosed, onCloseChat}){
         {chatClosed ? 
         (
             <>
-            {!avaliado ? 
+            {!avaliado && role === 'usuario' ? 
                 (
                 <Avaliacao onClose={toogleAvaliado}/>   
                 )
