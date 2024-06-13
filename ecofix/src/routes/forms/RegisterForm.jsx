@@ -1,20 +1,21 @@
-import  '../../styles/reg.css';
+/* eslint-disable no-undef */
+import '../../styles/reg.css';
 import { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
-import { doc, setDoc,getFirestore } from "firebase/firestore";
+import { doc, setDoc, getFirestore } from "firebase/firestore";
 import openedEyeImage from '../../assets/opened-eye.svg';
 import closedEyeImage from "../../assets/closed-eye.svg";
 import selectedradio from "../../assets/selectedradio.png";
-import unselectedradio from "../../assets/unselectedradio.png"
-import app from '../../components/DatabaseConnection'
-import art from '../../assets/art.png'
-import {useNavigate} from 'react-router-dom'
-export default function RegisterForm(){
+import unselectedradio from "../../assets/unselectedradio.png";
+import app from '../../components/DatabaseConnection';
+import { useNavigate } from 'react-router-dom';
+
+export default function RegisterForm() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [email, setEmail] = useState("");
-    const [emailError, setEmailError] = useState(false);
+    const [emailError, setEmailError] = useState('');
     const [check, setCheck] = useState(true);
     const [confirmCheck, setConfirmCheck] = useState(true);
     const [emailExists, setEmailExists] = useState(false);
@@ -24,129 +25,119 @@ export default function RegisterForm(){
     const [eyeState, setEye] = useState(closedEyeImage);
     const [confirmEyeState, setConfirmEye] = useState(closedEyeImage);
     const notReloadThePageEvent = (event) => event.preventDefault();
-    
+    const navigate = useNavigate();
+    const dataBase = getFirestore(app)
+    const auth = getAuth();
+    const mailWhiteList = [
+        "@somosicev.com",
+        "@hotmail.com",
+        "@gmail.com",
+        "@yahoo.com",
+        "@outlook.com",
+        "@proton.me",
+        "@icloud.com",
+        "@aol.com",
+        "@mail.com",
+    ];
+
     function passwordsMatch() {
         return password === confirmPassword;
-      }
-    
-      function isEmailValid(){
+    }
+
+    function isEmailValid() {
         try {
-          email.split('@')[1].split('.');
+            email.split('@')[1].split('.');
         } catch (error) {
-          setEmailError(true);
+            setEmailError("Formato de e-mail inválido.");
+            return false;
         }
-        if(emailError == true){
-          return false;
-        }
-    
         let isInWhiteList = false;
         let invalideMail = email.split('@')[1].split('.').length !== 2 && email.split('@').length !== 2;
         if (invalideMail) {
-            setEmailError(true);
+            setEmailError("Formato de e-mail inválido.");
             return false;
         }
-    
         for (let index = 0; index < mailWhiteList.length; index++) {
             isInWhiteList = email.includes(mailWhiteList[index]);
-            if(isInWhiteList){
+            if (isInWhiteList) {
                 return true;
             }
         }
-        setEmailError(true);
+        setEmailError("E-mail não está na lista permitida.");
         return false;
-        }
-        
-        async function handleSignup() {
+    }
+
+    async function handleSignup() {
         if (!isEmailValid() || !passwordsMatch()) {
-    
-          return;
+            return;
         }
         
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        const userID = userCredential.user.uid;
-        const user = userCredential.user;
+        
         try {
-          
+          const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+          const userID = userCredential.user.uid;
+          const user = userCredential.user;
           await sendEmailVerification(user);
-          sessionStorage.setItem("email",email);
-        } catch (error) {
-          const errorCode = error.code;
-          if (errorCode === 'auth/email-already-in-use') {
-            setEmailExists(true);
-          } else {
-    
-            console.error("Erro ao criar a conta:", error);
-          }
-          return; 
-        }
-      
-    
-        try {
+          sessionStorage.setItem("email", email);
           await setDoc(doc(dataBase, "usuarios", userID), {
-            name: name,
-            role: role,
-            uid: userID,
-            verified: false,
-            email: email,
+              name: name,
+              role: role,
+              uid: userID,
+              email: email,
           });
         } catch (error) {
-          console.error("Erro ao criar o documento do usuário:", error);
-    
+          const errorCode = error.code;
+            if (errorCode === 'auth/email-already-in-use') {
+                setEmailError('Email já está cadastrado!');
+            } else {
+                setEmailError('Algo deu errado, tente novamente mais tarde!')
+            }
+            return;
         }
-      
         navigate('/confirmar-email/')
         setRegisterDone(true);
-      }
-      
-    
-      const updateEmailField = (event) => {
+    }
+
+    const updateEmailField = (event) => {
         setEmailExists(false);
-        setEmailError(false);
+        setEmailError('');
         setEmail(event.target.value);
-      };
-    
-      function changePassType() {
+    };
+
+    function changePassType() {
         setCheck(!check);
-        document.getElementById("password").type = check ? "password" : "text";
-        if(eyeState == openedEyeImage){
-          setEye(closedEyeImage);
-          return
+        document.getElementById("passwordSignup").type = !check ? "password" : "text";
+        if (eyeState == openedEyeImage) {
+            document.getElementsByClassName('eye')[0].style = "";
+            setEye(closedEyeImage);
+            return;
         }
         setEye(openedEyeImage);
-      }
-      function changeConfirmPassType(){
+        document.getElementsByClassName('eye')[0].style = "width:35px;top:-31px"
+    }
+    function changeConfirmPassType() {
         setConfirmCheck(!confirmCheck);
-        document.getElementById("confirmpassword").type = confirmCheck ? "password" : "text";
-        if(confirmEyeState == openedEyeImage){
-          setConfirmEye(closedEyeImage);
-          return;
+        document.getElementById("confirmPassword").type = !confirmCheck ? "password" : "text";
+        if (confirmEyeState == openedEyeImage) {
+            document.getElementsByClassName('confirm-eye')[0].style = "";
+            setConfirmEye(closedEyeImage);
+            return;
         }
         setConfirmEye(openedEyeImage);
-        return;
-      }
-      function changeName(event){
+        document.getElementsByClassName('confirm-eye')[0].style = "width:35px;top:-31px"
+    }
+
+    function changeName(event) {
         setName(event.target.value)
-      }
-    
-      function roleSelection(event){
-    
-        if(event.target.id == 'user' || event.target.id == 'commonUser'){
+    }
+
+    function roleSelection(event) {
+        if (event.target.value == 'user') {
             setRole("User");
-            document.getElementById('user').style.color = "green";
-            document.getElementById('commonUser').src = selectedradio;
-    
-            document.getElementById('specialistRole').style.color = "black";
-            document.getElementById('specialist').src = unselectedradio;
             return;
         }
         setRole("Specialist")
-    
-        document.getElementById('user').style.color = "black";
-        document.getElementById('commonUser').src = unselectedradio;
-        
-        document.getElementById('specialistRole').style.color = "green";
-        document.getElementById('specialist').src = selectedradio;
-      }
+    }
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
         if (e.target.value.length < 6) {
@@ -158,58 +149,63 @@ export default function RegisterForm(){
 
     const handleConfirmPasswordChange = (e) => {
         setConfirmPassword(e.target.value);
+
         if (e.target.value !== password) {
             setPasswordError('As senhas não correspondem');
         } else {
             setPasswordError('');
         }
     };
-    return(
+    return (
         <div className="signup-container">
             <h2>Cadastro</h2>
-            <form action="/signup" method="post">
+            <form onSubmit={notReloadThePageEvent} method="post">
                 <div className="form-group">
                     <label htmlFor="name">Nome:</label>
-                    <input type="text" id="name" name="name" required />
+                    <input onChange={changeName} type="text" id="name" name="name" required />
                 </div>
                 <div className="form-group">
                     <label htmlFor="emailSignup">Email:</label>
-                    <input type="email" id="emailSignup" name="email" required />
+                    <input onChange={updateEmailField} type="email" id="emailSignup" name="email" required />
+                    {emailError && <p id="emailError" className="error">{emailError}</p>}
                 </div>
                 <div className="form-group">
                     <label htmlFor="userType">Tipo de Usuário:</label>
-                    <select id="userType" name="userType" required>
-                        <option value="normal">Normal</option>
-                        <option value="especialista">Especialista</option>
+                    <select onChange={roleSelection} id="userType" name="userType" required>
+                        <option id="user" value="user">Usuário Comum</option>
+                        <option id="specialist" value="specialist">Especialista</option>
                     </select>
                 </div>
                 <div className="form-group">
                     <label htmlFor="passwordSignup">Senha:</label>
-                    <input 
-                        type="password" 
-                        id="passwordSignup" 
-                        name="password" 
-                        required 
+                    <input
+                        type="password"
+                        id="passwordSignup"
+                        name="password"
+                        required
                         value={password}
                         onChange={handlePasswordChange}
                     />
+                    <img onClick={changePassType} className='eye' src={eyeState} />
                 </div>
                 <div className="form-group">
                     <label htmlFor="confirmPassword">Confirmar Senha:</label>
-                    <input 
-                        type="password" 
-                        id="confirmPassword" 
-                        name="confirmPassword" 
-                        required 
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        required
                         value={confirmPassword}
                         onChange={handleConfirmPasswordChange}
                     />
+                    <img src={confirmEyeState} className='confirm-eye' onClick={changeConfirmPassType} />
                 </div>
                 {passwordError && <p id="passwordError" className="error">{passwordError}</p>}
                 <div className="form-group">
-                    <button type="submit" id="btnSignup">Cadastrar</button>
+                    <button onClick={handleSignup} type="submit" id="btnSignup">Cadastrar</button>
                 </div>
             </form>
         </div>
     )
 }
+``

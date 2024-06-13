@@ -11,8 +11,9 @@ import CardTestPage from './routes/CardTestPage.jsx';
 //Configuração do "router" para trocar de páginas.
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import ChatPage from './routes/ChatPage.jsx'
-import RegisterForm from './routes/RegisterPage.jsx'
 import VerifyPage from './routes/VerifyPage.jsx'
+
+import ForgotPassword from './routes/ForgotPassword.jsx'
 const router = createBrowserRouter([
   {
   //Página inicial.
@@ -46,11 +47,6 @@ const router = createBrowserRouter([
   },
 
   {
-    //Pagina de registro
-    path:'cadastro/',
-    element:<RegisterForm/>
-  },
-  {
     //email page
     path:'confirmar-email/',
     element: <VerifyPage/>
@@ -60,7 +56,12 @@ const router = createBrowserRouter([
     // pagina pesquisa teste
     path: 'test/',
     element: <CardTestPage/>
-}
+  },
+  {
+    //pagina de esqueci minha senha
+    path: '/esqueci-minha-senha/',
+    element: <ForgotPassword/>
+  },
 ]);
 
 //Não excluir comentario abaixo, ele ignora o erro de document undefined na linha 23.(erro falso)
