@@ -1,5 +1,5 @@
 function abrircaixa(){
-    var caixa = document.getElementById("caixaFlutuante")
+    var caixa = document.getElementById("caixaflutuante")
     caixa.style.display = "block";
 }
 

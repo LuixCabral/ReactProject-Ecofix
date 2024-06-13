@@ -1,12 +1,10 @@
 .caixaflutuante{
-    top: 50%;
-    bottom: 50%;
     border-radius: 24px 0;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   
   }
   
-  button{
+  .fechar{
     background-color: darkgreen;
     margin: 10px; 
     padding: 10px 20px;
@@ -14,7 +12,7 @@
     border-radius: 5px;
     cursor: pointer;
   }
-  button:hover{
+  .fechar:hover{
     background-color: green;
   }
 

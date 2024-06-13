@@ -7,6 +7,7 @@ import app from "../../DatabaseConnection";
 import { useRef } from "react";
 import { StyledChatClosed } from "./style";
 import send from '/src/assets/send.svg'
+import Avaliacao from "../../../routes/Avaliacao";
 
 const db = getFirestore(app);
 const auth = getAuth(app);
@@ -16,16 +17,26 @@ export default function PrivateChat({chat}){
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
     const [chatClosed, setChatClosed] = useState(false);
+    const [avaliado, setAvaliado] = useState(false);
     const msgEndRef = useRef(null);
     const inputBox = useRef(null);
     const sendButton = useRef(null);
+
+    // altera o estado de visibilidade da caixa de avaliação 
+    const toogleAvaliado = () => {
+        setAvaliado(!avaliado);
+        localStorage.setItem(`avaliado-${chat.id}`, 'true') //armazena o estado de 'avaliado'
+    }
+
 
     // ao entrar em um chat privado resgata as mensagens e checa se o chat ainda está disponível
     useEffect(() => {
         if(chat){
             getMessages(chat.id, setMessages);
             checkChatStatus(chat.id);
-        }
+            const isAvaliado = localStorage.getItem(`avaliado-${chat.id}`) === 'true';
+            setAvaliado(isAvaliado);
+        }   
     }, [chat]);
 
     // rola tela para baixo ao máximo, até a nova mensagem
@@ -145,15 +156,25 @@ export default function PrivateChat({chat}){
             <span className="msg">{msg.text}</span>
             <span className="time">{ msg.timestamp ? formatDate(msg.timestamp) : ''}</span>
             </div> 
-        )) : <p>No messages</p>
+        )) : <p></p>
         }
         <div ref={msgEndRef}/>     
         </StyledMessagesField>
         {chatClosed ? 
         (
-        <StyledChatClosed>
-            O chat foi finalizado.
-        </StyledChatClosed>   
+            <>
+            {!avaliado ? 
+                (
+                <Avaliacao onClose={toogleAvaliado}/>   
+                )
+                :
+                (
+                <StyledChatClosed>
+                O chat foi finalizado.
+                </StyledChatClosed>
+                )
+            } 
+            </>
         )
         :
         (
