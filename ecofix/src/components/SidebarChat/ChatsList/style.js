@@ -11,9 +11,11 @@ export const StyledChats = styled('div', {
     '.chat':{
         display:'flex',
         alignItems:'center',
+        justifyContent:'flex-start',
         borderBottom:'1px solid black',
         width:'100%',
         height:'9vh',
+        paddingLeft:'10%'
     },
     '.chat:hover':{
         backgroundColor:'rgb(60, 135, 90, 0.9)',  
