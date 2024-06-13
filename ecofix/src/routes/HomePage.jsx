@@ -58,27 +58,12 @@ export default function HomePage(){
 
     <div className="app-header">Ecofix
 
-      <button className="close-menu">
-        <svg width="24" height="24" fill="none" stroke="#51a380" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="feather feather-x">
-          <defs />
-          <path d="M18 6L6 18M6 6l12 12" />
-        </svg>
-      </button>
+      <img className="burguerMenu" src={back} onClick={switchMenuBack} />
 
     </div>
 
-    <img className="burguerMenu" src={back} onClick={switchMenuBack} />
 
     <div className="left-area-content">
-
-      <div className="profile">
-        <img src={userPhoto} alt=""/>
-        <div className="profile-info">
-          <span className="profile-name">{name}</span>
-          <span className="country">Country</span>
-        </div>
-
-      </div>
 
       <div className="page-link-list">
         <a href="#" className="item-link active" id="pageLink">
@@ -150,10 +135,10 @@ export default function HomePage(){
         Dance</a>
 
     </div>
-
     <button className="btn-invite">Invite Team</button>
-
   </div>
+
+{/* div do container da direita */}
 
   <div className="right-area">
 
@@ -172,11 +157,23 @@ export default function HomePage(){
       
       <button className="btn-chat" >
         <Link to='chat/'>
-          <img src={chatIcon} alt="" width='30' height='30'/>
+          <img id="chatimg" src={chatIcon} alt="" width='30' height='30'/>
         </Link>
       </button>
+
+      <div className="profile">
+        <img src={userPhoto} alt=""/>
+
+        <div className="profile-info">
+          {/* aqui quando clicar no perfil aparece outra aba menor com info do perfil */}
+       
+        </div>
+
+      </div>
       
     </div>
+    
+{/* conteudo principal da direita */}
 
     <div className="page-right-content">
 
@@ -257,20 +254,7 @@ export default function HomePage(){
 
           </div>
 
-          <div className="item video-box-wrapper">
-
-            <div className="img-preview">
-              <img src="https://images.unsplash.com/photo-1518272417499-b6ebd5fab96a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2181&q=80" alt="video"/>
-            </div>
-
-            <div className="video-description-wrapper">
-              <p className="video-description-header">Puppet Theatre</p>
-              <p className="video-description-subheader">By July</p>
-              <p className="video-description-info">116K views <span>1 hour ago</span></p>
-              <button className="btn-play"></button>
-            </div>
-
-          </div>
+          
 
           <div className="item video-box-wrapper">
 
@@ -320,21 +304,6 @@ export default function HomePage(){
 
             <div className="video-description-wrapper">
               <p className="video-description-header">Minimal Photography</p>
-              <p className="video-description-subheader">By July</p>
-              <p className="video-description-info">116K views <span>1 hour ago</span></p>
-              <button className="btn-play"></button>
-            </div>
-
-          </div>
-
-          <div className="item video-box-wrapper">
-
-            <div className="img-preview">
-              <img src="https://images.unsplash.com/photo-1524678714210-9917a6c619c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=2249&q=80" alt="video"/>
-            </div>
-
-            <div className="video-description-wrapper">
-              <p className="video-description-header">Puppet Theatre</p>
               <p className="video-description-subheader">By July</p>
               <p className="video-description-info">116K views <span>1 hour ago</span></p>
               <button className="btn-play"></button>
