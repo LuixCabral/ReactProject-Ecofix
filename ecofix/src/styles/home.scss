@@ -48,12 +48,18 @@
     border-radius: 10px;
   }
   
+  // div da pagina inteira
   .app-wrapper {
-    width: 114vw;
-    max-width: 1500px;
+    display: flex;
+    align-items: center;
+    flex-flow: row nowrap;
+    justify-content: center;
+
+    width: 100w;
     height: 100vh;
-    background-color: #fff;
+    max-width: 1680px;
     border-radius: 4px;
+    background-color: #fff;
     box-shadow:
     0 0.3px 2.2px rgba(0, 0, 0, 0.011),
     0 0.7px 5.3px rgba(0, 0, 0, 0.016),
@@ -61,21 +67,25 @@
     0 2.2px 17.9px rgba(0, 0, 0, 0.024),
     0 4.2px 33.4px rgba(0, 0, 0, 0.029),
     0 10px 80px rgba(0, 0, 0, 0.04);
+    
     overflow: hidden;
-    display: flex;
     
     @media screen and (max-width: 900px) {
       & { border-radius: none; }
     }
   }
+
+  // div da esquerda
+
   .left-area {
+    height: 100%;
     max-width: 190px;
+    padding-bottom: 20px;
     transition: all .6s linear;
     border-right: 1px solid #ddd;
+
     display: flex;
     flex-direction: column;
-    height: 100%;
-    padding-bottom: 20px;
     
     &.hide-on-mobile {
       transition: all .6s linear;
@@ -106,6 +116,7 @@
     font-weight: 500;
     color: $primary-font-color;
     background-repeat: no-repeat;
+    
     background-size: 24px;
     left:-46px;
     background-position: center left 20px;
@@ -255,9 +266,12 @@
     overflow: auto;
   }
   
+  // div do conteudo do lado direito
+
   .right-area {
     flex: 1;
     display: flex;
+    align-items: center;
     flex-direction: column;
     width: 100%;
     max-width: calc(100% - 190px);
@@ -288,7 +302,6 @@
     .menu-button {
       display: none; //em telas grandes nao aparece
     }
-    
     @media screen and (max-width: 900px) {
       & {
         .menu-button { // div do menu burguer
@@ -296,7 +309,6 @@
         }
       }
     }
-    
     @media screen and (max-width: 520px) {
       & { padding: 0 10px; }
     }
