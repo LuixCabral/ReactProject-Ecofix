@@ -2,22 +2,26 @@ import { styled } from '@stitches/react'
 
 export const StyledSidebarHeader = styled('div', {
         display: 'flex',
-        paddingLeft:'20px',
         paddingRight:'20px',
-        justifyContent:'space-between',
         alignItems:'center',
+        justifyContent:'space-between',
         width:'100%',
         height: '8%',
-        backgroundColor: 'white',
+        backgroundColor: 'rgba(255,255,255,0.9)',
         boxShadow: '0 10px 10px -9px rgb(0,0,0,0.2)',
         zIndex:'1',
-
+    
+        '.boxArrowPhoto':{
+            display:'flex',
+            alignItems:'center',
+            height:'100%',
+        },
         '.photo':{
             display:'flex',
             width:'45px',
             height:'45px',
             borderRadius: '50%',
-            backgroundColor:'grey',
+            backgroundColor:'#CBE5C9',
             border:'3px solid black'
         },
 
@@ -26,7 +30,8 @@ export const StyledSidebarHeader = styled('div', {
         },
 
         '.title':{
-            fontSize:'30px'
+            fontSize:'1em',
+
         },
         '.options:hover':{
             cursor:'pointer'
@@ -40,9 +45,9 @@ export const StyledSidebarHeader = styled('div', {
             justifyContent:'center',
             height:'40px',
             width:'15px',
-            backgroundColor:'white',
+            backgroundColor:'rgba(0,0,0,0)',
             border:'0px',
-        },
+        }, 
         '.dropdown':{
             display:'flex',
             width:'10vw',
@@ -52,8 +57,6 @@ export const StyledSidebarHeader = styled('div', {
             position:'absolute',
             top:'100%',
             right:'0',
-            backgroundColor:'white',
-            border:'1px solid grey',
             borderBottom:'0px',
             borderRadius:'10px',
             boxShadow:'0px 2px 5px rgba(2,3,1,0.7)'
@@ -66,25 +69,28 @@ export const StyledSidebarHeader = styled('div', {
             flexDirection:'column',
             alignItems:'center',
             justifyContent:'center',
+            right:'0',
+            backgroundColor:'white',
+            border:'1px solid grey',
+            borderRadius:'10px',
         },
         '.box':{
             display:'flex',
             alignItems:'center',
             justifyContent:'center',
             width:'100%',
-            borderBottom:'1px solid grey',
-            padding:'0px',
         },
         '.boxTop': {
             borderTopRightRadius:'6px',
             borderTopLeftRadius:'6px',
+            borderBottom:'1px solid grey'
         },
         '.boxBottom':{
             borderBottomLeftRadius:'6px',
             borderBottomRightRadius:'6px',
         },
         '.box:hover':{
-            backgroundColor:'grey',
+            backgroundColor:'rgb(60, 135, 90, 0.9)',
         },
         '.link':{
             color:'rgba(2,0,3,0.7)',
@@ -101,5 +107,21 @@ export const StyledSidebarHeader = styled('div', {
         },
         '.link:focus':{
             outline:'none',
+        },
+        '.backToList':{
+            width:'60%',
+            height:'100%',
+            display:'flex',
+            alignItems:'center',
+            justifyContent:'center',
+            borderRadius:'0',
+            border:'none'
+
+        },
+        '.backToList:hover':{
+            border:'0px',
+        },
+        '.backToList:focus':{
+            outline:'none'
         }
 })

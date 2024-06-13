@@ -16,11 +16,11 @@ export const StyledChats = styled('div', {
         height:'9vh',
     },
     '.chat:hover':{
-        backgroundColor:'darkgray',
+        backgroundColor:'rgb(60, 135, 90, 0.9)',  
         cursor:'pointer',
     },
     '.photo':{
-        backgroundColor:'grey',
+        backgroundColor:'#CBE5C9',
         width:'40px',
         height:'40px',
         borderRadius:'50%',

@@ -1,4 +1,4 @@
-import { StyledSidebar } from "./style";
+import { StyledBody, StyledSidebar } from "./style";
 import  SidebarHeader  from "./HeaderChatsList";
 import { Chats } from "./ChatsList";
 import HeaderPrivateChat from "./HeaderPrivateChat";
@@ -36,14 +36,13 @@ export function Sidebar (){
 
     return(
         <>
-
+        <StyledBody>
         <StyledSidebar>
             {selectedChat ? (
                 <>
                 <HeaderPrivateChat chat={selectedChat} onBack={handleBack} />       
                 <PrivateChat chat={selectedChat} />
                 </>
-                
             )
             :
             (
@@ -53,9 +52,9 @@ export function Sidebar (){
                 <Footer></Footer>
                 </>
             )}
-
-
         </StyledSidebar>
+        </StyledBody>
+        
         
       
         </>

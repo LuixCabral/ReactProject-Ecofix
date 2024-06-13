@@ -6,6 +6,7 @@ import { collection, doc, where, orderBy, onSnapshot, query, addDoc, updateDoc, 
 import app from "../../DatabaseConnection";
 import { useRef } from "react";
 import { StyledChatClosed } from "./style";
+import send from '/src/assets/send.svg'
 
 const db = getFirestore(app);
 const auth = getAuth(app);
@@ -158,7 +159,7 @@ export default function PrivateChat({chat}){
         (
         <StyledInput>
             <input type="text" ref={inputBox} value={newMessage} onChange={(e) => setNewMessage(e.target.value)} className="inputBox" placeholder="Digite uma mensagem..." />
-            <button className="send" ref={sendButton} onClick={handleSend}>Enviar</button>
+            <button className="send" ref={sendButton} onClick={handleSend}><img src={send} alt="" height='23vh' className="imgSend"/></button>
         </StyledInput>
         )
         

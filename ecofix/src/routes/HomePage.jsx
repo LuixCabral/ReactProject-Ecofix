@@ -6,6 +6,14 @@ import user from "../assets/user.png"
 import { useState, useEffect } from "react";
 import app from "../components/DatabaseConnection";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
+import chatIcon from '/src/assets/chatIcon.svg';
+import { Link } from "react-router-dom";
+
+
+
+
+
+
 export default function HomePage(){
   const [userPhoto, setUserPhoto] = useState(user)
   const [name, setName] = useState("null")
@@ -155,12 +163,14 @@ export default function HomePage(){
           <li><a href="#">Events</a></li>
         </ul>
       </div>
-      <button className="btn-notification">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#232428" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-bell">
-          <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" />
-        </svg>
-        <span>3</span>
+      
+      <button className="btn-chat" >
+      <Link to='chat/'>
+        <img src={chatIcon} alt="" width='30' height='30' />
+      </Link>
       </button>
+      
+      
       <div className="action-buttons-wrapper">
 
       </div>

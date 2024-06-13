@@ -8,6 +8,11 @@ import { getDocs, getFirestore, collection, query, where } from 'firebase/firest
 import app from '../../DatabaseConnection';
 import { addChat } from "../ChatsList";
 import {Link} from 'react-router-dom' 
+import backArrow from '/src/assets/backArrow.svg';
+
+
+
+
 
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -80,7 +85,10 @@ export default function SidebarHeader(){
     
     return(
         <StyledSidebarHeader>
+            <div className="boxArrowPhoto">
+            <button className="backToList"> <Link to='/home'><img src={backArrow} alt="" width='20px' height='20px'/></Link></button>
             <a href="/profile"><div className="photo"><img src={example} alt="Foto do usuário" height='100%' width='100%'/></div></a>
+            </div>
             <h1 className="title">CHAT</h1>
             <div className="menu">
             <button onClick={toggleShowDropdown} className="buttonMenu">
@@ -90,7 +98,6 @@ export default function SidebarHeader(){
               (<nav className="dropdown" >
                <ul id='boxLinks' type='none'>
                 <li className="box boxTop"><button className="link" onClick={addChatButton} >Adicionar chat</button></li>
-                <li className="box"><Link to='/home'><button className="link" >Home Page</button></Link></li>
                 <li className="box boxBottom"><Link to='/news'><button className="link" >News Page</button></Link></li>
                </ul>
             </nav>) }
