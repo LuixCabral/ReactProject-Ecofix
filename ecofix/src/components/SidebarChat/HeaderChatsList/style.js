@@ -83,10 +83,7 @@ export const StyledSidebarHeader = styled('div', {
         '.boxTop': {
             borderTopRightRadius:'6px',
             borderTopLeftRadius:'6px',
-        },
-        '.boxMiddle':{
-            borderTop:'1px solid grey',
-            borderBottom: '1px solid grey',
+            borderBottom:'1px solid grey'
         },
         '.boxBottom':{
             borderBottomLeftRadius:'6px',
