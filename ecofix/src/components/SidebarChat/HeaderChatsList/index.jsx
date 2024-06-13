@@ -86,8 +86,8 @@ export default function SidebarHeader(){
     return(
         <StyledSidebarHeader>
             <div className="boxArrowPhoto">
-            <button className="backToList"> <Link to='/home'><img src={backArrow} alt="" width='20px' height='20px'/></Link></button>
-            <a href="/profile"><div className="photo"><img src={example} alt="Foto do usuário" height='100%' width='100%'/></div></a>
+            <button className="backToList"> <Link to='/home'><img src={backArrow} alt="" width='auto' height='20px'/></Link></button>
+            <a href="/profile"><div className="photo"><img className='svg' src={example} alt="Foto do usuário" /></div></a>
             </div>
             <h1 className="title">CHAT</h1>
             <div className="menu">

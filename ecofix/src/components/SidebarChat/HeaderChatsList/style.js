@@ -14,15 +14,26 @@ export const StyledSidebarHeader = styled('div', {
         '.boxArrowPhoto':{
             display:'flex',
             alignItems:'center',
+            maxHeight:'100%',
+            maxWidth:'42%',
+            minHeight:'0%',
+            minWidth:'0%',
+        },
+        '.svg':{
             height:'100%',
+            width:'auto',
+            minHeight:'0%',
+            minWidth:'0%',
         },
         '.photo':{
             display:'flex',
-            width:'45px',
+            width:'100%',
+            minWidth:'0',
+            minHeight:'0',
             height:'45px',
             borderRadius: '50%',
             backgroundColor:'#CBE5C9',
-            border:'3px solid black'
+            border:'3px solid black',
         },
 
         '.photo:hover':{
@@ -115,7 +126,8 @@ export const StyledSidebarHeader = styled('div', {
             alignItems:'center',
             justifyContent:'center',
             borderRadius:'0',
-            border:'none'
+            border:'none',
+            
 
         },
         '.backToList:hover':{
