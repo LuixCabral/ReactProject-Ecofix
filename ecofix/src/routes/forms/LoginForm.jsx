@@ -59,7 +59,7 @@ function LoginForm(){
                     <button onClick={userLogin} id="btnSubmit">Login</button>
                 </div>
                 <div className="form-group">
-                    <a href="/forgot-password" className="forgot-password">Esqueci minha senha</a>
+                   <a className="forgot-password"onClick={() => navigate('/esqueci-minha-senha')}>Esqueci minha senha</a>
                 </div>
             </form>
         </div>

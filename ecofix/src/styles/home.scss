@@ -49,7 +49,7 @@
   }
   
   .app-wrapper {
-    width: 100%;
+    width: 114vw;
     max-width: 1500px;
     height: 100vh;
     background-color: #fff;
@@ -67,13 +67,6 @@
     @media screen and (max-width: 900px) {
       & { border-radius: none; }
     }
-  }
-  .burguerMenu{
-    width: 23px;
-    position: absolute;
-    left: 130px;
-    top: 3px;
-    cursor: pointer;
   }
   .left-area {
     max-width: 190px;
@@ -262,9 +255,8 @@
     overflow: auto;
   }
   
-  // Div do conteudo direio
-
-  .right-area { 
+  .right-area {
+    flex: 1;
     display: flex;
     flex-direction: column;
     width: 100%;
