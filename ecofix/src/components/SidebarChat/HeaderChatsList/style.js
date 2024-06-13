@@ -41,8 +41,8 @@ export const StyledSidebarHeader = styled('div', {
         },
 
         '.title':{
-            fontSize:'1em',
-
+            fontSize:'1.5em',
+            marginBottom:'20px',
         },
         '.options:hover':{
             cursor:'pointer'
