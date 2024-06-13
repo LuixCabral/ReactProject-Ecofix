@@ -61,6 +61,10 @@ export default function SidebarHeader(){
                         const user2email = userDoc.data().email;
                         const chatID = await addChat(auth.currentUser.email, user2email)
 
+                        const chatAvaliado = localStorage.getItem(`avaliado-${chatID}`);
+                        if(chatAvaliado) {
+                            localStorage.removeItem(`avaliado-${chatID}`)
+                        }
                         console.log('chat adicionado com sucesso. ID: ', chatID);
                     }
                      else {

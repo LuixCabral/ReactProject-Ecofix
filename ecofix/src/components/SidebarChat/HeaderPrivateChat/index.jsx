@@ -14,7 +14,7 @@ const db = getFirestore(app);
 
 
 
-export default function HeaderPrivateChat({chat, onBack}){
+export default function HeaderPrivateChat({chat, onBack, onCloseChat}){
 
     // função de dropdown para o botão de opções 
     const [showDropdown, setShowDropdown] = useState(false);
@@ -32,7 +32,7 @@ export default function HeaderPrivateChat({chat, onBack}){
         if (validation === 'sim') {
             const chatDocRef = doc(db, 'chats', chat.id);
             await updateDoc(chatDocRef, {status: false});
-            onBack();
+            onCloseChat();
         }
         } catch (error) {
             console.error('Erro ao atualizar chat: ' , error)
