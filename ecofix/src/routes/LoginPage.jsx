@@ -29,13 +29,13 @@ function LoginPage(){
                       <div>
                         <h3>Não tem conta?</h3>
                         <p>
-                          Cadastre-se e conecte-se com várias comunidades e especialistas!
+                          Cadastre-se e conecte-se a várias comunidades e especialistas em sustentabilidade!
                         </p>
                       </div>
                       <div>
                         <h3>Já tem uma conta?</h3>
                         <p>
-                            Seja bem-vindo novamente!
+                            Insira seus dados
                         </p>
                       </div>
                     </div>
