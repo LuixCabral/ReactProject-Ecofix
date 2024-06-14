@@ -7,12 +7,13 @@ import { useState, useEffect } from "react";
 import app from "../components/DatabaseConnection";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import chatIcon from '/src/assets/chatIcon.svg';
-import { Link } from "react-router-dom";
+import { Sidebar } from "../components/SidebarChat";
 
 
 export default function HomePage(){
   const [userPhoto, setUserPhoto] = useState(user)
-  const [name, setName] = useState("null")
+  const [name, setName] = useState("null");
+  const [sidebarVisible, setSidebarVisible] = useState(false);
   const auth = getAuth();
   const db = getFirestore(app)
 
@@ -51,8 +52,18 @@ export default function HomePage(){
     event.target.src = back;
   }
 
+  const handleChatButton = () => {
+    setSidebarVisible(true);
+  }
+
+  const handleCloseSidebar = () => {
+    setSidebarVisible(false);
+  }
+
+
     return(
-<div className="app-wrapper">
+      <div>
+<div className={`app-wrapper ${sidebarVisible ? "blur-background" : ""}`}>
 
   <div className="left-area hide-on-mobile">
 
@@ -170,10 +181,8 @@ export default function HomePage(){
         <input className="search-input" type="text" placeholder="Encontre especialistas..."/>
       </div>
       
-      <button className="btn-chat" >
-        <Link to='chat/'>
+      <button className="btn-chat" onClick={handleChatButton} >
           <img src={chatIcon} alt="" width='30' height='30'/>
-        </Link>
       </button>
       
     </div>
@@ -390,6 +399,17 @@ export default function HomePage(){
       </div>
     </div>
   </div>
+  </div>
+
+      {sidebarVisible && (
+         <div className="sidebar-overlay" onClick={handleCloseSidebar}>
+         <div className="sidebar-container" onClick={e => e.stopPropagation()}>
+           <Sidebar closeSidebar={handleCloseSidebar}/>
+         </div>
+       </div>
+      )}
+
+
   </div>
   )
   }

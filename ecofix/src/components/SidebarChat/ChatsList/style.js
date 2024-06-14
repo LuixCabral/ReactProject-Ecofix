@@ -1,4 +1,4 @@
-import {styled} from '@stitches/react'
+import { styled} from '@stitches/react'
 
 
 export const StyledChats = styled('div', {
@@ -34,8 +34,8 @@ export const StyledChats = styled('div', {
         overflow:'hidden',
         whiteSpace:'nowrap',
         textOverflow:'ellipsis',
-        marginLeft:'2.3vw'
-    }
+        marginLeft:'5%'
+    },
 })
 
 

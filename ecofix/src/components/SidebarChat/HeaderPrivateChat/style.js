@@ -29,6 +29,7 @@ export const StyledHeaderPC = styled('div', {
         '.title':{
             fontSize:'18px',
             width:'50%',
+            color:'black',
         },
         '.options:hover':{
             cursor:'pointer'

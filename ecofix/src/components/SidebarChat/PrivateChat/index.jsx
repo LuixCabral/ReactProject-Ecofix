@@ -50,7 +50,6 @@ export default function PrivateChat({chat, chatClosed, onCloseChat}){
         const handleKeyPress = (e) =>{
             if(e.key === 'Enter'){
                 sendButton.current.click();
-                console.log('ok')
             };
         };
 
@@ -75,6 +74,7 @@ export default function PrivateChat({chat, chatClosed, onCloseChat}){
     // adiciona novas mensagens ao banco de dados
     const addMessage = async (text, chatID, sender) => {
         try{
+            setNewMessage('');
             if(!text.trim()){
                 return;
             }
@@ -84,12 +84,21 @@ export default function PrivateChat({chat, chatClosed, onCloseChat}){
                 sender,
                 timestamp: serverTimestamp(),
             });
-    
-            await updateDoc(doc(db, 'chats', chatID), {
-                lastMessage: text,
-                timestamp: serverTimestamp(),
+            
+            const chatDoc = await getDoc(doc(db, 'chats', chatID));
+            if(!chatDoc.exists()){
+                console.error('Chat não encontrado.');
+                return;
+            };
+
+                await updateDoc(doc(db, 'chats', chatID), {
+                    lastMessage: text,
+                    timestamp: serverTimestamp(),
+                    hasNewMessage: true,
             });
 
+            
+            
             console.log('Mensagem criada com sucesso.')
     
         } catch(error){
@@ -132,7 +141,6 @@ export default function PrivateChat({chat, chatClosed, onCloseChat}){
     const handleSend = async () => {
         if(newMessage.trim()){
             await addMessage(newMessage, chat.id, auth.currentUser.email);
-            setNewMessage('');
         }
     }
 

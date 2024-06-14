@@ -1,4 +1,4 @@
-import { StyledBody, StyledSidebar } from "./style";
+import { StyledSidebar } from "./style";
 import  SidebarHeader  from "./HeaderChatsList";
 import { Chats } from "./ChatsList";
 import HeaderPrivateChat from "./HeaderPrivateChat";
@@ -9,7 +9,7 @@ import Footer from '../footer/Footer'
 
 
 
-export function Sidebar (){
+export function Sidebar ({handleCloseSidebar}){
 
     //verifica e manipula se chat está abertou ou fechado
     const [chatClosed, setChatClosed] = useState(false);
@@ -42,7 +42,7 @@ export function Sidebar (){
 
     return(
         <>
-        <StyledBody>
+        
         <StyledSidebar>
             {selectedChat ? (
                 <>
@@ -53,13 +53,13 @@ export function Sidebar (){
             :
             (
                 <>
-                <SidebarHeader/>
+                <SidebarHeader closeSidebar={handleCloseSidebar}/>
                 <Chats onChatClick={handleChatClick}/>
                 <Footer></Footer>
                 </>
             )}
         </StyledSidebar>
-        </StyledBody>
+        
         
         
       

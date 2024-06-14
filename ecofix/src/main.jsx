@@ -40,13 +40,6 @@ const router = createBrowserRouter([
   },
 
   {
-    // Página do Chat
-    path:'home/chat/',
-    element: <ChatPage/>
-
-  },
-
-  {
     //email page
     path:'confirmar-email/',
     element: <VerifyPage/>

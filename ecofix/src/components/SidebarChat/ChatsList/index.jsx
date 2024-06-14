@@ -44,13 +44,11 @@ export function Chats({onChatClick}){
          {user? (
          <StyledChats>
            {chats.map((chat) => (
-             <div className="chat" key={chat.id} onClick={() => onChatClick(chat)}>
+             <div className="chat" key={chat.id} onClick={() => {onChatClick(chat)}}>
              <img src={example} alt="" className="photo" />
              <span className="contactName">{chat.chatName}</span>
             </div>
-           ))
-           } 
-            
+           ))}     
          </StyledChats>
          ):(
          <StyledRedirect>Faça Login para acessar o chat</StyledRedirect> 
@@ -68,7 +66,7 @@ export const addChat = async (user1, user2) => {
 
     if(existingChat){
         const refDoc = doc(db, 'chats', existingChat.id);
-        await updateDoc(refDoc, {status: true});
+        await updateDoc(refDoc, {status: true, hasNewMessage: true});
         return existingChat.id;
     } else {
         const chatDoc = await addDoc(collection(db, 'chats'), {
@@ -76,7 +74,9 @@ export const addChat = async (user1, user2) => {
             lastMessage: '',
             timestamp: serverTimestamp(),
             status: true,
+            hasNewMessage: true,
         });
+        
         return { id: chatDoc.id};
     }
 }

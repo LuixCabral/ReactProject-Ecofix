@@ -8,7 +8,7 @@ import { getDocs, getFirestore, collection, query, where } from 'firebase/firest
 import app from '../../DatabaseConnection';
 import { addChat } from "../ChatsList";
 import {Link} from 'react-router-dom' 
-import backArrow from '/src/assets/backArrow.svg';
+
 
 
 
@@ -19,7 +19,7 @@ const db = getFirestore(app);
 
 
 
-export default function SidebarHeader(){
+export default function SidebarHeader({closeSidebar}){
 
     // verificação de LogIn
     const [logado, setLogado] = useState(null);
@@ -90,7 +90,6 @@ export default function SidebarHeader(){
     return(
         <StyledSidebarHeader>
             <div className="boxArrowPhoto">
-            <button className="backToList"> <Link to='/home'><img src={backArrow} alt="" width='auto' height='20px'/></Link></button>
             <a href="/profile"><div className="photo"><img className='svg' src={example} alt="Foto do usuário" /></div></a>
             </div>
             <h1 className="title">CHAT</h1>

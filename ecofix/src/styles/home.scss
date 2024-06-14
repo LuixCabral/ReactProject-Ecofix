@@ -702,3 +702,34 @@
     height: 250px;
     display: flex;
   }
+
+
+
+  .app-wrapper.blur-background {
+    filter: blur(1.5px);
+    pointer-events: none; /* Para que não se possa interagir com o conteúdo desfocado */
+  }
+  
+  /* Estilos para centralizar e exibir a sidebar */
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Para garantir que esteja em primeiro plano */
+  }
+  
+  .sidebar-container {
+    position: relative;
+    width: 30vw;
+    max-width: 600px;
+    height: 95vh;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0px 0px 15px rgb(68, 66, 66) ;
+  }

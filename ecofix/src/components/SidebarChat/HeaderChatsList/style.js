@@ -18,6 +18,7 @@ export const StyledSidebarHeader = styled('div', {
             maxWidth:'42%',
             minHeight:'0%',
             minWidth:'0%',
+            paddingLeft:'20px'
         },
         '.svg':{
             height:'100%',
@@ -102,6 +103,7 @@ export const StyledSidebarHeader = styled('div', {
         },
         '.box:hover':{
             backgroundColor:'rgb(60, 135, 90, 0.9)',
+            textDecoration:'none',
         },
         '.link':{
             color:'rgba(2,0,3,0.7)',
@@ -115,6 +117,7 @@ export const StyledSidebarHeader = styled('div', {
         },
         '.link:hover':{
             border:'0px',
+            textDecoration:'none',
         },
         '.link:focus':{
             outline:'none',
