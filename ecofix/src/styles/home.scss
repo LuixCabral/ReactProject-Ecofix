@@ -233,7 +233,7 @@ max-width: calc(100% - 190px);
   flex-flow: row nowrap;
   justify-content: space-around;
 
-  background-color: red;
+  background-color: #499d77;
   width: 100%;
   max-height: 64px;
   border-bottom: 1px solid #ddd;
@@ -364,6 +364,7 @@ li {
 
 #chatimg:hover {
   transform: translate(0, 2px);
+  background-color:black;
 }
 
 // container do Conteudo pricipal da direita de noticias
