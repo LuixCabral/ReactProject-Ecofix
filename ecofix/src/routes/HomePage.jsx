@@ -211,7 +211,7 @@ export default function HomePage(){
         centeredSlides={true}
         autoplay={{
           delay: 4000,
-          disableOnInteraction: true, // desabilita o auto slider
+          disableOnInteraction: true, // desabilita o auto slider quando interagir
         }}
         pagination={{
           clickable: true,
@@ -223,15 +223,17 @@ export default function HomePage(){
         <SwiperSlide>
           <img className="imagem-slider" src="https://images.unsplash.com/photo-1532673492-1b3cdb05d51b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2167&q=80" alt="video"/>
           <div className="middle-slider">
-            <div className="title-slider"> titulo da noticia</div>
+            <div className="title-slider"> <h2> titulo noticias </h2> </div>
+            <div className="news-content"> <p> conteudo da noticia </p> </div>
           </div>
         </SwiperSlide>
 
         <SwiperSlide>
           <img className="imagem-slider" src="https://images.unsplash.com/photo-1532673492-1b3cdb05d51b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2167&q=80" alt="video"/> 
-          
+
           <div className="middle-slider">
-            <div className="title-slider"> titulo da noticia</div>
+          <div className="title-slider"> <h2> titulo noticias </h2> </div>
+          <div className="news-content"> <p> conteudo da noticia </p> </div>
           </div>
         </SwiperSlide>
       
