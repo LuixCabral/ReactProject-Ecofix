@@ -202,10 +202,6 @@ export default function HomePage(){
     {/* slider de noticias */}
     <div className="SliderDiv">
 
-      <div className="slider-header">
-        <span className="header-text-slider">New Uploads</span>
-      </div>
-
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
@@ -229,7 +225,7 @@ export default function HomePage(){
         </SwiperSlide>
 
         <SwiperSlide>
-          <img className="imagem-slider" src="https://images.unsplash.com/photo-1532673492-1b3cdb05d51b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2167&q=80" alt="video"/> 
+          <img className="imagem-slider" src="https://images.unsplash.com/photo-1502136969935-8d8eef54d77b?ixlib=rb-1.2.1&auto=format&fit=crop&w=2249&q=80"/> 
 
           <div className="middle-slider">
           <div className="title-slider"> <h2> titulo noticias </h2> </div>
@@ -242,7 +238,7 @@ export default function HomePage(){
 
     </div>
 
-
+    {/* Container do conteudo secundario de noticias */}
     <div className="content-line content-line-list">
 
       <div className="line-header">
@@ -254,7 +250,7 @@ export default function HomePage(){
         <div className="item video-box-wrapper">
 
           <div className="img-preview">
-              <img src="https://images.unsplash.com/photo-1532673492-1b3cdb05d51b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2167&q=80" alt="video"/>
+            <img src="https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?ixlib=rb-1.2.1&auto=format&fit=crop&w=2168&q=80" alt="video"/>
           </div>
 
           <div className="video-description-wrapper">
@@ -286,7 +282,7 @@ export default function HomePage(){
         <div className="item video-box-wrapper">
 
           <div className="img-preview">
-              <img src="https://images.unsplash.com/photo-1555298472-8c43a95ddb8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80" alt="video"/>
+            <img src="https://images.unsplash.com/photo-1490535004195-099bc723fa1f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3280&q=80" alt="video"/>
           </div>
 
           <div className="video-description-wrapper">
@@ -301,7 +297,7 @@ export default function HomePage(){
           <div className="item video-box-wrapper">
 
             <div className="img-preview">
-              <img src="https://images.unsplash.com/photo-1459664018906-085c36f472af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80" alt="video"/>
+              <img src="https://images.unsplash.com/photo-1494252713559-f26b4bf0b174?ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80" alt="video"/>
             </div>
 
             <div className="video-description-wrapper">

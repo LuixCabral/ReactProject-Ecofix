@@ -364,41 +364,40 @@ li {
   background-color:black;
 }
 
-// container do Conteudo pricipal da direita de noticias
+// container do Conteudo de noticias da direita de noticias
 
 .page-right-content {
   flex: 1;
   width: 100%;
   padding: 20px;
   overflow: auto; 
+  @media screen and (min-width: 920px) {
+    width: 90%;
+    
+  }
 }
 
-// slider de noticias 
+// imagens das noticias no slider
+
+.imagem-slider {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+// slider de noticias  estilos
 .SliderDiv {
   width: 100%;
 
 }
 
-//texto titulo header do slider de noticias
-
-.slider-header {
-  font-size: larger;
-  display: flex;
-  align-self: flex-start;
-
-  line-height: 24px;
-  font-weight: 500;
-  font-size: 16px;
-  color: $primary-font-color;
-}
-
-// slider 
-
 .mySwiper {
-  position: relative;
-  background-color: #f0f0f0; /* add a background color to see the container */
-  height: 400px; /* add a height to see the container */
+  width: 100%;
+  border-radius: 5px;
+  position: relative; 
+  height: 400px; 
 }
+
+// container dentro do slider que contem titulo e conteudo
 
 .middle-slider {
   position: absolute;
@@ -406,7 +405,7 @@ li {
   left: 0;
   width: 100%;
   height: 50%;
-  background-color: rgba(0, 0, 0, 0.132);
+  background-color: rgba(0, 0, 0, 0.3);
   opacity: 1;
   transition: opacity 0.3s ease-in-out;
   text-align: center;
@@ -414,16 +413,19 @@ li {
   color: #fff;
 }
 
+// titulo da noticia no slider
+
 .title-slider {
-  color: #ffffff; /* golden yellow */
+  color: #ffffff; 
   font-size: 24px;
   font-weight: bolder;
   margin-bottom: 8px;
 
 }
+// conteudo da noticia dentro do slider
 
 .news-content {
-  color: #66d9ef; /* soft blue */
+  color: #ffffff; 
   font-size: 18px;
   margin-bottom: 16px;
 }
@@ -435,7 +437,6 @@ li {
 // primeiro container de noticias apos o slider
 
 .content-line {
-  
   width: 100%;
   position: relative;
 
