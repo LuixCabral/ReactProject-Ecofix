@@ -1,18 +1,32 @@
 import "../styles/home.scss";
+
 import { getAuth } from "firebase/auth";
+
 import back from "../assets/back.png";
 import menu from "../assets/menu.png";
 import user from "../assets/user.png"
+
 import { useState, useEffect } from "react";
+
 import app from "../components/DatabaseConnection";
+
 import { getFirestore, doc, getDoc } from "firebase/firestore";
-import chatIcon from '/src/assets/chatIcon.svg';
+import chatIcon from '/src/assets/chatIcon.svg'; 
+
 import { Sidebar } from "../components/SidebarChat";
+
+// import Swiper JS
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+// import Swiper styles
+import 'swiper/scss';
+import 'swiper/scss/navigation';
+import 'swiper/scss/pagination';
 
 
 export default function HomePage(){
   const [userPhoto, setUserPhoto] = useState(user)
-  const [name, setName] = useState("null");
+  const [name, setName] = useState("null");  // ainda nao em uso
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const auth = getAuth();
   const db = getFirestore(app)
@@ -60,10 +74,9 @@ export default function HomePage(){
     setSidebarVisible(false);
   }
 
-
     return(
-      <div>
-<div className={`app-wrapper ${sidebarVisible ? "blur-background" : ""}`}>
+<div>
+  <div className={`app-wrapper ${sidebarVisible ? "blur-background" : ""}`}>
 
   <div className="left-area hide-on-mobile">
 
@@ -149,7 +162,7 @@ export default function HomePage(){
     <button className="btn-invite">Invite Team</button>
   </div>
 
-{/* div do container da direita */}
+  {/* div do container da direita */}
 
   <div className="right-area">
 
@@ -182,103 +195,106 @@ export default function HomePage(){
       
     </div>
     
-{/* conteudo principal da direita */}
+    {/* conteudo principal da direita */}
 
     <div className="page-right-content">
 
-      <div className="content-line content-line-hero">
+    {/* slider de noticias */}
+    <div className="SliderDiv">
 
-        <div className="line-header">
-          <span className="header-text">New Uploads</span>
-        </div>
-
-        <div className="slider-wrapper owl-carousel owl-theme" id="owl-slider-1">
-
-          <div className="item hero-img-wrapper img-1">
-
-            <div className="upload-text-wrapper">
-              <p className="upload-text-header">The </p>
-              <p className="upload-text-info">By Pravin <span> 20 minutes ago</span></p>
-            </div>
-
-            <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2240&q=80" alt="SlideShow"/>
-          </div>
-
-          <div className="item hero-img-wrapper img-2">
-
-            <div className="upload-text-wrapper">
-              <p className="upload-text-header">History of Art</p>
-              <p className="upload-text-info">By Pravin <span> 10 minutes ago</span></p>
-            </div>
-
-            <img src="https://images.unsplash.com/photo-1485518994577-6cd6324ade8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2144&q=80" alt="SlideShow"/>
-          </div>
-
-          <div className="item hero-img-wrapper img-3">
-            <div className="upload-text-wrapper">
-              <p className="upload-text-header">Van Life</p>
-              <p className="upload-text-info">By Tess <span> 3 days ago</span></p>
-            </div>
-            <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2208&q=80" alt="SlideShow"/>
-          </div>
-
-        </div>
+      <div className="slider-header">
+        <span className="header-text-slider">New Uploads</span>
       </div>
 
-      <div className="content-line content-line-list">
+      <Swiper
+        spaceBetween={30}
+        centeredSlides={true}
+        autoplay={{
+          delay: 4000,
+          disableOnInteraction: true, // desabilita o auto slider
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={true}
+        modules={[Autoplay, Pagination, Navigation]}
+        className="mySwiper">
 
-        <div className="line-header">
-          <span className="header-text">Trending</span>
-        </div>
+        <SwiperSlide>
+          <img className="imagem-slider" src="https://images.unsplash.com/photo-1532673492-1b3cdb05d51b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2167&q=80" alt="video"/>
+          <div className="middle-slider">
+            <div className="title-slider"> titulo da noticia</div>
+          </div>
+        </SwiperSlide>
 
-        <div id="owl-slider-2" className="slider-wrapper owl-carousel">
+        <SwiperSlide>
+          <img className="imagem-slider" src="https://images.unsplash.com/photo-1532673492-1b3cdb05d51b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2167&q=80" alt="video"/> 
+          
+          <div className="middle-slider">
+            <div className="title-slider"> titulo da noticia</div>
+          </div>
+        </SwiperSlide>
+      
+      
+      </Swiper>
 
-          <div className="item video-box-wrapper">
+    </div>
 
-            <div className="img-preview">
+
+    <div className="content-line content-line-list">
+
+      <div className="line-header">
+        <span className="header-text">Trending</span>
+      </div>
+
+      <div id="owl-slider-2" className="slider-wrapper owl-carousel">
+
+        <div className="item video-box-wrapper">
+
+          <div className="img-preview">
               <img src="https://images.unsplash.com/photo-1532673492-1b3cdb05d51b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2167&q=80" alt="video"/>
-            </div>
+          </div>
 
-            <div className="video-description-wrapper">
+          <div className="video-description-wrapper">
               <p className="video-description-header">Minimal Photography</p>
               <p className="video-description-subheader">By July</p>
               <p className="video-description-info">116K views <span>1 hour ago</span></p>
               <button className="btn-play"></button>
-            </div>
-
           </div>
 
-          <div className="item video-box-wrapper">
+        </div>
 
-            <div className="img-preview">
+        <div className="item video-box-wrapper">
+
+          <div className="img-preview">
               <img src="https://images.unsplash.com/photo-1531736275454-adc48d079ce9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80" alt="video"/>
-            </div>
+          </div>
 
-            <div className="video-description-wrapper">
+          <div className="video-description-wrapper">
               <p className="video-description-header">Puppet Theatre</p>
               <p className="video-description-subheader">By July</p>
               <p className="video-description-info">116K views <span>1 hour ago</span></p>
               <button className="btn-play"></button>
-            </div>
-
           </div>
+
+        </div>
 
           
 
-          <div className="item video-box-wrapper">
+        <div className="item video-box-wrapper">
 
-            <div className="img-preview">
+          <div className="img-preview">
               <img src="https://images.unsplash.com/photo-1555298472-8c43a95ddb8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80" alt="video"/>
-            </div>
+          </div>
 
-            <div className="video-description-wrapper">
+          <div className="video-description-wrapper">
               <p className="video-description-header">Road Trip</p>
               <p className="video-description-subheader">By Wallace</p>
               <p className="video-description-info">116K views <span>1 hour ago</span></p>
               <button className="btn-play"></button>
-            </div>
-
           </div>
+
+        </div>
 
           <div className="item video-box-wrapper">
 
@@ -368,6 +384,7 @@ export default function HomePage(){
       </div>
     </div>
   </div>
+  
   </div>
 
       {sidebarVisible && (

@@ -227,7 +227,7 @@ max-width: calc(100% - 190px);
 // header da parte direita
 
 .right-area-upper { 
-  padding: 10px;
+  padding: 15px;
   display: flex;
   align-items: center;
   flex-flow: row nowrap;
@@ -355,10 +355,7 @@ li {
 
 // div do container do chat
 
-.btn-chat {
-  
-
-}
+//.btn-chat {}
 
 
 
@@ -373,10 +370,66 @@ li {
   flex: 1;
   width: 100%;
   padding: 20px;
-  overflow: auto;
+  overflow: auto; 
 }
 
+// slider de noticias 
+.SliderDiv {
+  width: 100%;
+
+}
+
+//texto titulo header do slider de noticias
+
+.slider-header {
+  font-size: larger;
+  display: flex;
+  align-self: flex-start;
+
+  line-height: 24px;
+  font-weight: 500;
+  font-size: 16px;
+  color: $primary-font-color;
+}
+
+// slider 
+.mySwiper {
+  max-height: 400px;
+
+  @media screen and (min-width: 900px) {
+    height: 500px;
+    opacity: 1;
+    display: block;
+    transition: 0.5s ease;
+    backface-visibility: hidden;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.3;
+    }
+
+   .middle-slider {
+      background-color: red;
+      transition: 0.5s ease;
+      opacity: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+   .title-slider {
+      background-color: #4CAF50;
+      color: white;
+      font-size: 16px;
+      padding: 16px 32px;
+    }
+  }
+}
+
+// primeiro container de noticias apos o slider
 .content-line {
+  
   width: 100%;
   position: relative;
 
