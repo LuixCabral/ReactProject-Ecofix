@@ -224,7 +224,7 @@ max-width: calc(100% - 190px);
 }
 }
 
-// header da parte direita
+// header principal da parte direita
 
 .right-area-upper { 
   padding: 15px;
@@ -233,9 +233,10 @@ max-width: calc(100% - 190px);
   flex-flow: row nowrap;
   justify-content: space-around;
 
-  background-color: #499d77;
+  background-color: #18b94b72;
   width: 100%;
-  max-height: 64px;
+  height: 70px;
+  max-height: 70px;
   border-bottom: 1px solid #ddd;
 
 //menu burguer 
@@ -371,6 +372,7 @@ li {
   width: 100%;
   padding: 20px;
   overflow: auto; 
+
   @media screen and (min-width: 920px) {
     width: 90%;
     
@@ -434,278 +436,86 @@ li {
   opacity: 1;
 }
 
-// primeiro container de noticias apos o slider
+// Container de noticias apos o slider
 
 .content-line {
+  display: flex;
+  flex-flow: column nowrap;
   width: 100%;
-  position: relative;
-
-+ .content-line { margin-top: 24px;  transition: .2s;}
-
-.header-text {
-  display: block;
-  line-height: 24px;
-  font-weight: 500;
-  font-size: 16px;
-  color: $primary-font-color;
+  height: fit-content;
 }
-}
+
+// titulo para o container
 
 .line-header {
-  position: absolute;
-  padding: 0 10px;
-}
-
-.content-line-hero .owl-dots {
-  position: absolute;
-  z-index: 12;
-  left: 50%;
-  transform: translatex(-50%);
-  bottom: 24px;
-
-.owl-dot {
-  width: 10px;
-  height: 10px;
-  background-color: #fff;
-  border-radius: 50%;
-  margin: 0 2px;
-  opacity: 0.5;
-  padding: 0;
-  
-  &.active { opacity: 1; }
-}
-}
-
-.owl-nav {
-  position: absolute;
-  top: 0;
-  right: 10px;
-}
-
-.owl-nav button {
-  background-color: $green-dark;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  background-position: center;
-  background-repeat: no-repeat;
-  transition: all .2s ease-in;
-
-span { display: none; }
-
-&:hover {
-  background-color: lighten($green-dark,6%);
-}
-}
-
-.owl-prev {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23e6f1ed' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-chevron-left'%3E%3Cpolyline points='15 18 9 12 15 6'/%3E%3C/svg%3E ");
-  margin-right: 6px;
-
-&:hover {
-  background-position: center left 2px;
-}
-}
-
-.owl-next {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23e6f1ed' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-chevron-right'%3E%3Cpath d='M9 18l6-6-6-6'/%3E%3C/svg%3E ");
-
-&:hover {
-  background-position: center right 2px;
-}
-}
-
-.owl-carousel {
-  position: relative;
-  overflow: hidden;
-}
-
-.owl-item {
-  padding: 6px 10px;
-}
-
-.owl-stage-outer { width: 100%; }
-
-.hero-img-wrapper {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-  flex-shrink: 0;
-  border-radius: 4px;
-
-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-}
-
-.owl-carousel {
-  position: relative;
-  width: 100%;
-  height: 280px;
   display: flex;
+  align-self: flex-start;
+  
+}
+
+// Container das noticias - wrapper
+
+.owl-carousel {
+  display: flex;
+  flex-flow: row wrap;
   align-items: center;
-  padding-top: 32px;
-  padding-bottom: 8px;
-}
+  justify-content: space-evenly;
+  align-items: stretch;
 
-.upload-text {
-  &-wrapper {
-    position: absolute;
-    top: 24px;
-    left: 24px;
-  }
-
-  &-header {
-    font-size: 16px;
-    line-height: 24px;
-    font-weight: 700;
-    color: #fff;
-    margin: 0;
-  }
-
-  &-info {
-    font-size: 12px;
-    font-weight: 400;
-    color: #fff;
-    margin: 0;
-    opacity: .8;
+  height: fit-content;
+  @media screen and (min-width:768px) {
+    display: flex;
+    justify-content: space-between;
     
-    span {
-      border-left: 1px solid #fff;
-      padding-left: 4px;
-    }
   }
 }
 
-.img-preview {
-  flex: 1;
-}
-
-.video-box-wrapper {
-  width: 100%;
-  height: 100%;
+.item-noticia {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  border-radius: 4px;
+
+  border-radius: 5px;
   overflow: hidden;
   box-shadow: 0px 2px 4px 0px rgba(209,209,209,.4);
-  margin-right: 10px;
+  margin-top: 50px;
+  position: relative;
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
+
+ .noticia-description-div {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background-color: rgba(0, 0, 0, 0.57);
+    padding: 8px;
+    color: #fff;
+  }
 }
 
-.video-description {
-  &-wrapper {
-    background-color: #fff;
-    padding: 8px;
-    position: relative;
-    
-    p {
-      width: 100%;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+@media screen and (min-width: 768px) {
+ .item-noticia {
+    width: 48%;
   }
+}
 
+.noticia-description {
   &-header {
-    font-weight: 500;
+    font-weight: bold;
     margin: 16px 0 4px  0;
-    font-size: 14px;
   }
 
   &-subheader {
     color: #bebfbf;
     margin: 0;
-    font-size: 12px;
+    font-size: 15px;
+    text-align: justify;
   }
 
-  &-info {
-    font-size: 12px;
-    margin: 4px 0;
-    
-    span {
-      border-left: 1px solid #cdcdcd;
-      padding-left: 4px;
-    }
-}
-
-}
-
-.btn-play {
-  position: absolute;
-  top: -16px;
-  right: 8px;
-  background-color: #fff;
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  background-size: 14px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2311a074' stroke='%2311a074' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-play'%3E%3Cpath d='M5 3l14 9-14 9V3z' /%3E%3C/svg%3E");
-  box-shadow: 0px 2px 4px 2px rgba(209,209,209,.4);
-}
-
-.more-button { display: none; }
-
-@media screen and (max-width: 768px) {
-  .menu-links {
-    display: none;
-  }
-
-  .more-button {
-    display: block;
-  }
-
-  .action-buttons-wrapper {
-    display: none;
-  }
-}
-
-#owl-slider-1 .hero-img-wrapper img {
-    display: block;
-    width: 100%;
-}
-
-.owl-stage {
-  height: 250px;
-  display: flex;
-}
-
-.app-wrapper.blur-background {
-  filter: blur(1.5px);
-  pointer-events: none; /* Para que não se possa interagir com o conteúdo desfocado */
-}
-
-/* Estilos para centralizar e exibir a sidebar */
-.sidebar-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000; /* Para garantir que esteja em primeiro plano */
-}
-
-.sidebar-container {
-  position: relative;
-  width: 30vw;
-  max-width: 600px;
-  height: 95vh;
-  border-radius: 30px;
-  overflow: hidden;
-  box-shadow: 0px 0px 15px rgb(68, 66, 66) ;
 }
