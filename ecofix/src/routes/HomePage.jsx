@@ -1,23 +1,51 @@
 import "../styles/home.scss";
+
 import { getAuth } from "firebase/auth";
+
 import back from "../assets/back.png";
 import menu from "../assets/menu.png";
 import user from "../assets/user.png"
+
 import { useState, useEffect } from "react";
+
 import app from "../components/DatabaseConnection";
+
 import { getFirestore, doc, getDoc } from "firebase/firestore";
-import chatIcon from '/src/assets/chatIcon.svg';
+import chatIcon from '/src/assets/chatIcon.svg'; 
+
 import { Sidebar } from "../components/SidebarChat";
-import ProfileDropdown from '../components/ProfileDropdown';
+
+// import Swiper JS
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+// import Swiper styles
+import 'swiper/scss';
+import 'swiper/scss/navigation';
+import 'swiper/scss/pagination';
+
 
 export default function HomePage(){
   const [userPhoto, setUserPhoto] = useState(user)
-  const [name, setName] = useState("null");
+  const [name, setName] = useState("null");  // ainda nao em uso
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const auth = getAuth();
   const db = getFirestore(app)
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [data,setData] = useState([]);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuOpenIcon = menu;
+  const backIcon = back;
+
+function switchMenuBack(event) {
+  if (event.target.src.includes(back)) {
+    if (!menuOpen) {
+      event.target.src = menuOpenIcon; 
+    } else {
+      event.target.src = back; 
+    }
+    setMenuOpen(!menuOpen); 
+  }
+}
+  
+
   function capitalize(string){
     const upperCase = string[0].toUpperCase();
     let newString = "";
@@ -70,14 +98,14 @@ export default function HomePage(){
     setSidebarVisible(false);
   }
 
-
     return(
-      <div>
-<div className={`app-wrapper ${sidebarVisible ? "blur-background" : ""}`}>
+<div>
+  <div className={`app-wrapper ${sidebarVisible ? "blur-background" : ""}`}>
 
   <div className="left-area hide-on-mobile">
 
-    <div className="app-header">Ecofix
+    <div className="app-header">
+      Ecofix
 
       <img className="burguerMenu" src={back} onClick={switchMenuBack} />
 
@@ -159,17 +187,17 @@ export default function HomePage(){
     <button className="btn-invite">Invite Team</button>
   </div>
 
-{/* div do container da direita */}
+  {/* div do container da direita */}
 
   <div className="right-area">
 
     <div className="right-area-upper">
-
+      
+      {/* botao menu mobile */}
       <button className="menu-button">
-        <svg width="24" height="24" fill="none" stroke="#51a380" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
-          <defs />
-          <path d="M3 12h18M3 6h18M3 18h18" />
-        </svg>
+
+        <img className="burguerMenu" src={back} onClick={switchMenuBack} />
+        
       </button>
       
       <div className="search-part-wrapper">
@@ -188,185 +216,129 @@ export default function HomePage(){
       
     </div>
     
-{/* conteudo principal da direita */}
+    {/* conteudo principal da direita */}
 
     <div className="page-right-content">
 
-      <div className="content-line content-line-hero">
+    {/* slider de noticias */}
+    <div className="SliderDiv">
 
-        <div className="line-header">
-          <span className="header-text">New Uploads</span>
-        </div>
+      <Swiper
+        spaceBetween={30}
+        centeredSlides={true}
+        autoplay={{
+          delay: 4000,
+          disableOnInteraction: true, // desabilita o auto slider quando interagir
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={true}
+        modules={[Autoplay, Pagination, Navigation]}
+        className="mySwiper">
 
-        <div className="slider-wrapper owl-carousel owl-theme" id="owl-slider-1">
-
-          <div className="item hero-img-wrapper img-1">
-
-            <div className="upload-text-wrapper">
-              <p className="upload-text-header">The </p>
-              <p className="upload-text-info">By Pravin <span> 20 minutes ago</span></p>
-            </div>
-
-            <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2240&q=80" alt="SlideShow"/>
+        <SwiperSlide>
+          <img className="imagem-slider" src="https://images.unsplash.com/photo-1532673492-1b3cdb05d51b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2167&q=80" alt="video"/>
+          <div className="middle-slider">
+            <div className="title-slider"> <h2> titulo noticias </h2> </div>
+            <div className="news-content"> <p> conteudo da noticia </p> </div>
           </div>
+        </SwiperSlide>
 
-          <div className="item hero-img-wrapper img-2">
+        <SwiperSlide>
+          <img className="imagem-slider" src="https://images.unsplash.com/photo-1502136969935-8d8eef54d77b?ixlib=rb-1.2.1&auto=format&fit=crop&w=2249&q=80"/> 
 
-            <div className="upload-text-wrapper">
-              <p className="upload-text-header">History of Art</p>
-              <p className="upload-text-info">By Pravin <span> 10 minutes ago</span></p>
-            </div>
+          <div className="middle-slider">
 
-            <img src="https://images.unsplash.com/photo-1485518994577-6cd6324ade8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2144&q=80" alt="SlideShow"/>
+          <div className="title-slider"> <h2> titulo noticias </h2> </div>
+          <div className="news-content"> <p> conteudo da noticia </p> </div>
+
           </div>
+        </SwiperSlide>
+      
+      
+      </Swiper>
 
-          <div className="item hero-img-wrapper img-3">
-            <div className="upload-text-wrapper">
-              <p className="upload-text-header">Van Life</p>
-              <p className="upload-text-info">By Tess <span> 3 days ago</span></p>
-            </div>
-            <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2208&q=80" alt="SlideShow"/>
-          </div>
+    </div>
 
-        </div>
+    {/* Container do conteudo secundario de noticias */}
+
+    <div className="content-line">
+      
+      {/* titulo header  */}
+
+      <div className="line-header">
+        <span className="header-text"> <h1> Ultimas Noticias </h1> </span>
       </div>
+      
+      {/* conteudo de noticias container */}
 
-      <div className="content-line content-line-list">
+      <div className="owl-carousel">
+        
+        {/* container das noticias individual */}
 
-        <div className="line-header">
-          <span className="header-text">Trending</span>
+        {/* item 1 */}
+
+        <div className="item-noticia">
+
+          <img src="https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?ixlib=rb-1.2.1&auto=format&fit=crop&w=2168&q=80" alt="video"/>
+
+          {/* descricao */}
+
+          <div className="noticia-description-div">
+
+              <h2 className="noticia-description-header">Minimal Photography</h2>
+              <p className="noticia-description-subheader">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa accusamus iste velit quae enim voluptate eaque ipsam porro optio cumque, in dolorum, non aperiam ullam, nihil consectetur iusto vitae blanditiis.</p>
+          </div>
+
         </div>
 
-        <div id="owl-slider-2" className="slider-wrapper owl-carousel">
+        {/* item 2 */}
 
-          <div className="item video-box-wrapper">
+        <div className="item-noticia">
 
-            <div className="img-preview">
-              <img src="https://images.unsplash.com/photo-1532673492-1b3cdb05d51b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2167&q=80" alt="video"/>
-            </div>
+          <img src="https://images.unsplash.com/photo-1531736275454-adc48d079ce9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80" alt="video"/>
 
-            <div className="video-description-wrapper">
-              <p className="video-description-header">Minimal Photography</p>
-              <p className="video-description-subheader">By July</p>
-              <p className="video-description-info">116K views <span>1 hour ago</span></p>
-              <button className="btn-play"></button>
-            </div>
+          {/*  Descricao */}
+          <div className="noticia-description-div">
+
+              <h3 className="noticia-description-header">Puppet Theatre</h3>
+              <p className="noticia-description-subheader">By July</p>
 
           </div>
 
-          <div className="item video-box-wrapper">
-
-            <div className="img-preview">
-              <img src="https://images.unsplash.com/photo-1531736275454-adc48d079ce9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80" alt="video"/>
-            </div>
-
-            <div className="video-description-wrapper">
-              <p className="video-description-header">Puppet Theatre</p>
-              <p className="video-description-subheader">By July</p>
-              <p className="video-description-info">116K views <span>1 hour ago</span></p>
-              <button className="btn-play"></button>
-            </div>
-
-          </div>
-
-          
-
-          <div className="item video-box-wrapper">
-
-            <div className="img-preview">
-              <img src="https://images.unsplash.com/photo-1555298472-8c43a95ddb8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80" alt="video"/>
-            </div>
-
-            <div className="video-description-wrapper">
-              <p className="video-description-header">Road Trip</p>
-              <p className="video-description-subheader">By Wallace</p>
-              <p className="video-description-info">116K views <span>1 hour ago</span></p>
-              <button className="btn-play"></button>
-            </div>
-
-          </div>
-
-          <div className="item video-box-wrapper">
-
-            <div className="img-preview">
-              <img src="https://images.unsplash.com/photo-1459664018906-085c36f472af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80" alt="video"/>
-            </div>
-
-            <div className="video-description-wrapper">
-              <p className="video-description-header">Young Folks</p>
-              <p className="video-description-subheader">By Peter</p>
-              <p className="video-description-info">116K views <span>1 hour ago</span></p>
-              <button className="btn-play"></button>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <div className="content-line content-line-list">
-
-        <div className="line-header">
-          <span className="header-text">Public</span>
         </div>
 
-        <div id="owl-slider-3" className="slider-wrapper owl-carousel">
+        {/* item 3 */}
 
-          <div className="item video-box-wrapper">
+        <div className="item-noticia">
 
-            <div className="img-preview">
-              <img src="https://images.unsplash.com/photo-1494252713559-f26b4bf0b174?ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80" alt="video"/>
-            </div>
+          <img src="https://images.unsplash.com/photo-1490535004195-099bc723fa1f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3280&q=80" alt="video"/>
 
-            <div className="video-description-wrapper">
-              <p className="video-description-header">Minimal Photography</p>
-              <p className="video-description-subheader">By July</p>
-              <p className="video-description-info">116K views <span>1 hour ago</span></p>
-              <button className="btn-play"></button>
-            </div>
+          {/* descricao */}
+
+          <div className="noticia-description-div">
+
+              <h3 className="noticia-description-header">Road Trip</h3>
+              <p className="noticia-description-subheader">By Wallace</p>
 
           </div>
 
-          <div className="item video-box-wrapper">
+        </div>
 
-            <div className="img-preview">
-              <img src="https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?ixlib=rb-1.2.1&auto=format&fit=crop&w=2168&q=80" alt="video"/>
-            </div>
+          {/* item 4 */}
 
-            <div className="video-description-wrapper">
-              <p className="video-description-header">Road Trip</p>
-              <p className="video-description-subheader">By Wallace</p>
-              <p className="video-description-info">116K views <span>1 hour ago</span></p>
-              <button className="btn-play"></button>
-            </div>
+          <div className="item-noticia">
 
-          </div>
+            <img src="https://images.unsplash.com/photo-1494252713559-f26b4bf0b174?ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80" alt="video"/>
 
-          <div className="item video-box-wrapper">
+            {/* descricao */}
 
-            <div className="img-preview">
-              <img src="https://images.unsplash.com/photo-1502136969935-8d8eef54d77b?ixlib=rb-1.2.1&auto=format&fit=crop&w=2249&q=80" alt="video"/>
-            </div>
+            <div className="noticia-description-div">
 
-            <div className="video-description-wrapper">
-              <p className="video-description-header">Young Folks</p>
-              <p className="video-description-subheader">By Peter</p>
-              <p className="video-description-info">116K views <span>1 hour ago</span></p>
-              <button className="btn-play"></button>
-            </div>
+              <h3 className="noticia-description-header">Young Folks</h3>
+              <p className="noticia-description-subheader">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione reprehenderit molestias error corrupti necessitatibus odio magni nihil rerum dicta nulla? Illo quaerat quo ipsum unde dolore? Eveniet incidunt voluptatum repudiandae.</p>
 
-          </div>
-
-          <div className="item video-box-wrapper">
-
-            <div className="img-preview">
-              <img src="https://images.unsplash.com/photo-1490535004195-099bc723fa1f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3280&q=80" alt="video"/>
-            </div>
-
-            <div className="video-description-wrapper">
-              <p className="video-description-header">Minimal Photography</p>
-              <p className="video-description-subheader">By July</p>
-              <p className="video-description-info">116K views <span>1 hour ago</span></p>
-              <button className="btn-play"></button>
             </div>
 
           </div>
@@ -374,6 +346,7 @@ export default function HomePage(){
       </div>
     </div>
   </div>
+  
   </div>
 
       {sidebarVisible && (
@@ -384,7 +357,7 @@ export default function HomePage(){
        </div>
       )}
 
-
+      
   </div>
-  )
-  }
+)
+}
