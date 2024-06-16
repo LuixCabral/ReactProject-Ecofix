@@ -51,6 +51,11 @@ export default function SidebarHeader({closeSidebar}){
     const addChatButton = async () => {
         if (logado){
             const emailDigitado = prompt('Digite o e-mail:');
+
+            if(emailDigitado == auth.currentUser.email){
+                alert('Digite um email diferente do seu.')
+            }
+            
             const validacao = emailDigitado.split('@');
             if(validacao.length == 2){
                 const q = query(collection(db, 'usuarios'), where('email', '==', emailDigitado));

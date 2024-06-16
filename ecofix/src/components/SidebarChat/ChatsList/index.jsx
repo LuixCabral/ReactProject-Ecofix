@@ -90,7 +90,10 @@ export const getChats = (email, callback) => {
         const chats = [];
         querySnapshot.forEach((doc) => {
             const chatName = doc.data().participants.find(participant => participant != email);
-            chats.push({...doc.data(), id: doc.id, chatName: chatName.split('@')[0]});
+            if(chatName){
+                chats.push({...doc.data(), id: doc.id, chatName: chatName.split('@')[0]});
+            }
+            
         });
         callback(chats);    
     });
