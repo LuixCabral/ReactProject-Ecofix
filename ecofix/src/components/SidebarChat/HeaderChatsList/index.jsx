@@ -87,8 +87,8 @@ export default function SidebarHeader(){
                 try{
                     if(!querySnapshot.empty){
                         const userDoc = querySnapshot.docs[0];
-                        const user2email = userDoc.data().email;
-                        const chatID = await addChat(auth.currentUser.email, user2email)
+                        const user2email = userDoc.data().email;             
+                        const chatID = await addChat(auth.currentUser.email, user2email);
 
                         const chatAvaliado = localStorage.getItem(`avaliado-${chatID}`);
                         if(chatAvaliado) {
@@ -97,7 +97,7 @@ export default function SidebarHeader(){
                         console.log('chat adicionado com sucesso. ID: ', chatID);
                     }
                      else {
-                        alert('Email não encontrado.')
+                        alert('Usuário não encontrado.')
                     }
                 } catch(error){
                     console.error('Erro ao encontrar usuário: ', error);

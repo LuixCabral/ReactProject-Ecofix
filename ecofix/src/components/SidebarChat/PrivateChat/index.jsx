@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { StyledMessagesField } from "./style";
 import { StyledInput } from "./style";
 import { getAuth } from "firebase/auth";
-import { collection, doc, where, orderBy, onSnapshot, query, addDoc, updateDoc, getFirestore, serverTimestamp, getDoc, } from "firebase/firestore";
+import { collection, doc, where, orderBy, onSnapshot, query, addDoc, getDocs, updateDoc, getFirestore, serverTimestamp, getDoc, } from "firebase/firestore";
 import app from "../../DatabaseConnection";
 import { useRef } from "react";
 import { StyledChatClosed } from "./style";
@@ -17,7 +17,8 @@ export default function PrivateChat({chat, chatClosed, onCloseChat}){
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
     const [avaliado, setAvaliado] = useState(false);
-    const [role, setRole] = useState(null);
+    const [roleUser1, setRoleUser1] = useState(null);
+    const [roleUser2, setRoleUser2] = useState(null);
     const msgEndRef = useRef(null);
     const inputBox = useRef(null);
     const sendButton = useRef(null);
@@ -161,11 +162,11 @@ export default function PrivateChat({chat, chatClosed, onCloseChat}){
 
         // acessando a role do usuario (especialista ou não)
         useEffect(() => {
-            const buscarRole = async () => {
+            const buscarRoleUser1 = async () => {
                 try {
                     const docUser = await getDoc(doc(db, 'usuarios', auth.currentUser.uid));
                     if(docUser.exists()){
-                        setRole(docUser.data().role);
+                        setRoleUser1(docUser.data().role);
                         console.log('Role encontrada.')
                     } else {
                         console.error('Documento não encontrado');
@@ -175,8 +176,33 @@ export default function PrivateChat({chat, chatClosed, onCloseChat}){
                 }
             };
 
-            buscarRole();
-        }, [])
+            buscarRoleUser1();
+        }, []);
+
+        useEffect(() => {
+            const buscarRoleUser2 = async() => {
+                try {
+                       const userEmails = chat.participants;
+                       const otherUserEmail = userEmails.find(email => email !== auth.currentUser.email);
+                       const user2query = query(collection(db, 'usuarios'), where('email', '==', otherUserEmail));
+                       const user2snapshot = await getDocs(user2query);
+                       if(!user2snapshot.empty){
+                        const user2doc = user2snapshot.docs[0];
+                        setRoleUser2(user2doc.data().role);
+
+                       } else {
+                        console.error('Documento do usuário 2 não encontrado.');
+                    }
+                       
+                } catch (error) {
+                    console.error(error);
+                }
+                
+            }
+
+            buscarRoleUser2();
+
+        },[chat]);
      
     return(
         <>
@@ -194,7 +220,7 @@ export default function PrivateChat({chat, chatClosed, onCloseChat}){
         {chatClosed ? 
         (
             <>
-            {!avaliado && role === 'usuario' ? 
+            {!avaliado && roleUser1 === 'usuario' && roleUser2 === 'Specialist' ? 
                 (
                 <Avaliacao onClose={toogleAvaliado}/>   
                 )
