@@ -32,7 +32,7 @@ export default function HomePage(){
   const db = getFirestore(app)
   const [menuOpen, setMenuOpen] = useState(false);
   const menuOpenIcon = menu;
-  const backIcon = back;
+  const menuCloseIcon = back;
   const navigate = useNavigate();
   try {
     auth.currentUser
@@ -40,16 +40,9 @@ export default function HomePage(){
     navigate('/acesso-negado/');
   }
 
-function switchMenuBack(event) {
-  if (event.target.src.includes(back)) {
-    if (!menuOpen) {
-      event.target.src = menuOpenIcon; 
-    } else {
-      event.target.src = back; 
-    }
-    setMenuOpen(!menuOpen); 
+  const toggleMenu =() => {
+    setMenuOpen((open) => !open);
   }
-}
   
 
   function capitalize(string){
@@ -112,10 +105,7 @@ function switchMenuBack(event) {
   <div className="left-area hide-on-mobile">
 
     <div className="app-header">
-      Ecofix
-
-      <img className="burguerMenu" src={back} onClick={switchMenuBack} />
-
+      <h2>Ecofix</h2>
     </div>
 
 
@@ -143,70 +133,37 @@ function switchMenuBack(event) {
             <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
           </svg>
           Playlist</a>
-        <a href="#" className="item-link" id="pageLink">
-          <svg className="link-icon feather feather-clock" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" >
-            <circle cx="12" cy="12" r="10" />
-            <polyline points="12 6 12 12 16 14" /></svg>
-          History</a>
       </div>
-
-      <div className="list-header">
-        <span className="">Private</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-plus-circle">
-          <circle cx="12" cy="12" r="10" />
-          <line x1="12" y1="8" x2="12" y2="16" />
-          <line x1="8" y1="12" x2="16" y2="12" /></svg>
-      </div>
-
-      <a href="#" className="item-link" id="pageLink">
-        <svg className="link-icon feather feather-folder" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" >
-          <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-          <path d="M7 11V7a5 5 0 0110 0v4" />
-        </svg>
-        Studio Records</a>
-
-      <a href="#" className="item-link " id="pageLink">
-        <svg className="link-icon feather feather-folder" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" >
-          <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-          <path d="M7 11V7a5 5 0 0110 0v4" />
-        </svg>
-        Personal</a>
-
-      <div className="list-header">
-        <span className="">Public</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-plus-circle">
-          <circle cx="12" cy="12" r="10" />
-          <line x1="12" y1="8" x2="12" y2="16" />
-          <line x1="8" y1="12" x2="16" y2="12" /></svg>
-      </div>
-
-      <a href="#" className="item-link" id="pageLink">
-        <svg className="link-icon feather feather-folder" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" >
-          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" /></svg>
-        Vlogs</a>
-
-      <a href="#" className="item-link feather feather-folder" id="pageLink">
-        <svg className="link-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" >
-          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" /></svg>
-        Dance</a>
+      <button className="btn-invite"> Chat </button>
 
     </div>
-    <button className="btn-invite">Invite Team</button>
   </div>
 
   {/* div do container da direita */}
 
   <div className="right-area">
-    <p onClick={() => navigate('/meu-perfil/')}>Meu Perfil</p>
-    <p onClick={handleLogout}>Sair</p>
+    <p onClick={() => navigate('/meu-perfil/')}> Meu Perfil </p>
+    <p onClick={handleLogout}> Sair </p>
     <div className="right-area-upper">
       
       {/* botao menu mobile */}
-      <button className="menu-button">
-
-        <img className="burguerMenu" src={back} onClick={switchMenuBack} />
-        
+      <button className="menu-button" onClick={toggleMenu}>
+        <img className="burguerMenu" src={menuOpen? menuCloseIcon : menuOpenIcon} alt="Menu Toggle" />
       </button>
+
+      {menuOpen && (
+
+        <div className="left-area-menu">
+          <button className="menu-button" onClick={toggleMenu}>
+            <img className="burguerMenu" src={menuOpen? menuCloseIcon : menuOpenIcon} alt="Menu Toggle" />
+          </button>
+          <ul className="lista-menu-mobile">
+            <li> <a href="#"> home </a> </li>
+            <li> <a href="#"> Buscar Especialistas </a> </li>
+          </ul>
+        </div>
+
+      )}
       
       <div className="search-part-wrapper">
         <input className="search-input" type="text" placeholder="Encontre especialistas..."/>

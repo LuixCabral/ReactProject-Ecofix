@@ -383,44 +383,81 @@ max-width: calc(100% - 190px);
 
 // header principal da parte direita
 
-.right-area-upper { 
+.right-area-upper {
   padding: 15px;
   display: flex;
   align-items: center;
-  flex-flow: row nowrap;
-  justify-content: space-around;
+  flex-flow: column wrap;
+  justify-content: space-between;
 
   background-color: #18b94b72;
   width: 100%;
   height: 70px;
-  max-height: 70px;
   border-bottom: 1px solid #ddd;
-
-//menu burguer 
+}
 
 .menu-button {
-display: none; //em telas grandes nao ira aparecer
-}
-@media screen and (max-width: 900px) {
-& {
-  .menu-button { // div do menu burguer
-    display: block;
+  display: none; // hide on large screens
+
+  @media screen and (max-width: 900px) {
+    display: block; // show on small screens
+    background: none;
+    border: none;
+    cursor: pointer;
   }
-  padding: 0;
-}
 }
 
-// para telas pequenas
-@media screen and (min-width: 400px) {
-  & {
-    padding: 0;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center;
+.burguerMenu {
+  width: 20px;
+  height: 20px;
+}
+
+.left-area-menu {
+  position: fixed; 
+  width: 100vw; /* Cover the entire screen width */
+  height: 100vh; /* Cover the entire screen height */
+  background-color: #ffffff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  display: block; /* Hide by default */
+  z-index: 1; /* Make sure it's on top of other elements */
+  @media screen and (max-width: 900px) {
+    .left-area-menu.active {
+      display: none; /* Hide when.active class is added */
+    }
+    .lista-menu-mobile {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    
+      li {
+        margin-bottom: 10px;
+    
+        a {
+          text-decoration: none;
+          color: #333;
+    
+          &:hover {
+            color: #666;
+          }
+        }
+      }
+    }
+    
+  }
+  @media screen and (min-width: 900px) {
+    display: none;
+    
   }
 }
-}
+
+// menu no mobile toggle 
+
+
+
+// para telas pequenas
+
+
 
 /* Estilo inicial da div da barra de pesquisa */
 
@@ -698,7 +735,7 @@ li {
 // slider de noticias  estilos
 .SliderDiv {
   width: 100%;
-
+  z-index: 0;
 }
 
 .mySwiper {
