@@ -12,6 +12,7 @@ import MyProfile from './routes/MyProfile.jsx'
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import ChatPage from './routes/ChatPage.jsx'
 import VerifyPage from './routes/VerifyPage.jsx'
+import Unauthorized from './routes/Unauthorized.jsx'
 
 import ForgotPassword from './routes/ForgotPassword.jsx'
 const router = createBrowserRouter([
@@ -64,6 +65,11 @@ const router = createBrowserRouter([
     //pagina de perfil de usuario
     path: 'meu-perfil/',
     element: <MyProfile/>
+  },
+  {
+    //Pagia de acesso não autorizado
+    path: 'acesso-negado/',
+    element: <Unauthorized/>
   }
 ]);
 

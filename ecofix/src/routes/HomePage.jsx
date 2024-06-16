@@ -1,5 +1,5 @@
 import "../styles/home.scss";
-
+import { useNavigate } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 
 import back from "../assets/back.png";
@@ -33,6 +33,12 @@ export default function HomePage(){
   const [menuOpen, setMenuOpen] = useState(false);
   const menuOpenIcon = menu;
   const backIcon = back;
+  const navigate = useNavigate();
+  try {
+    auth.currentUser
+  } catch (error) {
+    navigate('/acesso-negado/');
+  }
 
 function switchMenuBack(event) {
   if (event.target.src.includes(back)) {
@@ -87,7 +93,8 @@ function switchMenuBack(event) {
   }
   const handleLogout = () => {
  
-    console.log("Logout clicked");
+    auth.signOut();
+    navigate('/entrar');
   }
 
   const handleChatButton = () => {
@@ -190,7 +197,8 @@ function switchMenuBack(event) {
   {/* div do container da direita */}
 
   <div className="right-area">
-
+    <p onClick={() => navigate('/meu-perfil/')}>Meu Perfil</p>
+    <p onClick={handleLogout}>Sair</p>
     <div className="right-area-upper">
       
       {/* botao menu mobile */}
@@ -210,7 +218,7 @@ function switchMenuBack(event) {
 
       <div className="profile" onClick={handleProfileClick}>
         <img src={userPhoto} alt=""/>
-        {showDropdown && <ProfileDropdown handleLogout={handleLogout} user={data.uid} />}
+        {/* {showDropdown && <ProfileDropdown handleLogout={handleLogout} user={data.uid} />} */}
 
       </div>
       
