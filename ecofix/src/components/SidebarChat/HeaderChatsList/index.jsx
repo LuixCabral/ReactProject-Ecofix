@@ -2,7 +2,7 @@ import { StyledSidebarHeader } from "./style";
 import options from '/src/assets/options.svg'
 import example from '/src/assets/example.svg'
 import React, { useEffect } from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getDocs, getFirestore, collection, query, where } from 'firebase/firestore';
 import app from '../../DatabaseConnection';
@@ -19,10 +19,13 @@ const db = getFirestore(app);
 
 
 
-export default function SidebarHeader({closeSidebar}){
+export default function SidebarHeader(){
 
     // verificação de LogIn
     const [logado, setLogado] = useState(null);
+    const dropdownRef = useRef();
+    const buttonMenuRef = useRef();
+    const optionsImgRef = useRef();
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (logado) => {
@@ -42,6 +45,22 @@ export default function SidebarHeader({closeSidebar}){
     // função de dropdown para o botão de opções 
     const [showDropdown, setShowDropdown] = useState(false);
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if(dropdownRef.current && !dropdownRef.current.contains(event.target) && event.target !== buttonMenuRef.current && event.target !== optionsImgRef.current){
+                setShowDropdown(false);
+            };
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        }
+
+
+
+    }, [dropdownRef]);
+
     const toggleShowDropdown = function(){
     setShowDropdown(!showDropdown)
 };
@@ -50,13 +69,18 @@ export default function SidebarHeader({closeSidebar}){
     // botão para adicionar chats
     const addChatButton = async () => {
         if (logado){
+
             const emailDigitado = prompt('Digite o e-mail:');
 
             if(emailDigitado == auth.currentUser.email){
                 alert('Digite um email diferente do seu.')
             }
-            
+            if(!emailDigitado){
+                return
+            }
+
             const validacao = emailDigitado.split('@');
+            
             if(validacao.length == 2){
                 const q = query(collection(db, 'usuarios'), where('email', '==', emailDigitado));
                 const querySnapshot = await getDocs(q);
@@ -91,6 +115,10 @@ export default function SidebarHeader({closeSidebar}){
     }
     // fim de botão
 
+
+
+
+
     
     return(
         <StyledSidebarHeader>
@@ -99,11 +127,11 @@ export default function SidebarHeader({closeSidebar}){
             </div>
             <h1 className="title">CHAT</h1>
             <div className="menu">
-            <button onClick={toggleShowDropdown} className="buttonMenu">
-                <img src={options} alt="opções" width='30px' height='30px'/>
+            <button onClick={toggleShowDropdown} className="buttonMenu" ref={buttonMenuRef}>
+                <img src={options} alt="opções" width='30px' height='30px' ref={optionsImgRef}/>
             </button>
            { showDropdown &&
-              (<nav className="dropdown" >
+              (<nav className="dropdown" ref={dropdownRef} >
                <ul id='boxLinks' type='none'>
                 <li className="box boxTop"><button className="link" onClick={addChatButton} >Adicionar chat</button></li>
                 <li className="box boxBottom"><Link to='/news'><button className="link" >News Page</button></Link></li>

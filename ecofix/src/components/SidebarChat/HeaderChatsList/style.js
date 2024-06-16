@@ -60,6 +60,9 @@ export const StyledSidebarHeader = styled('div', {
             backgroundColor:'rgba(0,0,0,0)',
             border:'0px',
         }, 
+        '.buttonMenu:focus':{
+            outline:'1px solid black'
+        },
         '.dropdown':{
             display:'flex',
             width:'10vw',

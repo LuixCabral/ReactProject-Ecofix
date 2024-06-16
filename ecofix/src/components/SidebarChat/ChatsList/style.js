@@ -36,6 +36,10 @@ export const StyledChats = styled('div', {
         textOverflow:'ellipsis',
         marginLeft:'5%'
     },
+    '.noChats':{
+        padding:'3px',
+        marginTop:'25vh',
+    }
 })
 
 

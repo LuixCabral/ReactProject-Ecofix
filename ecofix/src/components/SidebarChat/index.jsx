@@ -9,7 +9,7 @@ import Footer from '../footer/Footer'
 
 
 
-export function Sidebar ({handleCloseSidebar}){
+export function Sidebar (){
 
     //verifica e manipula se chat está abertou ou fechado
     const [chatClosed, setChatClosed] = useState(false);
@@ -53,7 +53,7 @@ export function Sidebar ({handleCloseSidebar}){
             :
             (
                 <>
-                <SidebarHeader closeSidebar={handleCloseSidebar}/>
+                <SidebarHeader />
                 <Chats onChatClick={handleChatClick}/>
                 <Footer></Footer>
                 </>

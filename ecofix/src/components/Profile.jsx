@@ -8,6 +8,8 @@ import dbPhoto from "../assets/user.png";
 import chat from "../assets/whitechat.png";
 import edit from "../assets/editar.png";
 import LoadingSpinner from '../components/LoadingSpinner';
+import { Sidebar }  from './SidebarChat';
+
 
 const Profile = ({ userId, isCurrentUser }) => {
   const auth = getAuth();
@@ -22,6 +24,7 @@ const Profile = ({ userId, isCurrentUser }) => {
   const [editMode, setEditMode] = useState(false);
   const [thisUser, setThisUser] = useState('');
   const [similarProfiles, setSimilarProfiles] = useState([]);
+  const [sidebarVisible, setSidebarVisible] = useState(false); // para armazenar estado do chat
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -126,6 +129,16 @@ const Profile = ({ userId, isCurrentUser }) => {
     navigate('/user/' + e.target.offsetParent.lastChild.id);
   };
 
+  //funções da lógica do chat
+  const handleButtonChat = () => { // abertura do chat (pelo botão)
+    setSidebarVisible(true);
+  };
+
+  const handleCloseSidebar = () => { // fechamento do chat (pelo clique fora do chat)
+    setSidebarVisible(false);
+  }
+  // fim da funções do chat
+
   return (
     <>
       <div className="content-profile-page">
@@ -134,7 +147,7 @@ const Profile = ({ userId, isCurrentUser }) => {
             <img className="profile-bgHome" src="https://37.media.tumblr.com/88cbce9265c55a70a753beb0d6ecc2cd/tumblr_n8gxzn78qH1st5lhmo1_1280.jpg" />
             <img className="avatar" src={userPhoto} alt="User" />
           </div>
-          <button><img id="chatIMG" src={chat} alt="Enviar Mensagem" /></button>
+          <button onClick={handleButtonChat}><img id="chatIMG" src={chat} alt="Enviar Mensagem" /></button>
           <div className="user-profile-data">
             <h1>{name}</h1>
             <p>{linkedin}</p>
@@ -153,7 +166,21 @@ const Profile = ({ userId, isCurrentUser }) => {
             ))}
           </ul>
         </div>
-      </div>
+
+
+        {/* Lógica da abertura do chat na página de perfil */}
+        {sidebarVisible && (
+         <div className="sidebar-overlay" onClick={handleCloseSidebar}>
+         <div className="sidebar-container" onClick={e => e.stopPropagation()}>
+           <Sidebar />
+         </div>
+       </div>
+      )}
+      {/* fim da lógica */}
+      
+      
+
+      </div> 
     </>
   );
 };

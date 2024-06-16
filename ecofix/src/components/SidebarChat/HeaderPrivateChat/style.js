@@ -41,11 +41,14 @@ export const StyledHeaderPC = styled('div', {
             display:'flex',
             alignItems:'center',
             justifyContent:'center',
-            height:'40px',
-            width:'45px',
-            backgroundColor:'#297b45',
+            height:'90%',
+            width:'30%',
+            backgroundColor:'transparent',
             border:'0px',
             marginLeft:'3.2vw',
+        },
+        '.buttonMenu:focus':{
+            outline:'1px solid black'
         },
         '.dropdown':{
             display:'flex',
@@ -88,6 +91,7 @@ export const StyledHeaderPC = styled('div', {
         '.boxBottom':{
             borderBottomLeftRadius:'6px',
             borderBottomRightRadius:'6px',
+            border:'0px',
         },
         '.box:hover':{
             backgroundColor:'rgb(60, 135, 90, 0.9)',

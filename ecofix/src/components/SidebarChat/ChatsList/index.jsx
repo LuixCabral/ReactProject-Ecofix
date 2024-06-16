@@ -43,12 +43,18 @@ export function Chats({onChatClick}){
         <>
          {user? (
          <StyledChats>
-           {chats.map((chat) => (
+           { chats.length>0 ?
+           (chats.map((chat) => (
              <div className="chat" key={chat.id} onClick={() => {onChatClick(chat)}}>
              <img src={example} alt="" className="photo" />
              <span className="contactName">{chat.chatName}</span>
             </div>
-           ))}     
+           )))
+           :
+           (
+            <div className="noChats">Nenhum chat adicionado ainda.</div>
+           )
+           }     
          </StyledChats>
          ):(
          <StyledRedirect>Faça Login para acessar o chat</StyledRedirect> 
@@ -85,16 +91,19 @@ export const addChat = async (user1, user2) => {
 
 // resgata os chats do usuário
 export const getChats = (email, callback) => {
+
+
+
     const q = query(collection(db, 'chats'), where('participants', 'array-contains', email));
     onSnapshot(q, (querySnapshot) => {
         const chats = [];
         querySnapshot.forEach((doc) => {
             const chatName = doc.data().participants.find(participant => participant != email);
-            if(chatName){
-                chats.push({...doc.data(), id: doc.id, chatName: chatName.split('@')[0]});
-            }
-            
+                if(chatName){
+                    chats.push({...doc.data(), id: doc.id, chatName: chatName.split('@')[0]});
+                }
         });
+
         callback(chats);    
     });
 };
