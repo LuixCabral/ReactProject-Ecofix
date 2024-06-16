@@ -5,8 +5,6 @@ import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "
 import { doc, setDoc, getFirestore } from "firebase/firestore";
 import openedEyeImage from '../../assets/opened-eye.svg';
 import closedEyeImage from "../../assets/closed-eye.svg";
-import selectedradio from "../../assets/selectedradio.png";
-import unselectedradio from "../../assets/unselectedradio.png";
 import app from '../../components/DatabaseConnection';
 import { useNavigate } from 'react-router-dom';
 

@@ -6,8 +6,8 @@ import LoginPage from './routes/LoginPage.jsx'
 import HomePage from './routes/HomePage.jsx'
 import NewsFeedPage from './routes/NewsFeedTest.jsx'
 import CardTestPage from './routes/CardTestPage.jsx'; 
-
-
+import UserProfile from './routes/UserProfile.jsx'
+import MyProfile from './routes/MyProfile.jsx'
 //Configuração do "router" para trocar de páginas.
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import ChatPage from './routes/ChatPage.jsx'
@@ -55,6 +55,16 @@ const router = createBrowserRouter([
     path: '/esqueci-minha-senha/',
     element: <ForgotPassword/>
   },
+  {
+      //pagina de outro user
+    path: 'user/:userId',
+    element: <UserProfile />
+  },
+  {
+    //pagina de perfil de usuario
+    path: 'meu-perfil/',
+    element: <MyProfile/>
+  }
 ]);
 
 //Não excluir comentario abaixo, ele ignora o erro de document undefined na linha 23.(erro falso)

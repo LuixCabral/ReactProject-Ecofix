@@ -8,7 +8,7 @@ import app from "../components/DatabaseConnection";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import chatIcon from '/src/assets/chatIcon.svg';
 import { Sidebar } from "../components/SidebarChat";
-
+import ProfileDropdown from '../components/ProfileDropdown';
 
 export default function HomePage(){
   const [userPhoto, setUserPhoto] = useState(user)
@@ -16,7 +16,8 @@ export default function HomePage(){
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const auth = getAuth();
   const db = getFirestore(app)
-
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [data,setData] = useState([]);
   function capitalize(string){
     const upperCase = string[0].toUpperCase();
     let newString = "";
@@ -34,14 +35,15 @@ export default function HomePage(){
 
       if(userInfo.exists()){
         setName(capitalize((userInfo.data().name.split(" ")[0])));
-
+        setData(userInfo.data());
+        console.log(data.uid);
       }
       setUserPhoto(userPhoto);   
   }
 
   useEffect(() => {
     dataHandler();
-  })
+  },[])
 
   function switchMenuBack(event){
     console.log()
@@ -50,6 +52,14 @@ export default function HomePage(){
       return;
       }
     event.target.src = back;
+  }
+
+  const handleProfileClick = () => {
+    setShowDropdown(!showDropdown);
+  }
+  const handleLogout = () => {
+ 
+    console.log("Logout clicked");
   }
 
   const handleChatButton = () => {
@@ -170,13 +180,9 @@ export default function HomePage(){
           <img src={chatIcon} alt="" width='30' height='30'/>
       </button>
 
-      <div className="profile">
+      <div className="profile" onClick={handleProfileClick}>
         <img src={userPhoto} alt=""/>
-
-        <div className="profile-info">
-          {/* aqui quando clicar no perfil aparece outra aba menor com info do perfil */}
-       
-        </div>
+        {showDropdown && <ProfileDropdown handleLogout={handleLogout} user={data.uid} />}
 
       </div>
       

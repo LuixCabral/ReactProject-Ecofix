@@ -1,5 +1,5 @@
 import '../styles/LoginPage.scss';
-import cn from "https://cdn.skypack.dev/classnames@2.3.2";
+import cn from "https://cdn.skypack.dev/pin/classnames@v2.3.2-D9cZp00G4gR0MYedQXCH/mode=imports/optimized/classnames.js";
 import LoginForm from './forms/LoginForm';
 import RegisterForm from './forms/RegisterForm'
 import { useState } from 'react';
