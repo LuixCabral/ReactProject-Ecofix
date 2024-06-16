@@ -40,6 +40,7 @@ export default function HomePage(){
     navigate('/acesso-negado/');
   }
 
+  // toggle menu 
   const toggleMenu =() => {
     setMenuOpen((open) => !open);
   }
@@ -132,9 +133,14 @@ export default function HomePage(){
           <svg className="link-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" >
             <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
           </svg>
-          Playlist</a>
+          Playlist </a>
       </div>
-      <button className="btn-invite"> Chat </button>
+
+      {/* botao de chat no menu da esquerda em telas grandes */}
+
+      <button className="btn-chat" onClick={handleChatButton}> 
+        <img src={chatIcon} alt="" width='30' height='30'/>
+      </button>
 
     </div>
   </div>
@@ -169,7 +175,7 @@ export default function HomePage(){
         <input className="search-input" type="text" placeholder="Encontre especialistas..."/>
       </div>
       
-      <button className="btn-chat" onClick={handleChatButton} >
+      <button className="btn-chat-right" onClick={handleChatButton} >
           <img src={chatIcon} alt="" width='30' height='30'/>
       </button>
 

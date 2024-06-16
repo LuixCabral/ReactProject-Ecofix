@@ -341,25 +341,6 @@ span {
 }
 }
 
-.btn-invite {
-background-color: $active-color;
-border: none;
-color: #fff;
-border-radius: 4px;
-padding: 10px;
-font-size: 14px;
-line-height: 20px;
-width: 100%;
-max-width: 160px;
-margin: 0 auto;
-display: block;
-margin-top: auto;
-
-&:hover {
-  background-color: darken($active-color,4%);
-}
-}
-
 .left-area-content {
 flex: 1;
 overflow: auto;
@@ -632,7 +613,34 @@ li {
 
 // div do container do chat
 
-//.btn-chat {}
+.btn-chat {
+  background-color: $active-color;
+  border: none;
+  color: #fff;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 14px;
+  line-height: 20px;
+  width: 100%;
+  max-width: 160px;
+  margin: 0 auto;
+  display: block;
+  margin-top: auto;
+
+  &:hover {
+    background-color: darken($active-color,4%);
+  }
+
+
+}
+// botao do chat na versao mobile 
+
+.btn-chat-right {
+  @media screen and (min-width: 900px) {
+    display: none;
+    
+  }
+}
 
 .app-wrapper.blur-background {
   filter: blur(1.5px);
@@ -640,6 +648,7 @@ li {
 }
 
 /* Estilos para centralizar e exibir a sidebar */
+// chat
 .sidebar-overlay {
   position: fixed;
   top: 0;
@@ -647,11 +656,13 @@ li {
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.6);
+
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   z-index: 1000; /* Para garantir que esteja em primeiro plano */
 }
+
 .profile {
   position: relative;
   cursor: pointer;
