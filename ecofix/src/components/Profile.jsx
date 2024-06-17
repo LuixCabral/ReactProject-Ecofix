@@ -31,7 +31,7 @@ const Profile = ({ userId, isCurrentUser }) => {
   const [similarProfiles, setSimilarProfiles] = useState([]);
   const [sidebarVisible, setSidebarVisible] = useState(false); 
   const [chatEmail, setChatEmail] = useState(null);
-
+  const [expertise, setExpertise] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -61,6 +61,9 @@ const Profile = ({ userId, isCurrentUser }) => {
           if (userData.businessmail) {
             setMailBusiness(userData.businessmail);
           }
+          if(userData.expertise){
+            setExpertise(userData.expertise);
+          }
         } else {
           console.log('Usuário não encontrado');
         }
@@ -73,7 +76,9 @@ const Profile = ({ userId, isCurrentUser }) => {
 
     fetchUser();
   }, [db, userId, auth]);
-
+  function capitalize(string){
+    return string[0].replace(string[0]).uppercase;
+  }
   useEffect(() => {
     const fetchSimilarProfiles = async () => {
       try {
@@ -190,7 +195,7 @@ const Profile = ({ userId, isCurrentUser }) => {
         <div className="skills">
           <h1 className="heading">Especialista em:</h1>
           <ul>
-            <li></li>
+            <li>{expertise}</li>
           </ul>
         </div>
       </section>

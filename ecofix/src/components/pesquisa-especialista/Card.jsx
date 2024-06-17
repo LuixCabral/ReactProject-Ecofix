@@ -23,7 +23,7 @@ export default function SearchExperts() {
             id: doc.id,
             nome: data.name || '',
             localizacao: data.location || '',
-            especialidade: data.specialty || '',
+            especialidade: data.expertise || '',
             disponibilidade: data.availability || '',
             // adicione outros campos necessários aqui
           };
