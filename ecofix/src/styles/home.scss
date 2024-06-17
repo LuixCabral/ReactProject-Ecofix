@@ -206,14 +206,17 @@ border-radius: 10px;
 }
 
 // div da pagina inteira
-.app-wrapper {
-display: flex;
-flex-flow: row nowrap;
-justify-content: center;
 
-width: 100vw;
-height: 100vh;
-background-color: white;
+.app-wrapper {
+
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  background-image: radial-gradient(at bottom left, green 5%, white 20%);
 }
 
 // div do container da esquerda
@@ -246,15 +249,6 @@ background-color: white;
   }
 }
 
-@media screen and (min-width: 901px) {
-  .hide-on-mobile {
-    display: block;
-  }
-  
-}
-
-
-
 // div do header do container da esquerda
 
 .app-header {
@@ -267,6 +261,7 @@ background-color: white;
   font-weight: bolder;
   border-bottom: 1px solid #c9c8c8;
   height: 40px;
+
 }
 
 // div do menu abaixo do perfil
@@ -333,8 +328,9 @@ background-color: white;
 }
 
 .left-area-content {
-flex: 1;
-overflow: auto;
+  flex: 1;
+  overflow: auto;
+  background-color: rgba(255, 255, 255, 0);
 }
 
 // div do conteudo do lado direito
@@ -475,13 +471,14 @@ overflow: auto;
 
 /* Efeito hover na wrapper */
 .search-part-wrapper:hover {
-width: 150px; 
+  width: 150px; 
 }
 
 /* Efeito hover no input */
 .search-part-wrapper:hover .search-input {
-background-position: 5px center;
+  background-position: 5px center;
 }
+
 .app-wrapper {
   display: flex;
   .left-area {
@@ -719,7 +716,7 @@ color: #a2a1a1; /* Cor do texto ao focar */
   background-color:black;
 }
 
-// container do Conteudo de noticias da direita de noticias
+// Container do Conteudo de todas as noticias da direita
 
 .page-right-content {
   flex: 1;
@@ -739,7 +736,9 @@ color: #a2a1a1; /* Cor do texto ao focar */
   object-fit: cover;
   width: 100%;
   height: 100%;
+  filter: blur(2px);
 }
+
 // slider de noticias  estilos
 .SliderDiv {
   width: 100%;
@@ -751,7 +750,16 @@ color: #a2a1a1; /* Cor do texto ao focar */
   border-radius: 5px;
   position: relative; 
   height: 400px; 
+  box-shadow: 0 0 10px 0.5px rgb(37, 68, 33);
 }
+.mySwiper:hover {
+  cursor: pointer;
+}
+.mySwiper:hover img {
+  filter: none;
+  cursor: pointer;
+}
+
 
 // container dentro do slider que contem titulo e conteudo
 
@@ -807,7 +815,7 @@ color: #a2a1a1; /* Cor do texto ao focar */
   
 }
 
-// Container das noticias - wrapper
+// Container das noticias - wrapper ultimas noticias
 
 .owl-carousel {
   display: flex;
@@ -815,14 +823,16 @@ color: #a2a1a1; /* Cor do texto ao focar */
   align-items: center;
   justify-content: space-evenly;
   align-items: stretch;
-
   height: fit-content;
+
   @media screen and (min-width:768px) {
     display: flex;
     justify-content: space-between;
     
   }
 }
+
+// div de cada item de noticia individual
 
 .item-noticia {
   display: flex;
@@ -834,11 +844,20 @@ color: #a2a1a1; /* Cor do texto ao focar */
   box-shadow: 0px 2px 4px 0px rgba(209,209,209,.4);
   margin-top: 50px;
   position: relative;
+  box-shadow: 0 0 10px 0.5px rgb(37, 68, 33);
+  &:hover {
+    cursor: pointer;
+  }
+  &:hover img {
+    filter: none;
+    cursor: pointer;
+  }
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    filter: blur(2px);
   }
 
  .noticia-description-div {
