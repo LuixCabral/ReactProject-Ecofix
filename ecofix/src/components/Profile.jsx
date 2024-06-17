@@ -245,8 +245,22 @@ const Profile = ({ userId, isCurrentUser }) => {
         </div>
       </section>
 
-      {/* Sidebar Chat */}
-      {sidebarVisible && <Sidebar onClose={handleCloseSidebar} />}
+
+
+      {/* Lógica da abertura do chat na página de perfil */}
+      {sidebarVisible && (
+         <div className="sidebar-overlay" onClick={handleCloseSidebar}>
+         <div className="sidebar-container" onClick={e => e.stopPropagation()}>
+           <Sidebar />
+         </div>
+       </div>
+      )}
+      {/* fim da lógica */}
+
+
+
+
+
     </div>
   );
 };
