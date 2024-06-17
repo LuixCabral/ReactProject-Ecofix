@@ -33,6 +33,7 @@ function HomePage(){
   const menuOpenIcon = back;
   const menuCloseIcon = menu;
   const navigate = useNavigate();
+  const [data, setData] = useState('');
   try {
     auth.currentUser
   } catch (error) {
@@ -77,8 +78,11 @@ function HomePage(){
   }
 
   const handleProfileClick = () => {
-    setShowDropdown(!showDropdown);
-  }
+  //   setShowDropdown(!showDropdown);
+  // 
+  navigate('/meu-perfil/');
+}
+  
   const handleLogout = () => {
  
     auth.signOut();
