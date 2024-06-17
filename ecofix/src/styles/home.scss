@@ -736,7 +736,9 @@ color: #a2a1a1; /* Cor do texto ao focar */
   object-fit: cover;
   width: 100%;
   height: 100%;
-  filter: blur(2px);
+  @media screen and (min-width: 900px) {
+    filter: blur(2px);
+  }
 }
 
 // slider de noticias  estilos
@@ -857,7 +859,12 @@ color: #a2a1a1; /* Cor do texto ao focar */
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: blur(2px);
+    
+    @media screen and (min-width: 900px) {
+      filter: blur(2px);
+      
+    }
+  
   }
 
  .noticia-description-div {

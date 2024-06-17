@@ -1,105 +1,106 @@
-import React, { useState } from 'react';
-import Users from './Users';
+import React, { useState, useEffect } from 'react';
+import { collection, getDocs, query, where } from "firebase/firestore";
+import db from './ddconnection';
 
-/**
- * SearchExperts componente
- */
 export default function SearchExperts() {
-  /**
-   * State variables para armazenar user's input
-   */
-  const [query, setQuery] = useState(""); // Search query
-  const [location, setLocation] = useState(""); // Location filter
-  const [expertise, setExpertise] = useState(""); // Area of expertise filter
-  const [availability, setAvailability] = useState(""); // Disponibilidade filtro
-
-  /**
-   * Filtrar os usuarios baseados nos criterios
-   */
-  const filteredUsers = Users.filter((user) => {
-    // Converta a pesquisa para lowercase
-    const queryLowercase = query.toLowerCase();
-
-    // se o nome ou email é igual 
-    const nameMatch = user.name.toLowerCase().includes(queryLowercase) || user.email.toLowerCase().includes(queryLowercase);
-
-    // Se o endereco é igual a localizacao
-    const locationMatch = user.address.toLowerCase().includes(location.toLowerCase());
-
-    // Se a especialidade
-    const expertiseMatch = user.expertise.some((expertiseItem) => expertiseItem.toLowerCase().includes(expertise.toLowerCase()));
-
-    // Disponibilidade
-    const availabilityMatch = user.availability.includes(availability);
-
-    // Retorna se todos os filtros estao certos
-    return nameMatch && locationMatch && expertiseMatch && availabilityMatch;
+  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [searchCriteria, setSearchCriteria] = useState({
+    nome: '',
+    localizacao: '',
+    especialidade: '',
+    disponibilidade: '',
   });
 
-  /**
-   * Resultado e pesquisa
-   */
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const q = query(collection(db, 'usuarios'), where('role', '==', 'specialist'));
+        const querySnapshot = await getDocs(q);
+
+        const users = querySnapshot.docs.map(doc => {
+          const data = doc.data();
+          return {
+            id: doc.id,
+            nome: data.name || '',
+            localizacao: data.location || '',
+            especialidade: data.specialty || '',
+            disponibilidade: data.availability || '',
+            // adicione outros campos necessários aqui
+          };
+        });
+
+        const filtered = applyFilters(users, searchCriteria);
+        setFilteredUsers(filtered);
+
+        // Exibe os critérios de busca e os dados filtrados no console
+        console.log("Critérios de Busca:", searchCriteria);
+        console.log("Usuários Filtrados:", filtered);
+      } catch (error) {
+        console.error("Erro ao buscar usuários:", error);
+      }
+    };
+
+    fetchUsers();
+  }, [searchCriteria]);
+
+  const applyFilters = (users, criteria) => {
+    const { nome, localizacao, especialidade, disponibilidade } = criteria;
+    return users.filter(user =>
+      user.nome.toLowerCase().includes(nome.toLowerCase()) &&
+      user.localizacao.toLowerCase().includes(localizacao.toLowerCase()) &&
+      user.especialidade.toLowerCase().includes(especialidade.toLowerCase()) &&
+      user.disponibilidade.toLowerCase().includes(disponibilidade.toLowerCase())
+    );
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setSearchCriteria(prevState => ({ ...prevState, [name]: value }));
+  };
+
   return (
-    <div className="conteudoDiv">
-      <div className='formularioDiv' >
-        <h2> Ache Especialistas </h2>
-        <form>
-          <label>
-            Procure:
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Procurar por nome ou email"
-            />
-          </label>
-          <br />
-          <label>
-            Localização:
-            <input
-              type="text"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              placeholder="Prcurar por local"
-            />
-          </label>
-          <br />
-          <label>
-            Especialidade:
-            <select value={expertise} onChange={(e) => setExpertise(e.target.value)}>
-              <option value="">Selecione a area de especialidade</option>
-              <option value="Energia renovavel">Energia renovavel</option>
-              <option value="Agricultura sustentavel">Agricultura sustentavel</option>
-              <option value="mudanca climatica">mudanca climatica</option>
-              {/* Adicionar mais se precisar*/}
-            </select>
-          </label>
-          <br />
-          <label>
-            Disponibilidade:
-            <select value={availability} onChange={(e) => setAvailability(e.target.value)}>
-              <option value="">Selecione Disponibilidade</option>
-              <option value="Disponivel Agora">Disponivel Agora</option>
-              <option value="Disponivel em 1-2 semanas">Disponivel em 1-2 semanas</option>
-              <option value="Disponivel em 2-4 semanas">Disponivel em 2-4 semanas</option>
-              {/* Adicionar mais se precisar */}
-            </select>
-          </label>
-        </form>
-      </div>
-      <div id='listaNomeDiv'>
-        <ul className="lista">
-            {filteredUsers.map((user) => (
-              <li key={user.id} className="itemLista">
-                {user.name} ({user.address}) - {user.email}
-                <br />
-                Especialidade: {user.expertise.join(", ")}
-                <br />
-                Disponibilidade: {user.availability}
-              </li>
-            ))}
-          </ul>
-      </div>
+    <div>
+      <h1>Buscar Especialistas</h1>
+      <form>
+        <input
+          type="text"
+          name="nome"
+          placeholder="Nome"
+          value={searchCriteria.nome}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="localizacao"
+          placeholder="Localização"
+          value={searchCriteria.localizacao}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="especialidade"
+          placeholder="Especialidade"
+          value={searchCriteria.especialidade}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="disponibilidade"
+          placeholder="Disponibilidade"
+          value={searchCriteria.disponibilidade}
+          onChange={handleChange}
+        />
+      </form>
+      <ul>
+        {filteredUsers.map(user => (
+          <li key={user.id}>
+            <h2>{user.nome}</h2>
+            <p>Localização: {user.localizacao}</p>
+            <p>Especialidade: {user.especialidade}</p>
+            <p>Disponibilidade: {user.disponibilidade}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

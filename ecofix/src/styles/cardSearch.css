@@ -71,3 +71,14 @@ select {
     box-shadow: 0 0 5px 0 black;
     background-color: rgba(0, 0, 0, 0);
 }
+#listaNomeDiv {
+    height: 400px;
+    background-color: white;
+    width: 400px;
+    color: black;
+}
+.lista {
+    color: black;
+    height: 400px;
+    width: 400px;
+}

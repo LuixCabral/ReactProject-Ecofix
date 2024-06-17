@@ -158,10 +158,12 @@ export default function HomePage(){
                   Agendamento
                 </a>
               </li>
+              {/* adiconar mais funcoes se necessario */}
+
             </ul>
           </div>
 
-          {/* botao de chat no menu da esquerda em telas grandes */}
+          {/* botao de chat no menu */}
           <button className="btn-chat" onClick={handleChatButton}>
             <img src={chatIcon} alt="" width='30' height='30'/>
           </button>
@@ -169,7 +171,7 @@ export default function HomePage(){
       </div>
     )}
 
-    {/* div do container da direita */}
+    {/* div do container total da direita */}
 
     <div className="right-area">
 
@@ -178,19 +180,19 @@ export default function HomePage(){
     <div className="right-area-upper">
 
       
-      {/* botao menu mobile */}
+      {/* botao burguer menu mobile */}
 
       <button className="menu-button" onClick={toggleMenu}>
         <img className="burguerMenu" src={menuOpen? menuCloseIcon : menuOpenIcon} alt="Menu Toggle" />
       </button>
       
-      <div className="search-part-wrapper">
+      {/* <div className="search-part-wrapper">
         <input className="search-input" type="text" placeholder="Encontre especialistas..."/>
-      </div>
+      </div> */}
       
-      <button className="btn-chat-right" onClick={handleChatButton} >
+      {/* <button className="btn-chat-right" onClick={handleChatButton} >
           <img src={chatIcon} alt="" width='30' height='30'/>
-      </button>
+      </button> */}
 
       <div className="profile" onClick={handleProfileClick}>
         <img src={userPhoto} alt=""/>
@@ -200,7 +202,7 @@ export default function HomePage(){
       
     </div>
     
-    {/* conteudo principal da direita */}
+    {/* container total do conteudo de noticias  */}
 
     <div className="page-right-content">
 
@@ -239,13 +241,15 @@ export default function HomePage(){
 
             </div>
           </SwiperSlide>
+
+          {/* adicionar mais noticias se necessario */}
         
         
         </Swiper>
 
       </div>
 
-      {/* Container do conteudo secundario de noticias */}
+      {/* Container total do conteudo secundario de noticias */}
 
       <div className="content-line">
         
@@ -255,7 +259,7 @@ export default function HomePage(){
           <span className="header-text"> <h1> Ultimas Noticias </h1> </span>
         </div>
         
-        {/* conteudo de noticias container */}
+        {/* container total dos containers de container */}
 
         <div className="owl-carousel">
           
@@ -263,69 +267,55 @@ export default function HomePage(){
 
           {/* item 1 */}
 
-          <div className="item-noticia">
-
-            <img src="https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?ixlib=rb-1.2.1&auto=format&fit=crop&w=2168&q=80" alt="video"/>
-
-            {/* descricao */}
-
-            <div className="noticia-description-div">
-
-                <h2 className="noticia-description-header">Minimal Photography</h2>
-                <p className="noticia-description-subheader">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa accusamus iste velit quae enim voluptate eaque ipsam porro optio cumque, in dolorum, non aperiam ullam, nihil consectetur iusto vitae blanditiis.</p>
+          <a href="/news/1">
+            <div className="item-noticia">
+              <img src="https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?ixlib=rb-1.2.1&auto=format&fit=crop&w=2168&q=80" alt="video"/>
+              {/* descricao */}
+              <div className="noticia-description-div">
+                  <h2 className="noticia-description-header">Minimal Photography</h2>
+                  <p className="noticia-description-subheader">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa accusamus iste velit quae enim voluptate eaque ipsam porro optio cumque, in dolorum, non aperiam ullam, nihil consectetur iusto vitae blanditiis.</p>
+              </div>
             </div>
-
-          </div>
+          </a>
 
           {/* item 2 */}
 
-          <div className="item-noticia">
-
-            <img src="https://images.unsplash.com/photo-1531736275454-adc48d079ce9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80" alt="video"/>
-
-            {/*  Descricao */}
-            <div className="noticia-description-div">
-
-                <h3 className="noticia-description-header">Puppet Theatre</h3>
-                <p className="noticia-description-subheader">By July</p>
-
+          <a href="/news/1">
+            <div className="item-noticia">
+              <img src="https://images.unsplash.com/photo-1531736275454-adc48d079ce9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80" alt="video"/>
+              {/*  Descricao */}
+              <div className="noticia-description-div">
+                  <h3 className="noticia-description-header">Puppet Theatre</h3>
+                  <p className="noticia-description-subheader">By July</p>
+              </div>
             </div>
-
-          </div>
+          </a>
 
           {/* item 3 */}
 
-          <div className="item-noticia">
-
-            <img src="https://images.unsplash.com/photo-1490535004195-099bc723fa1f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3280&q=80" alt="video"/>
-
-            {/* descricao */}
-
-            <div className="noticia-description-div">
-
-                <h3 className="noticia-description-header">Road Trip</h3>
-                <p className="noticia-description-subheader">By Wallace</p>
-
+          <a href="/news/1">
+            <div className="item-noticia">
+              <img src="https://images.unsplash.com/photo-1490535004195-099bc723fa1f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3280&q=80" alt="video"/>
+              {/* descricao */}
+              <div className="noticia-description-div">
+                  <h3 className="noticia-description-header">Road Trip</h3>
+                  <p className="noticia-description-subheader">By Wallace</p>
+              </div>
             </div>
-
-          </div>
+          </a>
 
             {/* item 4 */}
 
-            <div className="item-noticia">
-
-              <img src="https://images.unsplash.com/photo-1494252713559-f26b4bf0b174?ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80" alt="video"/>
-
-              {/* descricao */}
-
-              <div className="noticia-description-div">
-
-                <h3 className="noticia-description-header">Young Folks</h3>
-                <p className="noticia-description-subheader">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione reprehenderit molestias error corrupti necessitatibus odio magni nihil rerum dicta nulla? Illo quaerat quo ipsum unde dolore? Eveniet incidunt voluptatum repudiandae.</p>
-
+            <a href="/news/1">
+              <div className="item-noticia">
+                <img src="https://images.unsplash.com/photo-1494252713559-f26b4bf0b174?ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80" alt="video"/>
+                {/* descricao */}
+                <div className="noticia-description-div">
+                  <h3 className="noticia-description-header">Young Folks</h3>
+                  <p className="noticia-description-subheader">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione reprehenderit molestias error corrupti necessitatibus odio magni nihil rerum dicta nulla? Illo quaerat quo ipsum unde dolore? Eveniet incidunt voluptatum repudiandae.</p>
+                </div>
               </div>
-
-            </div>
+            </a>
           </div>
         </div>
       </div>
