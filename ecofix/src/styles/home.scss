@@ -827,8 +827,19 @@ color: #a2a1a1; /* Cor do texto ao focar */
   align-items: stretch;
   height: fit-content;
 
-  @media screen and (min-width:768px) {
+  @media screen and (min-width: 768px) {
     display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    
+  }
+}
+.owl-carousel > a {
+  display: flex;  
+  justify-content: center;
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex-flow: row wrap;
     justify-content: space-between;
     
   }

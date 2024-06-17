@@ -267,47 +267,48 @@ function HomePage(){
 
           {/* item 1 */}
 
-          <a href="/news/1">
-            <div className="item-noticia">
+          <a href="/news/1" className="item-noticia">
+            <div>
               <img src="https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?ixlib=rb-1.2.1&auto=format&fit=crop&w=2168&q=80" alt="video"/>
               {/* descricao */}
               <div className="noticia-description-div">
-                  <h2 className="noticia-description-header">Minimal Photography</h2>
-                  <p className="noticia-description-subheader">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa accusamus iste velit quae enim voluptate eaque ipsam porro optio cumque, in dolorum, non aperiam ullam, nihil consectetur iusto vitae blanditiis.</p>
+                <h2 className="noticia-description-header">Minimal Photography</h2>
+                <p className="noticia-description-subheader">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa accusamus iste velit quae enim voluptate eaque ipsam porro optio cumque, in dolorum, non aperiam ullam, nihil consectetur iusto vitae blanditiis.</p>
               </div>
             </div>
           </a>
+
 
           {/* item 2 */}
 
-          <a href="/news/1">
-            <div className="item-noticia">
+          <a href="/news/1" className="item-noticia">
+            <div>
               <img src="https://images.unsplash.com/photo-1531736275454-adc48d079ce9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80" alt="video"/>
               {/*  Descricao */}
               <div className="noticia-description-div">
-                  <h3 className="noticia-description-header">Puppet Theatre</h3>
-                  <p className="noticia-description-subheader">By July</p>
+                <h3 className="noticia-description-header">Puppet Theatre</h3>
+                <p className="noticia-description-subheader">By July</p>
               </div>
             </div>
           </a>
+
 
           {/* item 3 */}
-
-          <a href="/news/1">
-            <div className="item-noticia">
-              <img src="https://images.unsplash.com/photo-1490535004195-099bc723fa1f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3280&q=80" alt="video"/>
-              {/* descricao */}
-              <div className="noticia-description-div">
+            <a href="/news/1" className="item-noticia">
+              <div>
+                <img src="https://images.unsplash.com/photo-1490535004195-099bc723fa1f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3280&q=80" alt="video"/>
+                {/* descricao */}
+                <div className="noticia-description-div">
                   <h3 className="noticia-description-header">Road Trip</h3>
                   <p className="noticia-description-subheader">By Wallace</p>
+                </div>
               </div>
-            </div>
-          </a>
+            </a>
+
 
             {/* item 4 */}
-
-            <a href="/news/1">
-              <div className="item-noticia">
+            <a href="/news/1" className="item-noticia">
+              <div>
                 <img src="https://images.unsplash.com/photo-1494252713559-f26b4bf0b174?ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80" alt="video"/>
                 {/* descricao */}
                 <div className="noticia-description-div">
@@ -316,6 +317,7 @@ function HomePage(){
                 </div>
               </div>
             </a>
+
           </div>
         </div>
       </div>
