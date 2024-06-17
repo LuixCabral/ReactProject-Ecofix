@@ -12,6 +12,8 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import { Sidebar } from './SidebarChat';
 import linkedinIcon from "../assets/linkedin.png";
 import mail from "../assets/mail.png"
+import handleDownload from "./BotaoDownload"
+import "./cssBotaoDownload.css"
 
 const Profile = ({ userId, isCurrentUser }) => {
   const auth = getAuth();
@@ -249,6 +251,18 @@ const Profile = ({ userId, isCurrentUser }) => {
           ) : (
             <p style={{textAlign: 'justify'}}>{bioText}</p>
           )}
+        </div>
+      </section>
+      
+      <section className="DownloadFiles">
+        <div className="Arquivo">
+          <button className="BotaoDownload" onClick={() => handleDownload("testes/teste1.txt", "teste1.txt")}>Download</button>
+        </div>
+        <div className="Arquivo">
+          <button className="BotaoDownload" onClick={() => handleDownload("testes/teste1.txt", "teste1.txt")}>Download</button>
+        </div>
+        <div className="Arquivo">
+          <button className="BotaoDownload" onClick={() => handleDownload("testes/teste1.txt", "teste1.txt")}>Download</button>
         </div>
       </section>
 
