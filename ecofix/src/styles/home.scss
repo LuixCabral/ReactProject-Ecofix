@@ -210,135 +210,126 @@ border-radius: 10px;
 display: flex;
 flex-flow: row nowrap;
 justify-content: center;
+
 width: 100vw;
 height: 100vh;
-background-color: #fff;
+background-color: white;
 }
 
 // div do container da esquerda
 
 .left-area {
-width: 80vw;
-max-width: 190px;
-padding-bottom: 10px;
-transition: all .6s linear;
-border-right: 1px solid #ddd;
+  width: 80vw;
+  padding-bottom: 10px;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+}
 
-display: flex;
-flex-direction: column;
-
-&.hide-on-mobile {
-  transition: all .6s linear;
+@media screen and (max-width: 900px) {
+  .left-area {
+    z-index: 1;
+    position: fixed;
+    left: 300px;
+    top: 0;
+    height: 100vh;
+    display: block;
+    width: 100%;
+    transform: translateX(-100%);
+  }
   
-  @media screen and (max-width: 900px) {
-    & {
-      display: none;
-      visibility: hidden;
-    }
+}
+
+@media (min-width: 901px) {
+  .hide-on-mobile {
+    display: block; 
   }
 }
+
+@media screen and (min-width: 901px) {
+  .hide-on-mobile {
+    display: block;
+  }
+  
 }
+
+
 
 // div do header do container da esquerda
 
 .app-header {
-display: flex;
-align-items: center;
-flex-flow: row nowrap;
-justify-content: space-around;
+  display: flex;
+  align-items: center;
+  flex-flow: row nowrap;
+  justify-content: space-around;
 
-font-size: 20px;
-font-weight: bolder;
-border-bottom: 1px solid #c9c8c8;
-height: 40px;
-}
-// imagem do toggle de menu
-.burguerMenu{
-width: 20px;
-height: 20px;
-}
-
-// div onde tem imagem do perfil
-
-.profile {
-display: flex;
-align-items: center;
-justify-content: space-between;
-
-padding: 5px;
-cursor: pointer;
-
-//imagem do perfil
-
-img{
-  width: 40px;
+  font-size: 20px;
+  font-weight: bolder;
+  border-bottom: 1px solid #c9c8c8;
   height: 40px;
-  object-fit: cover;
-  border-radius: 6px;
-}
 }
 
 // div do menu abaixo do perfil
 
 .item-link {
-display: block;
-padding: 12px 20px;
-font-size: 14px;
-font-weight: 500;
-text-decoration: none;
-color: $secondary-font-color;
-transition: all .2s ease-in;
-width: 100%;
-white-space: nowrap;
-text-overflow: ellipsis;
-overflow: hidden;
+  display: block;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  color: $secondary-font-color;
+  transition: all .2s ease-in;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 
-&:not(:first-of-type) {
-  margin-top: 10px;
-}
+  &:not(:first-of-type) {
+    margin-top: 10px;
+  }
 
-&.active {
-  color: $active-color;
-  background-color: lighten($active-color,46%);
-}
+  &.active {
+    color: $active-color;
+    background-color: lighten($active-color,46%);
+  }
 
-&:not(.active):hover {
-  color: lighten($active-color,30%);
-  background-color: lighten($active-color,52%);
-}
+  &:not(.active):hover {
+    color: lighten($active-color,30%);
+    background-color: lighten($active-color,52%);
+  }
 
-.link-icon {
-  width: 16px;
-  display: inline-block;
-  vertical-align: sub;
-  margin-right: 4px;
-}
+  .link-icon {
+    width: 16px;
+    display: inline-block;
+    vertical-align: sub;
+    margin-right: 4px;
+  }
 }
 
 .list-header {
-font-size: 12px;
-color: $secondary-font-color;
-display: flex;
-align-items: center;
-justify-content: space-between;
-padding:  10px 20px;
-margin: 10px 0;
-transition: all .2s ease-in;
-cursor: pointer;
-background-color: lighten($secondary-font-color,30%);
+  font-size: 12px;
+  color: $secondary-font-color;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding:  10px 20px;
+  margin: 10px 0;
+  transition: all .2s ease-in;
+  cursor: pointer;
+  background-color: lighten($secondary-font-color,30%);
 
-svg { transition: all .2s ease-in; }
+  svg { transition: all .2s ease-in; }
 
-span {
-  display: block;
-  font-weight: 500;
-}
+  span {
+    display: block;
+    font-weight: 500;
+  }
 
-&:hover svg {
-  transition: all .2s ease-in; 
-  fill: $secondary-font-color;
-  line { stroke: #fff; }
-}
+  &:hover svg {
+    transition: all .2s ease-in; 
+    fill: $secondary-font-color;
+    line { stroke: #fff; }
+  }
 }
 
 .left-area-content {
@@ -349,17 +340,17 @@ overflow: auto;
 // div do conteudo do lado direito
 
 .right-area {
-flex: 1;
-display: flex;
-align-items: center;
-flex-direction: column;
-max-width: calc(100% - 190px);
+  flex: 1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  max-width: calc(100% - 190px);
 
-@media screen and (max-width: 900px) {
-  & {
-    max-width: 100%;
+  @media screen and (max-width: 900px) {
+    & {
+      max-width: 100%;
+    }
   }
-}
 }
 
 // header principal da parte direita
@@ -367,14 +358,14 @@ max-width: calc(100% - 190px);
 .right-area-upper {
   padding: 15px;
   display: flex;
-  align-items: center;
-  flex-flow: column wrap;
+  align-items: center ;
+  flex-flow: row-reverse ;
   justify-content: space-between;
 
-  background-color: #18b94b72;
+  background-color: #18b94b8e;
   width: 100%;
   height: 70px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #c6c6c6;
 }
 
 .menu-button {
@@ -392,6 +383,10 @@ max-width: calc(100% - 190px);
   width: 20px;
   height: 20px;
 }
+.burguerMenu:hover {
+  cursor: pointer;
+}
+// menu da esquerda
 
 .left-area-menu {
   position: fixed; 
@@ -432,47 +427,51 @@ max-width: calc(100% - 190px);
   }
 }
 
-// menu no mobile toggle 
-
-
-
-// para telas pequenas
-
-
-
 /* Estilo inicial da div da barra de pesquisa */
 
 .search-part-wrapper {
-background-color: blue;
-border-radius: 50px;
+  background-color: blue;
+  border-radius: 50px;
 
-display: flex;
-align-items: center;
-justify-content: flex-start;
+  display: none;
+  align-items: center;
+  justify-content: flex-start;
 
-width: 30px; 
-overflow: hidden; 
-transition: width 0.5s ease-in-out;
+  width: 30px; 
+  overflow: hidden; 
+  transition: width 0.5s ease-in-out;
 }
 
 /* Estilo do input de pesquisa */
 .search-input {
-width: 100%; 
-padding-left: 30px; /* Espaçamento interno à esquerda para o texto */
-font-size: 14px;
-line-height: 20px;
+  width: 100%; 
+  padding-left: 30px; /* Espaçamento interno à esquerda para o texto */
+  font-size: 14px;
+  line-height: 20px;
 
-color: #adadad;
-border: none;
+  color: #adadad;
+  border: none;
 
-// iamgem da luneta 
-outline: none; 
-background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23adadad' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-search'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='M21 21l-4.35-4.35'/%3E%3C/svg%3E%0A");
-background-size: 15px;
-background-repeat: no-repeat;
-background-position: 7.2px center; /* Posiciona a luneta à esquerda com 10px de deslocamento */
-transition: background-position 0.5s ease-in-out; /* Transição suave para a posição do background */
+  // iamgem da luneta 
+  outline: none; 
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23adadad' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-search'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='M21 21l-4.35-4.35'/%3E%3C/svg%3E%0A");
+  background-size: 15px;
+  background-repeat: no-repeat;
+  background-position: 7.2px center; /* Posiciona a luneta à esquerda com 10px de deslocamento */
+  transition: background-position 0.5s ease-in-out; /* Transição suave para a posição do background */
 }
+
+//item do menu da esquerda
+
+.item-link{
+  max-height: 55px;
+  
+}
+.link-icon {
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 
 /* Efeito hover na wrapper */
 .search-part-wrapper:hover {
@@ -575,40 +574,40 @@ color: #a2a1a1; /* Cor do texto ao focar */
 
 
 .more-menu-list {
-position: absolute;
-top: 100%;
-right: 0;
-background-color: #fff;
-z-index: 1;
-border-radius: 4px;
-box-shadow: 0px 2px 4px 2px rgba(209, 209, 209, 0.4);
-padding: 10px 0;
-transform-origin: center;
-
-&.hide { display: none; }
-
-&:before {
-  content: '';
   position: absolute;
-  width: 10px;
-  height: 10px;
+  top: 100%;
+  right: 0;
   background-color: #fff;
-  transform: rotate(45deg);
-  border-radius: 2px;
-  top: -6px;
-  right: 32px;
-  box-shadow: 0px 0px 4px 0px rgba(209, 209, 209, 0.4);
-}
+  z-index: 1;
+  border-radius: 4px;
+  box-shadow: 0px 2px 4px 2px rgba(209, 209, 209, 0.4);
+  padding: 10px 0;
+  transform-origin: center;
 
-li {
-  padding: 8px 20px;
-  list-style-type: none;
-  cursor: pointer;
-  
-  &:hover {
-    background-color: lighten(#e6f1ed,4%);
+  &.hide { display: none; }
+
+  &:before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    transform: rotate(45deg);
+    border-radius: 2px;
+    top: -6px;
+    right: 32px;
+    box-shadow: 0px 0px 4px 0px rgba(209, 209, 209, 0.4);
   }
-}
+
+  li {
+    padding: 8px 20px;
+    list-style-type: none;
+    cursor: pointer;
+    
+    &:hover {
+      background-color: lighten(#e6f1ed,4%);
+    }
+  }
 }
 
 // div do container do chat
@@ -628,19 +627,17 @@ li {
   margin-top: auto;
 
   &:hover {
-    background-color: darken($active-color,4%);
+    background-color: green;
   }
 
 
 }
-// botao do chat na versao mobile 
+// botao do chat na versao mobile na direita
 
 .btn-chat-right {
-  @media screen and (min-width: 900px) {
-    display: none;
-    
-  }
+  display: none;
 }
+
 
 .app-wrapper.blur-background {
   filter: blur(1.5px);
