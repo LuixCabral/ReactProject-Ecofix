@@ -30,6 +30,7 @@ const Profile = ({ userId, isCurrentUser }) => {
   const [thisUser, setThisUser] = useState('');
   const [similarProfiles, setSimilarProfiles] = useState([]);
   const [sidebarVisible, setSidebarVisible] = useState(false); 
+  const [chatEmail, setChatEmail] = useState(null);
 
   const navigate = useNavigate();
 
@@ -45,6 +46,7 @@ const Profile = ({ userId, isCurrentUser }) => {
           setName(userData.name);
           setLocation(userData.location);
           setBioText(userData.bio || '');
+          setChatEmail(userData.email);
           if (userData.role === 'Specialist') {
             setRole('Especialista');
           }
@@ -251,7 +253,7 @@ const Profile = ({ userId, isCurrentUser }) => {
       {sidebarVisible && (
          <div className="sidebar-overlay" onClick={handleCloseSidebar}>
          <div className="sidebar-container" onClick={e => e.stopPropagation()}>
-           <Sidebar />
+           <Sidebar email={user.email} />
          </div>
        </div>
       )}
