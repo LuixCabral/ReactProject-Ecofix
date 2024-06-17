@@ -24,7 +24,7 @@ import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 
 
-export default function HomePage(){
+function HomePage(){
   const [userPhoto, setUserPhoto] = useState(user)
   const [name, setName] = useState("null");  // ainda nao em uso
   const [sidebarVisible, setSidebarVisible] = useState(false);
@@ -345,3 +345,5 @@ export default function HomePage(){
     </div>
 )
 }
+export default  HomePage;
+

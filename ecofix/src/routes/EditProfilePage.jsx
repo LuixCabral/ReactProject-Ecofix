@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getFirestore, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { getAuth, updateProfile } from 'firebase/auth';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -21,40 +21,34 @@ function EditProfile() {
   const [photoFile, setPhotoFile] = useState(null);
   const navigate = useNavigate();
   
-    for(let i = 0 ;i < 10;i++){
-        console.log(i);
-    }
-    useEffect(() => {
-        const fetchUserData = async () => {
-          try {
-            const currentUser = auth.currentUser;
-            if (currentUser) {
-              setUserId(currentUser.uid);
-              const userDoc = await getDoc(doc(db, 'usuarios', currentUser.uid));
-              if (userDoc.exists()) {
-                const userData = userDoc.data();
-                setName(userData.name || '');
-                setUserPhoto(userData.photoURL || dbPhoto);
-                setLocation(userData.location || '');
-              } else {
-                console.log('Usuário não encontrado');
-              }
-            } else {
-              console.log('Usuário não está logado');
-            }
-          } catch (error) {
-            console.error('Erro ao buscar dados do usuário:', error);
-          } finally {
-            setLoading(false); // Garante que o loading seja definido como falso após buscar os dados
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const currentUser = auth.currentUser;
+        if (currentUser) {
+          setUserId(currentUser.uid);
+          const userDoc = await getDoc(doc(db, 'usuarios', currentUser.uid));
+          if (userDoc.exists()) {
+            const userData = userDoc.data();
+            setName(userData.name || '');
+            setUserPhoto(userData.photoURL || dbPhoto);
+            setLocation(userData.location || '');
+          } else {
+            console.log('Usuário não encontrado');
           }
-        };
-      
-        fetchUserData();
-      }, [auth, db, navigate]);
-
+        } else {
+          console.log('Usuário não está logado');
+        }
+      } catch (error) {
+        console.error('Erro ao buscar dados do usuário:', error);
+      } finally {
+        setLoading(false); // Garante que o loading seja definido como falso após buscar os dados
+      }
+    };
+  
     fetchUserData();
-  }, [auth, db, navigate];
-
+  }, [auth, db, navigate]);
+  
   const handlePhotoChange = (e) => {
     const file = e.target.files[0];
     if (file) {
