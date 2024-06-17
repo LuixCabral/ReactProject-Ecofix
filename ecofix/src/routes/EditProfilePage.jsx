@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getFirestore, doc, getDoc, updateDoc } from 'firebase/firestore';
-import { getAuth, updateProfile } from 'firebase/auth';
+import { getAuth, updateProfile, onAuthStateChanged } from 'firebase/auth';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import app from '../components/DatabaseConnection';
 import dbPhoto from '../assets/user.png';
@@ -20,13 +20,12 @@ function EditProfile() {
   const [location, setLocation] = useState('');
   const [photoFile, setPhotoFile] = useState(null);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const currentUser = auth.currentUser;
-        if (currentUser) {
-          setUserId(currentUser.uid);
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        setUserId(currentUser.uid);
+        try {
           const userDoc = await getDoc(doc(db, 'usuarios', currentUser.uid));
           if (userDoc.exists()) {
             const userData = userDoc.data();
@@ -36,19 +35,20 @@ function EditProfile() {
           } else {
             console.log('Usuário não encontrado');
           }
-        } else {
-          console.log('Usuário não está logado');
+        } catch (error) {
+          console.error('Erro ao buscar dados do usuário:', error);
+        } finally {
+          setLoading(false);
         }
-      } catch (error) {
-        console.error('Erro ao buscar dados do usuário:', error);
-      } finally {
-        setLoading(false); // Garante que o loading seja definido como falso após buscar os dados
+      } else {
+        console.log('Usuário não está logado');
+        setLoading(false);
       }
-    };
-  
-    fetchUserData();
+    });
+
+    return () => unsubscribe();
   }, [auth, db, navigate]);
-  
+
   const handlePhotoChange = (e) => {
     const file = e.target.files[0];
     if (file) {
