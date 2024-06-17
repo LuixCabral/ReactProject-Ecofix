@@ -1,84 +1,51 @@
-/*src/styles/cardSearch.css*/
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-#root {
-    width: 100vw;
-    height: 100vh;
-}
-
-.header {
-    width: 100vw;
-}
-.header > h1 {
-    visibility: hidden;
-}
-
-.conteudoDiv {
-    display: flex;
-    align-items: center;
-    flex-flow: column nowrap;
-    justify-content: flex-start;
-    background-color: red;
-    height: 900px;
-}
-
-.formularioDiv {
-    height: 350px;
-    background-color: rgb(49, 102, 148);
-    display: flex;
-    align-items: center;
-    flex-flow: column nowrap;
-    justify-content: flex-start;
-
-}
-
-.formularioDiv > form {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: space-evenly;
-    align-items: flex-start;
-    background-color: aliceblue;
-    height: 200px;
-}
-
-.lista {
-    visibility: hidden ;
-}
-label {
+.pesquisa-especialistas-container {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro semi-transparente */
+    backdrop-filter: blur(5px); /* Efeito de desfoque no fundo */
     display: flex;
+    justify-content: center;
     align-items: center;
-    height: fit-content;
-}
-input {
-    background-color: rgba(222, 222, 222, 0.074);
-    border: none;
-    height: 20px;
-    width: 100%;
-    border-radius: 50px;
-    padding: 15px;
-    box-shadow: 0 0 5px 0 black;
-}
-
-select {
-    width: 100%;
-    height: 30px;
-    border-radius: 50px;
-    box-shadow: 0 0 5px 0 black;
-    background-color: rgba(0, 0, 0, 0);
-}
-#listaNomeDiv {
-    height: 400px;
+    z-index: 1000; /* Coloca o componente na frente do conteúdo da página */
+  }
+  
+  .pesquisa-especialistas {
     background-color: white;
-    width: 400px;
-    color: black;
-}
-.lista {
-    color: black;
-    height: 400px;
-    width: 400px;
-}
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 80%;
+    max-width: 600px;
+  }
+  
+  .pesquisa-especialistas h2 {
+    margin-bottom: 20px;
+  }
+  
+  .pesquisa-especialistas form {
+    display: grid;
+    gap: 10px;
+  }
+  
+  .pesquisa-especialistas input,
+  .pesquisa-especialistas button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .pesquisa-especialistas button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .pesquisa-especialistas button:hover {
+    background-color: #0056b3;
+  }
+  

@@ -119,6 +119,9 @@ function HomePage(){
 
     // Função para verificar se a largura da tela é maior que 900px
     const isDesktop = windowWidth > 900;
+    const handleNavigateToEspecialistas = () => {
+      navigate('/test'); // Navega para a rota '/especialistas' quando clicado
+    };
 
 
     return(
@@ -148,10 +151,16 @@ function HomePage(){
               </li>
 
               <li>
-                <a href="#" className="item-link" id="pageLink2">
-                  <svg className="link-icon" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23adadad' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-search'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='M21 21l-4.35-4.35'/%3E%3C/svg%3E%0A")` }} />
+                {/* Substitui o link <a> pelo componente <div> com onClick para navegação */}
+                <div className="item-link" id="pageLink2" onClick={handleNavigateToEspecialistas}>
+                  <svg
+                    className="link-icon"
+                    style={{
+                      backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23adadad' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-search'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='M21 21l-4.35-4.35'/%3E%3C/svg%3E%0A")`,
+                    }}
+                  />
                   Especialistas
-                </a>
+                </div>
               </li>
 
               <li>

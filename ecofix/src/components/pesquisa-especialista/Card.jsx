@@ -61,7 +61,7 @@ export default function SearchExperts() {
   return (
     <div>
       <h1>Buscar Especialistas</h1>
-      <form>
+      <form className='formulario-div'>
         <input
           type="text"
           name="nome"
@@ -91,7 +91,8 @@ export default function SearchExperts() {
           onChange={handleChange}
         />
       </form>
-      <ul>
+      
+      <ul className='resultado-search-list'>
         {filteredUsers.map(user => (
           <li key={user.id}>
             <h2>{user.nome}</h2>
