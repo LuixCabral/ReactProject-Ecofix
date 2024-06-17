@@ -1,5 +1,5 @@
 import '../styles/LoginPage.scss';
-//import cn from "classnames";
+import cn from "classnames";
 import LoginForm from './forms/LoginForm';
 import RegisterForm from './forms/RegisterForm'
 import { useState } from 'react';
