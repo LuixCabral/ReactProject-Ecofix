@@ -1,7 +1,7 @@
 import "../../styles/loginform.scss"
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAuth , signInWithEmailAndPassword} from "firebase/auth";
+import { getAuth , signInWithEmailAndPassword,setPersistence} from "firebase/auth";
 import app from '../../components/DatabaseConnection'
 import openedEyeImage from '../../assets/opened-eye.svg';
 function LoginForm(){
@@ -14,6 +14,7 @@ function LoginForm(){
     const [isClicked , setClicked] = useState(false);
 
     async function userLogin(){
+
         await signInWithEmailAndPassword(auth,email,password).then((userCredential) => {
             const user = userCredential.user;
             console.log(user);
