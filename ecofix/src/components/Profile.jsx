@@ -1,15 +1,17 @@
-import "../styles/userprofile.css";
+import "../styles/profile.css";
+import "../styles/responsive.css";
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getFirestore, doc, getDoc, collection, query, where, getDocs } from "firebase/firestore";
+import { getFirestore, doc, getDoc, collection, query, where, getDocs, updateDoc, setDoc } from "firebase/firestore";
 import app from '../components/DatabaseConnection';
 import { getAuth } from "firebase/auth";
 import dbPhoto from "../assets/user.png";
 import chat from "../assets/whitechat.png";
 import edit from "../assets/editar.png";
 import LoadingSpinner from '../components/LoadingSpinner';
-import { Sidebar }  from './SidebarChat';
-
+import { Sidebar } from './SidebarChat';
+import linkedinIcon from "../assets/linkedin.png";
+import mail from "../assets/mail.png"
 
 const Profile = ({ userId, isCurrentUser }) => {
   const auth = getAuth();
@@ -22,9 +24,13 @@ const Profile = ({ userId, isCurrentUser }) => {
   const [linkedin, setLinkedin] = useState('seu-linkedin');
   const [businessmail, setMailBusiness] = useState('email@exemplo.com');
   const [editMode, setEditMode] = useState(false);
+  const [bioText, setBioText] = useState('');
+  const [bioInput, setBioInput] = useState('');
+  const [location, setLocation] = useState('')
   const [thisUser, setThisUser] = useState('');
   const [similarProfiles, setSimilarProfiles] = useState([]);
-  const [sidebarVisible, setSidebarVisible] = useState(false); // para armazenar estado do chat
+  const [sidebarVisible, setSidebarVisible] = useState(false); 
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,6 +43,8 @@ const Profile = ({ userId, isCurrentUser }) => {
           const userData = userDoc.data();
           setUser(userData);
           setName(userData.name);
+          setLocation(userData.location);
+          setBioText(userData.bio || '');
           if (userData.role === 'Specialist') {
             setRole('Especialista');
           }
@@ -78,7 +86,7 @@ const Profile = ({ userId, isCurrentUser }) => {
           tempProfiles.push({ id: doc.id, ...doc.data() });
         });
         for (let i = 0; i < tempProfiles.length; i++) {
-          if (tempProfiles[i].uid !== thisUser && tempProfiles[i].uid !== userId ) {
+          if (tempProfiles[i].uid !== thisUser && tempProfiles[i].uid !== userId) {
             profiles.push(tempProfiles[i]);
           }
         }
@@ -104,12 +112,24 @@ const Profile = ({ userId, isCurrentUser }) => {
   }
 
   const handleEdit = () => {
+    if (editMode && bioInput.trim() !== '') {
+      saveBio();
+    }
     setEditMode(!editMode);
   };
 
-  const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
-      setEditMode(false);
+
+  const handleBioChange = (e) => {
+    setBioInput(e.target.value);
+  };
+
+  const saveBio = async () => {
+    try {
+      const userDocRef = doc(db, 'usuarios', userId);
+      await updateDoc(userDocRef, { bio: bioInput });
+      setBioText(bioInput);
+    } catch (error) {
+      console.error('Erro ao salvar bio:', error);
     }
   };
 
@@ -117,9 +137,6 @@ const Profile = ({ userId, isCurrentUser }) => {
     setLinkedin(e.target.value);
   };
 
-  const handleMailChange = (e) => {
-    setMailBusiness(e.target.value);
-  };
 
   const goToProfile = (e) => {
     if (e.target.className === "userInList") {
@@ -130,58 +147,107 @@ const Profile = ({ userId, isCurrentUser }) => {
   };
 
   //funções da lógica do chat
-  const handleButtonChat = () => { // abertura do chat (pelo botão)
+  const handleButtonChat = () => {
     setSidebarVisible(true);
   };
 
-  const handleCloseSidebar = () => { // fechamento do chat (pelo clique fora do chat)
+  const handleCloseSidebar = () => {
     setSidebarVisible(false);
-  }
-  // fim da funções do chat
+  };
 
   return (
-    <>
-      <div className="content-profile-page">
-        <div className="profile-user-page card">
-          <div className="img-user-profile">
-            <img className="profile-bgHome" src="https://37.media.tumblr.com/88cbce9265c55a70a753beb0d6ecc2cd/tumblr_n8gxzn78qH1st5lhmo1_1280.jpg" />
-            <img className="avatar" src={userPhoto} alt="User" />
-          </div>
-          <button onClick={handleButtonChat}><img id="chatIMG" src={chat} alt="Enviar Mensagem" /></button>
-          <div className="user-profile-data">
-            <h1>{name}</h1>
-            <p>{linkedin}</p>
-            <p>{businessmail}</p>
-          </div>
-          {isCurrentUser && (
-            <button className="edit-profile" onClick={handleEdit}><img src={edit} alt="Editar" />Editar Perfil</button>
-          )}
-          <div className="description-profile">Front-end | Security Researcher | CSS Warrior | <a href="https://twitter.com/bullgit" title="bullgit"><strong>@bullgit</strong></a> | I love to create small things for the internet!</div>
+    <div className="container">
+      {/* ===== Header/Navbar ===== */}
+      <header>
+        <div className="brandLogo">
+          <span style={{fontSize:'x-large'}}>Ecofix</span>
         </div>
-        <div className="similar-profiles">
-          <h2>Perfis Similares</h2>
-          <ul style={{ listStyleType: 'none' }}>
-            {similarProfiles.map((profile, index) => (
-              <li onClick={goToProfile} className="userInList" key={index}>{profile.name}<p className="userProfileRole">{profile.role === "Specialist" ? "Especializado em: " : ""}</p><img className="userProfileImage" style={{ width: '30px' }} src={profile.photo === undefined ? dbPhoto : profile.photo} alt="" /><span id={profile.uid}></span></li>
-            ))}
+      </header>
+
+      {/* ===== User Main-Profile ===== */}
+      <section className="userProfile card">
+        <div className="profile">
+          <figure><img src={userPhoto} alt="profile" width="250px" height="250px" /></figure>
+        </div>
+        <div className="user-profile-data">
+        </div>
+      </section>
+
+      {/* ===== Work & Skills Section ===== */}
+      <section className="work_skills card">
+        {/* ===== Work Container ===== */}
+        <div className="work">
+          <h1 className="heading">Contatos</h1>
+          <div className="primary">
+            <a style={{marginBottom:'10px'}} href="#" target="_blank"><img style={{width:'20px', marginRight:'5px'}} src={linkedinIcon} alt="" />{"linkedin.com/in/"+linkedin}</a>
+            <p><img style={{width:'20px', marginRight:'5px'}} src={mail} alt="" />{user.email}</p>
+          </div>
+        </div>
+
+        {/* ===== Skills Container ===== */}
+        <div className="skills">
+          <h1 className="heading">Especialista em:</h1>
+          <ul>
+            <li></li>
           </ul>
         </div>
+      </section>
 
+      {/* ===== User Details Sections ===== */}
+      <section className="userDetails card">
+        <div className="userName">
+          <h1 className="name">{name}</h1>
+          <div className="map">
+            <i className="ri-map-pin-fill ri"></i>
+            <p>Localização:{location}</p>
+          </div>
+        </div>
 
-        {/* Lógica da abertura do chat na página de perfil */}
-        {sidebarVisible && (
-         <div className="sidebar-overlay" onClick={handleCloseSidebar}>
-         <div className="sidebar-container" onClick={e => e.stopPropagation()}>
-           <Sidebar />
-         </div>
-       </div>
-      )}
-      {/* fim da lógica */}
-      
-      
+        <div className="btns">
+          <ul>
+            <li className="sendMsg">
+              <i className="ri-chat-4-fill ri"></i>
+              <a href="#" onClick={handleButtonChat}>{isCurrentUser ? "Abrir Chat" : "Enviar mensagem"}</a>
+            </li>
+            {isCurrentUser && (
+              <li className="sendMsg active">
+                <i className="ri-check-fill ri"></i>
+                <a href="/editar-perfil/">Editar Perfil</a>
+              </li>
+            )}
+          </ul>
+        </div>
+      </section>
 
-      </div> 
-    </>
+      {/* ===== Timeline & About Sections ===== */}
+      <section className="timeline_about card">
+        <div className="tabs">
+          <ul>
+            <li className="about active">
+              <i className="ri-user-3-fill ri"></i>
+              <span>Sobre Mim</span>
+            </li>
+            <img onClick={handleEdit} id="editIcon" style={{width:'30px', marginTop:'-1.5%', marginLeft:'-3%', cursor:'pointer'}} src={edit} alt="Editar" />
+          </ul>
+          {editMode ? (
+            <>
+            <button className="btnTextField" onClick={handleEdit}>Salvar</button>
+            <textarea 
+              style={{textAlign: 'justify'}}
+              value={bioInput}
+              onChange={handleBioChange}
+              autoFocus
+            />
+            </>
+          ) : (
+            <p style={{textAlign: 'justify'}}>{bioText}</p>
+          )}
+        </div>
+      </section>
+
+      {/* Sidebar Chat */}
+      {sidebarVisible && <Sidebar onClose={handleCloseSidebar} />}
+    </div>
   );
 };
 

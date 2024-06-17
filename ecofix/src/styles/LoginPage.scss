@@ -14,7 +14,7 @@ body {
 
 body {
   min-height: 100vh;
-  background: #fff;
+  background: rgba(177, 218, 179, 0.932);
   color: #333;
   line-height: 1.5;
   font-family: 'Roboto', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
@@ -75,7 +75,9 @@ input, button {
   width: 800px;
   max-width: 100%;
 }
-
+.demo button{
+  top: 2%;
+}
 .demo {
   $demoRef: &; // saving reference in a variable is a good way to avoid issues if you'll decide to rename the main class after and forget to rename it in all places inside
   --switcher-width: 260px;
