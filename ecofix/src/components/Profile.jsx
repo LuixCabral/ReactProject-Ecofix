@@ -77,7 +77,7 @@ const Profile = ({ userId, isCurrentUser }) => {
     fetchUser();
   }, [db, userId, auth]);
   function capitalize(string){
-    return string[0].replace(string[0]).uppercase;
+    return string.replace(string[0],string[0].uppercase);
   }
   useEffect(() => {
     const fetchSimilarProfiles = async () => {
