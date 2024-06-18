@@ -29,6 +29,7 @@
     "nodemailer": "^6.9.13",
     "owl.carousel": "^2.3.4",
     "react": "^18.2.0",
+    "react-datepicker": "^7.0.0",
     "react-dom": "^18.2.0",
     "react-owl-carousel": "^2.3.3",
     "react-router-dom": "^6.23.1",

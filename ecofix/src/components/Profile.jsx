@@ -9,6 +9,7 @@ import chat from "../assets/whitechat.png";
 import edit from "../assets/editar.png";
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Sidebar }  from './SidebarChat';
+import Appointments from "./forms/Appointments";
 
 
 const Profile = ({ userId, isCurrentUser }) => {
@@ -179,7 +180,7 @@ const Profile = ({ userId, isCurrentUser }) => {
       {/* fim da lógica */}
       
       
-
+      <Appointments/>
       </div> 
     </>
   );
