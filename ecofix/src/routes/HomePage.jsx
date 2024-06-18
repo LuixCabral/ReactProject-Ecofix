@@ -251,20 +251,20 @@ function HomePage(){
           className="mySwiper">
 
           <SwiperSlide>
-            <img className="imagem-slider" src="https://images.unsplash.com/photo-1532673492-1b3cdb05d51b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2167&q=80" alt="video"/>
+            <img className="imagem-slider" src="src/assets/arvore-solar.jpg" alt="foto de arvore solar por IA"/>
             <div className="middle-slider">
-              <div className="title-slider"> <h2> titulo noticias </h2> </div>
-              <div className="news-content"> <p> conteudo da noticia </p> </div>
+              <div className="title-slider"> <h2> Arvores solares podem ser a solucao para gerar energia? </h2> </div>
+              <div className="news-content"> <p> Ja pensou em uma arvore solar que produz energia de maneira sustentavel? Ela existe e foi criada por pesquisadores brasileiros... </p> </div>
             </div>
           </SwiperSlide>
 
           <SwiperSlide>
-            <img className="imagem-slider" src="https://images.unsplash.com/photo-1502136969935-8d8eef54d77b?ixlib=rb-1.2.1&auto=format&fit=crop&w=2249&q=80"/> 
+            <img className="imagem-slider" src="src/assets/fazenda-solar.jpg"/> 
 
             <div className="middle-slider">
 
-            <div className="title-slider"> <h2> titulo noticias </h2> </div>
-            <div className="news-content"> <p> conteudo da noticia </p> </div>
+            <div className="title-slider"> <h2> A maior fazenda solar do mundo entra em ação </h2> </div>
+            <div className="news-content"> <p> Na China, maior fazenda solar ja esta em operação... </p> </div>
 
             </div>
           </SwiperSlide>
