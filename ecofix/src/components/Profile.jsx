@@ -256,13 +256,13 @@ const Profile = ({ userId, isCurrentUser }) => {
       
       <section className="DownloadFiles">
         <div className="Arquivo">
-          <button className="BotaoDownload" onClick={() => handleDownload("testes/teste1.txt", "teste1.txt")}>Download</button>
+          <button className="BotaoDownload" onClick={() => handleDownload("files/teste1.txt", "teste1.txt")}>Download</button>
         </div>
         <div className="Arquivo">
-          <button className="BotaoDownload" onClick={() => handleDownload("testes/teste1.txt", "teste1.txt")}>Download</button>
+          <button className="BotaoDownload" onClick={() => handleDownload("files/teste1.txt", "teste1.txt")}>Download</button>
         </div>
         <div className="Arquivo">
-          <button className="BotaoDownload" onClick={() => handleDownload("testes/teste1.txt", "teste1.txt")}>Download</button>
+          <button className="BotaoDownload" onClick={() => handleDownload("files/teste1.txt", "teste1.txt")}>Download</button>
         </div>
       </section>
 
