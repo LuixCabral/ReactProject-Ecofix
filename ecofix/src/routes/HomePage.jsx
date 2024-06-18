@@ -57,7 +57,6 @@ function HomePage(){
 
   async function dataHandler(){
       const db = getFirestore(app)
-      const photo = getStorage(app);
       const user = auth.currentUser;
       const docRef = doc(db,"usuarios",user.uid);
       const userInfo = await getDoc(docRef);
