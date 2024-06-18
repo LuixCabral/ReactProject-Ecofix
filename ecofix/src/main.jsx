@@ -40,7 +40,7 @@ const router = createBrowserRouter([
   },
 
   {
-    //email page
+    // email page
     path:'confirmar-email/',
     element: <VerifyPage/>
   },

@@ -35,7 +35,6 @@ const Profile = ({ userId, isCurrentUser }) => {
   const [thisUser, setThisUser] = useState('');
   const [similarProfiles, setSimilarProfiles] = useState([]);
   const [sidebarVisible, setSidebarVisible] = useState(false);
-  const [appointmentsVisible, setAppointmentsVisible] = useState(false);
   const [activeTab, setActiveTab] = useState('about'); 
   const [expertise, setExpertise] = useState('');
   const navigate = useNavigate();

@@ -362,6 +362,7 @@ function HomePage(){
            <Appointments />
        </div>
       )}
+      <Footer/>
       
     </div>
   )
