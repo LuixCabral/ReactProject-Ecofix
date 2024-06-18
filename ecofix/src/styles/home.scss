@@ -264,7 +264,7 @@ border-radius: 10px;
 
 }
 
-// div do menu abaixo do perfil
+// div do menu da esquerda em telas grandes
 
 .item-link {
   display: block;
@@ -423,39 +423,6 @@ border-radius: 10px;
   }
 }
 
-/* Estilo inicial da div da barra de pesquisa */
-
-.search-part-wrapper {
-  background-color: blue;
-  border-radius: 50px;
-
-  display: none;
-  align-items: center;
-  justify-content: flex-start;
-
-  width: 30px; 
-  overflow: hidden; 
-  transition: width 0.5s ease-in-out;
-}
-
-/* Estilo do input de pesquisa */
-.search-input {
-  width: 100%; 
-  padding-left: 30px; /* Espaçamento interno à esquerda para o texto */
-  font-size: 14px;
-  line-height: 20px;
-
-  color: #adadad;
-  border: none;
-
-  // iamgem da luneta 
-  outline: none; 
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23adadad' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-search'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='M21 21l-4.35-4.35'/%3E%3C/svg%3E%0A");
-  background-size: 15px;
-  background-repeat: no-repeat;
-  background-position: 7.2px center; /* Posiciona a luneta à esquerda com 10px de deslocamento */
-  transition: background-position 0.5s ease-in-out; /* Transição suave para a posição do background */
-}
 
 //item do menu da esquerda
 
@@ -466,17 +433,6 @@ border-radius: 10px;
 .link-icon {
   background-position: center;
   background-repeat: no-repeat;
-}
-
-
-/* Efeito hover na wrapper */
-.search-part-wrapper:hover {
-  width: 150px; 
-}
-
-/* Efeito hover no input */
-.search-part-wrapper:hover .search-input {
-  background-position: 5px center;
 }
 
 .app-wrapper {
@@ -496,10 +452,8 @@ border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      .burguerMenu {
-        cursor: pointer;
-      }
     }
+    
     .left-area-content {
       margin-top: 20px;
       .page-link-list {

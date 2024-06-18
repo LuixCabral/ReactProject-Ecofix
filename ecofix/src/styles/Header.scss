@@ -1,0 +1,121 @@
+/* src/styles/Header.css */
+
+$primary-font-color: #232428;
+$secondary-font-color: #adadad;
+$active-color: #499d77;
+
+$green-dark: #51a380;
+$green-light: #e6f1ed;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+
+    padding: 20px;
+    background-color: rgba(5, 5, 5, 0.227);
+}
+
+.profile-div img {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: black;
+    height: 40px;
+    width: 40px;
+}
+
+.menu-button {
+    @media screen and (max-width: 768px) {
+        display: block;
+        
+    }
+}
+
+.menu-div {
+    height: 100vh;
+    background-color: rgb(255, 0, 0);
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 300px;
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+
+    .menu-header-div {
+        font-size: 24px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .menu-list-item {
+        margin-top: 20px;
+    }
+    .item-link {
+        display: block;
+        padding: 12px 20px;
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+        color: $secondary-font-color;
+        transition: all .2s ease-in;
+        width: 100%;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      
+        &:not(:first-of-type) {
+          margin-top: 10px;
+        }
+      
+        &.active {
+          color: $active-color;
+          background-color: lighten($active-color,46%);
+        }
+      
+        &:not(.active):hover {
+          color: lighten($active-color,30%);
+          background-color: lighten($active-color,52%);
+        }
+      
+        .link-icon {
+          width: 16px;
+          display: inline-block;
+          vertical-align: sub;
+          margin-right: 4px;
+        }
+
+        .page-link2 {
+            .item-link {
+              display: flex;
+              align-items: center;
+              margin-bottom: 15px;
+              color: #333;
+              text-decoration: none;
+              &.active {
+                font-weight: bold;
+              }
+              .link-icon {
+                background-position: center;
+                background-repeat: no-repeat;
+              }
+            }
+          }
+
+    }
+}
+    
+    
+
