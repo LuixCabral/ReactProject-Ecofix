@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs, query, where } from "firebase/firestore";
 import db from './ddconnection';
+import { useNavigate } from 'react-router-dom';
 
 export default function SearchExperts() {
   const [filteredUsers, setFilteredUsers] = useState([]);
+  const navigate = useNavigate();
   const [searchCriteria, setSearchCriteria] = useState({
     nome: '',
     localizacao: '',
@@ -106,7 +108,7 @@ export default function SearchExperts() {
       
       <ul className='resultado-search-list'>
         {filteredUsers.map(user => (
-          <li key={user.id} className="profile-card">
+          <li style={{cursor:'pointer'}} onClick={() => navigate('/user/'+user.id)} key={user.id} className="profile-card">
             <div className="profile-info">
               <h2>{user.nome}</h2>
               <p><strong>Localização:</strong> {user.localizacao}</p>
