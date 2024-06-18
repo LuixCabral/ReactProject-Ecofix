@@ -9,11 +9,10 @@ import CardTestPage from './routes/CardTestPage.jsx';
 import UserProfile from './routes/UserProfile.jsx'
 import MyProfile from './routes/MyProfile.jsx'
 //Configuração do "router" para trocar de páginas.
-import {createBrowserRouter, RouterProvider} from 'react-router-dom'
-import ChatPage from './routes/ChatPage.jsx'
+import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import VerifyPage from './routes/VerifyPage.jsx'
 import Unauthorized from './routes/Unauthorized.jsx'
-
+import EditProfile from './routes/EditProfilePage.jsx'
 import ForgotPassword from './routes/ForgotPassword.jsx'
 const router = createBrowserRouter([
   {
@@ -70,7 +69,12 @@ const router = createBrowserRouter([
     //Pagia de acesso não autorizado
     path: 'acesso-negado/',
     element: <Unauthorized/>
-  }
+  },
+  {
+    //Pagina de edição de perfil
+    path: '/editar-perfil/',
+    element: <EditProfile/>
+  },
 ]);
 
 //Não excluir comentario abaixo, ele ignora o erro de document undefined na linha 23.(erro falso)

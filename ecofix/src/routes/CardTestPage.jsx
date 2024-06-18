@@ -6,14 +6,7 @@ function CardTestPage() {
     return (
         <div className="CardTestPage">
             <Header/>
-            <Card 
-              imgPath="" 
-              name="John Doe" 
-              email="johndoe@example.com" 
-              address="New York, USA" 
-              expertise={['Renewable Energy', 'Sustainable Agriculture']} 
-              availability="Available now" 
-            />
+            <Card/>
             <Footer/>
         </div>
     );

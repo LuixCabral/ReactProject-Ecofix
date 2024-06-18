@@ -1,17 +1,11 @@
 .signup-container {
     background-color: #fff;
-    padding: 27px;
+    top: -18px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 300px;
 }
-.eye{
-    width: 22px;
-    position: relative;
-    right: -138px;
-    top: -24px;
-}
-.confirm-eye{
+.eye {
     width: 22px;
     position: relative;
     right: -138px;
@@ -21,20 +15,19 @@ h2 {
     text-align: center;
     margin-bottom: 20px;
 }
-
 .form-group {
-    margin-bottom: 0px;
+    margin-bottom: 10px; 
 }
-
 label {
     display: block;
     margin-bottom: 5px;
 }
-
-#name,
+#firstName,
+#lastName,
 #emailSignup,
 #passwordSignup,
-#confirmPassword,
+#specialty,
+#location,
 #userType {
     width: 100%;
     color: black;
@@ -42,7 +35,6 @@ label {
     border-radius: 4px;
     box-sizing: border-box;
 }
-
 #btnSignup {
     width: 100%;
     padding: 10px;
@@ -53,13 +45,13 @@ label {
     font-size: 16px;
     cursor: pointer;
 }
-
 #btnSignup:hover {
     background-color: rgb(21, 189, 6);
 }
-
 .error {
+    top: -32px;
     color: red;
     font-size: 14px;
+    text-wrap: nowrap;
     text-align: center;
 }
