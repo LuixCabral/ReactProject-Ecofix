@@ -2,9 +2,10 @@
 
 .footer {
     display: flex;
-    justify-content: center;
     align-items: center;
-    background-color: rgba(5, 5, 5, 0.227);
+    justify-content: center;
+    background-color: rgba(167, 50, 50, 0);
+    
     height: 7vh;
     width: 100%;
 }

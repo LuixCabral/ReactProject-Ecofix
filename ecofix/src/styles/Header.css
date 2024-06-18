@@ -8,27 +8,25 @@
 
 .header {
     display: flex;
-    flex-flow: row nowrap;
     align-items: center;
-    justify-content: space-evenly;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+
+    padding: 20px;
     background-color: rgba(5, 5, 5, 0.227);
 }
 
-#logoDiv {
+.profile-div img {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
     background-color: black;
-    border: 2px solid black;
     height: 40px;
     width: 40px;
 }
-#logoDiv > a {
-    font-size: 10px;
-    color: white;
-}
+
 #buscaDiv {
     display: flex;
     flex-flow: column nowrap;
