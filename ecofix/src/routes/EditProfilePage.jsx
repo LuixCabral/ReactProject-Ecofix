@@ -7,6 +7,7 @@ import dbPhoto from '../assets/user.png';
 import LoadingSpinner from '../components/LoadingSpinner';
 import '../styles/editProfile.css';
 import { useNavigate } from 'react-router-dom';
+import Header from '../components/header/Header';
 
 function EditProfile() {
   const auth = getAuth(app);
@@ -98,6 +99,7 @@ function EditProfile() {
 
   return (
     <div className="edit-profile-container">
+      <header><Header/></header>
       <h2>Editar Perfil</h2>
       <form onSubmit={handleSubmit} className="edit-profile-form">
         <div className="form-group">
