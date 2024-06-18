@@ -27,7 +27,7 @@ const Header = () => {
 
     // Lendo datos do Firebase do usuario
     const db = getFirestore(app)
-    const auth = getAuth();
+    const auth = getAuth(app);
     const [userPhoto, setUserPhoto] = useState(user)
     async function dataHandler(){
         const user = auth.currentUser;
@@ -125,6 +125,7 @@ const Header = () => {
                                 Agendamento
                                 </a>
                             </li>
+                            <li style={{cursor:'pointer'}} onClick={handleLogout}>Sair</li>
                                      
                         </ul>
                         {/* botao de chat no menu */}
