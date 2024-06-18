@@ -483,3 +483,17 @@ textarea{
 .timeline_about .contact_info ul .site span {
   color: var(--f5-color);
 }
+
+.overlay-appoint {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Para garantir que esteja em primeiro plano */
+}

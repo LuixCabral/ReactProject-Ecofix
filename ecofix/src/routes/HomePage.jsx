@@ -14,7 +14,7 @@ import { getFirestore, doc, getDoc } from "firebase/firestore";
 import chatIcon from '/src/assets/chatIcon.svg'; 
 
 import { Sidebar } from "../components/SidebarChat";
-
+import Appointments from "../components/forms/Appointments";
 // import Swiper JS
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -28,6 +28,7 @@ function HomePage(){
   const [userPhoto, setUserPhoto] = useState(user)
   const [name, setName] = useState("null");  // ainda nao em uso
   const [sidebarVisible, setSidebarVisible] = useState(false);
+  const [appointmentsVisible, setAppointmentsVisible] = useState(false);
   const auth = getAuth();
   const db = getFirestore(app)
   const menuOpenIcon = back;
@@ -91,11 +92,19 @@ function HomePage(){
 
   const handleChatButton = () => {
     setSidebarVisible(true);
-  }
+  };
 
   const handleCloseSidebar = () => {
     setSidebarVisible(false);
-  }
+  };
+
+  const handleButtonAppointments = () => {
+    setAppointmentsVisible(!appointmentsVisible);
+  };
+
+  const handleCloseAppointments = () => {
+    setAppointmentsVisible(!appointmentsVisible);
+  };
 
   // toggle funciona a partir de um tamanho de tela
   const [menuOpen, setMenuOpen] = useState(false);
@@ -164,7 +173,7 @@ function HomePage(){
               </li>
 
               <li>
-                <a href="#" className="item-link" id="pageLink">
+                <a className="item-link" id="pageLink" onClick={handleButtonAppointments}>
                   <svg className="link-icon feather feather-list" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" >
                     <path d="M5 3l14 9-14 9V3z" />
                   </svg>
@@ -346,6 +355,11 @@ function HomePage(){
        </div>
       )}
 
+      {appointmentsVisible && (
+         <div className="overlay-appoint" onClick={handleCloseAppointments}>
+           <Appointments />
+       </div>
+      )}
       
     </div>
 )

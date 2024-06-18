@@ -107,9 +107,9 @@ export default function SidebarHeader({ email }) {
 
     // Chamada automática para adicionar chat ao montar o componente
     useEffect(() => {
-        if (logado && email && !chatAdicionado) {
+        if (logado && email && !chatAdicionado && email != auth.currentUser.email) {
             addChatButton();
-        }
+        } 
     }, [logado, email, chatAdicionado]);
 
     // Função de dropdown para o botão de opções

@@ -1,17 +1,62 @@
-import React, { useState } from 'react';
-import DatePicker from 'react-datepicker';
+import React, { useState, useEffect } from 'react';
+import DatePicker, { registerLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './Appointment.css';
+import { collection, getDocs, query, where, addDoc, getFirestore } from 'firebase/firestore';
+import app from '../../DatabaseConnection';
+import ptBR from 'date-fns/locale/pt-BR';
+
+
+const db =getFirestore(app);
+
+registerLocale('pt-BR', ptBR);
 
 const Appointments = () => {
   const [formVisible, setFormVisible] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     specialist: '',
     date: null,
     time: '',
+    description: ''
   });
+  const [specialists, setSpecialists] = useState([]);
+  const [busyTimes, setBusyTimes] = useState([]);
+
+  useEffect(() => {
+    const fetchSpecialists = async () => {
+      const q = query(collection(db, "usuarios"), where("role", "==", "specialist"));
+      const querySnapshot = await getDocs(q);
+      const specialistsList = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setSpecialists(specialistsList);
+    };
+
+    fetchSpecialists();
+  }, []);
+
+  useEffect(() => {
+    if (formData.specialist && formData.date) {
+      const fetchBusyTimes = async () => {
+        const q = query(
+          collection(db, "agendamentos"),
+          where("specialist", "==", formData.specialist),
+          where("date", "==", formData.date.toISOString().split('T')[0])
+        );
+        const querySnapshot = await getDocs(q);
+        const times = querySnapshot.docs.map(doc => doc.data().time);
+        setBusyTimes(times);
+      };
+
+      fetchBusyTimes();
+    } else {
+      setBusyTimes([]);
+    }
+  }, [formData.specialist, formData.date]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -21,22 +66,41 @@ const Appointments = () => {
     setFormData({ ...formData, date });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aqui você pode adicionar a lógica para enviar o formulário
-    console.log(formData);
+    try {
+      await addDoc(collection(db, "agendamentos"), {
+        ...formData,
+        date: formData.date.toISOString().split('T')[0]
+      });
+      alert('Agendamento realizado com sucesso!');
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        specialist: '',
+        date: null,
+        time: '',
+        description: ''
+      });
+    } catch (error) {
+      console.error("Erro ao agendar: ", error);
+      alert('Erro ao agendar, tente novamente.');
+    }
   };
 
   const toggleFormVisibility = () => {
     setFormVisible(!formVisible);
   };
 
+  const availableTimes = ["08:00", "09:00", "10:00", "11:00", "12:00", "14:00", "15:00", "16:00", "17:00", "18:00"].filter(time => !busyTimes.includes(time));
+
   return (
-    <div className="profile-page">
+    <div className="profile-page" onClick={e => e.stopPropagation()}>
       <h2 onClick={toggleFormVisibility} className="toggle-title">
-        Agendamento
+        Agendamento 
       </h2>
-      {formVisible && (
+      
         <form onSubmit={handleSubmit} className="appointment-form">
           <div className="form-group">
             <label htmlFor="name">Nome:</label>
@@ -61,6 +125,17 @@ const Appointments = () => {
             />
           </div>
           <div className="form-group">
+            <label htmlFor="phone">Telefone:</label>
+            <input
+              type="text"
+              id="phone"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
             <label htmlFor="specialist">Especialista:</label>
             <select
               id="specialist"
@@ -70,9 +145,11 @@ const Appointments = () => {
               required
             >
               <option value="">Selecione</option>
-              <option value="Especialista 1">Especialista 1</option>
-              <option value="Especialista 2">Especialista 2</option>
-              <option value="Especialista 3">Especialista 3</option>
+              {specialists.map((specialist) => (
+                <option key={specialist.id} value={specialist.name}>
+                  {specialist.name} ({specialist.email})
+                </option>
+              ))}
             </select>
           </div>
           <div className="form-group">
@@ -83,6 +160,8 @@ const Appointments = () => {
               onChange={handleDateChange}
               dateFormat="dd/MM/yyyy"
               required
+              className="datepicker"
+              locale="pt-BR"
             />
           </div>
           <div className="form-group">
@@ -95,21 +174,24 @@ const Appointments = () => {
               required
             >
               <option value="">Selecione</option>
-              <option value="08:00">08:00</option>
-              <option value="09:00">09:00</option>
-              <option value="10:00">10:00</option>
-              <option value="11:00">11:00</option>
-              <option value="12:00">12:00</option>
-              <option value="14:00">14:00</option>
-              <option value="15:00">15:00</option>
-              <option value="16:00">16:00</option>
-              <option value="17:00">17:00</option>
-              <option value="18:00">18:00</option>
+              {availableTimes.map((time) => (
+                <option key={time} value={time}>
+                  {time}
+                </option>
+              ))}
             </select>
+          </div>
+          <div className="form-group">
+            <label htmlFor="description">Observação (Opcional):</label>
+            <textarea
+              id="description"
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+            />
           </div>
           <button type="submit" className="submit-button">Enviar</button>
         </form>
-      )}
     </div>
   );
 };
