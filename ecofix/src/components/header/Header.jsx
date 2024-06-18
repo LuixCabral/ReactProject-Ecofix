@@ -1,4 +1,4 @@
-import React from 'react';
+
 import '../../styles/Header.scss';
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -14,8 +14,8 @@ import chatIcon from '../../assets/chat.png';
 
 const Header = () => {
     // Para navegacao
-    // const navigate = useNavigate();
-    // const [data, setData] = useState('');
+    const navigate = useNavigate();
+    //const [data, setData] = useState('');
     // try {
     // auth.currentUser
     // }catch (error) {
@@ -32,9 +32,14 @@ const Header = () => {
         const userInfo = await getDoc(docRef);
   
         if(userInfo.exists()){
-          setName(capitalize((userInfo.data().name.split(" ")[0])));
-          setData(userInfo.data());
-          console.log(data.uid);
+          //setName(capitalize((userInfo.data().name.split(" ")[0])));
+          //setData(userInfo.data());
+          if(userInfo.data().photoURL){
+              setUserPhoto(userInfo.data().photoURL)
+              return;
+          }
+          setUserPhoto(userPhoto)
+          return;
         }
         setUserPhoto(userPhoto);   
     }
@@ -45,9 +50,8 @@ const Header = () => {
 
     // Para o perfil
     const handleProfileClick = () => {
-        //   setShowDropdown(!showDropdown);
-        // 
-        navigate('/meu-perfil/'); //segue para a pagina 
+      navigate('/meu-perfil/');
+      
     }
     // logout do usuario
     const handleLogout = () => {
@@ -66,7 +70,7 @@ const Header = () => {
     return(
         <header className='header'>
             <div className="profile-div" onClick={handleProfileClick}>
-                <img src={userPhoto} alt=""/>     
+                <img style={{cursor:"pointer"}} src={userPhoto} alt=""/>     
             </div>
 
             <div id='menu-burguer-Div'>
@@ -80,8 +84,8 @@ const Header = () => {
                         </div>
                         
                         <ul className='menu-list-item'>
-                            <li>
-                                <div href="#" className="item-link" id="page-link1">
+                            <li onClick={() => navigate('/home')}>
+                                <div className="item-link" id="page-link1">
                                     <svg className="link-icon feather feather-heart" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
                                         <defs />
                                         <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />

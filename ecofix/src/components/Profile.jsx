@@ -2,20 +2,19 @@ import "../styles/profile.css";
 import "../styles/responsive.css";
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getFirestore, doc, getDoc, collection, query, where, getDocs, updateDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
 import app from '../components/DatabaseConnection';
 import { getAuth } from "firebase/auth";
 import UploadFileComponent from "../components/UploadFileComponent"; 
 import dbPhoto from "../assets/user.png";
-import chat from "../assets/whitechat.png";
 import edit from "../assets/editar.png";
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Sidebar } from './SidebarChat';
 import linkedinIcon from "../assets/linkedin.png";
 import mail from "../assets/mail.png"
-import handleDownload from "./BotaoDownload"
 import Appointments from "./forms/Appointments";
 import DownloadFileComponent from "./DownloadFIle";
+import Header from "./header/Header";
 
 const Profile = ({ userId, isCurrentUser }) => {
 
@@ -27,18 +26,16 @@ const Profile = ({ userId, isCurrentUser }) => {
   const [role, setRole] = useState('');
   const db = getFirestore(app);
   const [linkedin, setLinkedin] = useState('seu-linkedin');
-  const [businessmail, setMailBusiness] = useState('email@exemplo.com');
   const [editMode, setEditMode] = useState(false);
   const [bioText, setBioText] = useState('');
   const [bioInput, setBioInput] = useState('');
   const [location, setLocation] = useState('');
   const [thisUser, setThisUser] = useState('');
-  const [similarProfiles, setSimilarProfiles] = useState([]);
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [activeTab, setActiveTab] = useState('about'); 
   const [appointmentsVisible,setAppointmentsVisible] = useState(false);
   const [expertise, setExpertise] = useState('');
-  const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -52,8 +49,9 @@ const Profile = ({ userId, isCurrentUser }) => {
           setName(userData.name);
           setLocation(userData.location);
           setBioText(userData.bio || '');
-          if (userData.role === 'Specialist') {
+          if (userData.role === 'specialist') {
             setRole('Especialista');
+            
           }
           if (userData.photoURL) {
             setUserPhoto(userData.photoURL);
@@ -69,6 +67,7 @@ const Profile = ({ userId, isCurrentUser }) => {
           if(userData.expertise){
             setExpertise(userData.expertise);
           }
+          
         } else {
           console.log('Usuário não encontrado');
         }
@@ -91,36 +90,6 @@ const Profile = ({ userId, isCurrentUser }) => {
     return newWord
   }
 
-  useEffect(() => {
-    const fetchSimilarProfiles = async () => {
-      try {
-        if (!thisUser) return;
-
-        const specialistsRef = collection(db, 'usuarios');
-        const q = query(specialistsRef, where('role', '==', 'Specialist'));
-        const querySnapshot = await getDocs(q);
-        const tempProfiles = [];
-        const profiles = [];
-        querySnapshot.forEach((doc) => {
-          tempProfiles.push({ id: doc.id, ...doc.data() });
-        });
-        for (let i = 0; i < tempProfiles.length; i++) {
-          if (tempProfiles[i].uid !== thisUser && tempProfiles[i].uid !== userId) {
-            profiles.push(tempProfiles[i]);
-          }
-        }
-        if (profiles.length > 5) {
-          setSimilarProfiles(profiles.slice(0, 5));
-        } else {
-          setSimilarProfiles(profiles);
-        }
-      } catch (error) {
-        console.error('Erro ao buscar perfis similares:', error);
-      }
-    };
-
-    fetchSimilarProfiles();
-  }, [db, thisUser]);
 
   if (loading) {
     return <LoadingSpinner />;
@@ -140,7 +109,7 @@ const Profile = ({ userId, isCurrentUser }) => {
   const handleBioChange = (e) => {
     setBioInput(e.target.value);
   };
-
+  //Salvar o about
   const saveBio = async () => {
     try {
       const userDocRef = doc(db, 'usuarios', userId);
@@ -149,14 +118,6 @@ const Profile = ({ userId, isCurrentUser }) => {
     } catch (error) {
       console.error('Erro ao salvar bio:', error);
     }
-  };
-
-  const goToProfile = (e) => {
-    if (e.target.className === "userInList") {
-      navigate('/user/' + e.target.lastChild.id);
-      return;
-    }
-    navigate('/user/' + e.target.offsetParent.lastChild.id);
   };
 
   // Função para alternar entre as abas
@@ -185,9 +146,7 @@ const Profile = ({ userId, isCurrentUser }) => {
     <div className="container">
       {/* ===== Header/Navbar ===== */}
       <header>
-        <div className="brandLogo">
-          <span style={{ fontSize: 'x-large' }}>Ecofix</span>
-        </div>
+        <Header/>
       </header>
 
       {/* ===== User Main-Profile ===== */}
@@ -241,7 +200,7 @@ const Profile = ({ userId, isCurrentUser }) => {
                 <a href="/editar-perfil/">Editar Perfil</a>
               </li>
             )}
-            {isCurrentUser ?  (
+            {(!isCurrentUser && role =='Especialista') ?  (
               <li className="sendMsg active">
               <i className="ri-check-fill ri"></i>
               <a onClick={handleButtonAppointments}>Agendamento</a>

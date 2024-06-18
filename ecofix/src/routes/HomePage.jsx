@@ -23,6 +23,7 @@ import 'swiper/scss';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 import Footer from "../components/footer/Footer";
+import { getStorage } from "firebase/storage";
 
 
 function HomePage(){
@@ -55,14 +56,17 @@ function HomePage(){
   }
 
   async function dataHandler(){
+      const db = getFirestore(app)
+      const photo = getStorage(app);
       const user = auth.currentUser;
       const docRef = doc(db,"usuarios",user.uid);
       const userInfo = await getDoc(docRef);
-
+  
       if(userInfo.exists()){
         setName(capitalize((userInfo.data().name.split(" ")[0])));
         setData(userInfo.data());
-        console.log(data.uid);
+        setUserPhoto(userInfo.data().photoURL)
+        return;
       }
       setUserPhoto(userPhoto);   
   }
