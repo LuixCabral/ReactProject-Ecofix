@@ -117,9 +117,12 @@ const validateEmail = (email) => {
 };
 
 const validatePhone = (phone) => {
+  // Remove todos os caracteres não numéricos
+  const cleaned = phone.replace(/\D/g, '');
+
   // Aceita números entre 9 e 11 dígitos
   const phoneRegex = /^\d{11}$/;
-  return phoneRegex.test(phone);
+  return phoneRegex.test(cleaned);
 };
 
 const formatPhone = (phone) => {
