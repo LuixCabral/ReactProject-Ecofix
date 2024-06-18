@@ -14,8 +14,7 @@ import linkedinIcon from "../assets/linkedin.png";
 import mail from "../assets/mail.png"
 import handleDownload from "./BotaoDownload"
 import Appointments from "./forms/Appointments";
-// import "./cssBotaoDownload.css"
-
+import "../styles/BotaoDownload.css"
 
 const Profile = ({ userId, isCurrentUser }) => {
   const auth = getAuth();
@@ -273,13 +272,13 @@ const Profile = ({ userId, isCurrentUser }) => {
       
       <section className="DownloadFiles">
         <div className="Arquivo">
-          <button className="BotaoDownload" onClick={() => handleDownload("testes/teste1.txt", "teste1.txt")}>Download</button>
+          <button className="BotaoDownload" onClick={() => handleDownload("files/teste1.txt", "teste1.txt")}>Download</button>
         </div>
         <div className="Arquivo">
-          <button className="BotaoDownload" onClick={() => handleDownload("testes/teste1.txt", "teste1.txt")}>Download</button>
+          <button className="BotaoDownload" onClick={() => handleDownload("files/teste1.txt", "teste1.txt")}>Download</button>
         </div>
         <div className="Arquivo">
-          <button className="BotaoDownload" onClick={() => handleDownload("testes/teste1.txt", "teste1.txt")}>Download</button>
+          <button className="BotaoDownload" onClick={() => handleDownload("files/teste1.txt", "teste1.txt")}>Download</button>
         </div>
       </section>
 
