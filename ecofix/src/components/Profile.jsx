@@ -15,10 +15,10 @@ import linkedinIcon from "../assets/linkedin.png";
 import mail from "../assets/mail.png"
 import handleDownload from "./BotaoDownload"
 import Appointments from "./forms/Appointments";
-import "../styles/BotaoDownload.css"
+import DownloadFileComponent from "./DownloadFIle";
 
 const Profile = ({ userId, isCurrentUser }) => {
-  const [appointmentsVisible, setAppointmentsVisible] = useState(false);
+
   const auth = getAuth();
   const [name, setName] = useState('');
   const [userPhoto, setUserPhoto] = useState(dbPhoto);
@@ -36,6 +36,7 @@ const Profile = ({ userId, isCurrentUser }) => {
   const [similarProfiles, setSimilarProfiles] = useState([]);
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [activeTab, setActiveTab] = useState('about'); 
+  const [appointmentsVisible,setAppointmentsVisible] = useState(false);
   const [expertise, setExpertise] = useState('');
   const navigate = useNavigate();
 
@@ -290,7 +291,7 @@ const Profile = ({ userId, isCurrentUser }) => {
           )
         ) : (
           <section className="DownloadFiles">
-            <DownloadFile userId={userId} isCurrentUser={isCurrentUser}/>
+            <DownloadFileComponent userId={userId} isCurrentUser={isCurrentUser}/>
             {isCurrentUser && (
               <div className="upload-section">
                 <UploadFileComponent />

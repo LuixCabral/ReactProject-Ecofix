@@ -1,7 +1,7 @@
 import axios from 'axios';
 import fileDownload from 'js-file-download';
 
-function handleDownload(url, filename) {
+function DownloadHandle(url, filename) {
   axios({
     url: url,
     method: 'GET',
@@ -18,4 +18,4 @@ function handleDownload(url, filename) {
   console.log(url);
 }
 
-export default handleDownload;
+export default DownloadHandle;

@@ -1,7 +1,6 @@
 import '../styles/App.css';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import handleDownload from '../components/BotaoDownload.js';
 
 
 export default function App() {
