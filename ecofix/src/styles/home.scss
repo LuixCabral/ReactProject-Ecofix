@@ -4,6 +4,17 @@ box-sizing: border-box;
 outline: none;
 }
 
+body {
+  background-color: #dadada;
+  color: #1f2023;
+}
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #3a3c42;
+    color: #dadada;
+  }
+}
+
 %flex {
 display: flex;
 align-items: center;
@@ -215,8 +226,6 @@ border-radius: 10px;
 
   width: 100vw;
   height: 100vh;
-  background-color: white;
-  background-image: radial-gradient(at bottom left, green 5%, white 20%);
 }
 
 // div do container da esquerda
@@ -227,6 +236,7 @@ border-radius: 10px;
   border-right: 1px solid #ddd;
   display: flex;
   flex-direction: column;
+  background-color: #3a3c42;
 }
 
 @media screen and (max-width: 900px) {
@@ -246,6 +256,9 @@ border-radius: 10px;
 @media (min-width: 901px) {
   .hide-on-mobile {
     display: block; 
+    background-color: #3a3c42;
+    color: #dadada;
+    
   }
 }
 
@@ -330,7 +343,7 @@ border-radius: 10px;
 .left-area-content {
   flex: 1;
   overflow: auto;
-  background-color: rgba(255, 255, 255, 0);
+  color: black;
 }
 
 // div do conteudo do lado direito
@@ -441,7 +454,10 @@ border-radius: 10px;
   display: flex;
   .left-area {
     width: 300px;
-    background-color: rgb(255, 255, 255);
+    @media (prefers-color-scheme: dark) {
+      background-color: #3a3c42;
+
+    }
     padding: 20px;
     
     @media screen and (min-width:900px) {
@@ -465,6 +481,7 @@ border-radius: 10px;
           margin-bottom: 15px;
           color: #333;
           text-decoration: none;
+          color: #1f2023;
           &.active {
             font-weight: bold;
           }

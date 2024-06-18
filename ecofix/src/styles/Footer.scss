@@ -5,14 +5,21 @@
     align-items: center;
     justify-content: center;
     background-color: rgba(167, 50, 50, 0);
+    color: #dadada;
     
     height: 7vh;
-    width: 100%;
+    width: 100%;   
 }
 
 #copy{
     margin: 0px;
     left: auto;
     padding: 0px;
-    color: rgb(0, 0, 0);
+    color: #dadada;
+    @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #1f2023;
+          color: #dadada;
+        }
+    }
 }

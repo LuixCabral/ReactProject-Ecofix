@@ -205,8 +205,6 @@ function HomePage(){
     {/* <p onClick={() => navigate('/meu-perfil/')}> Meu Perfil </p>
     <p onClick={handleLogout}> Sair </p> */}
     <div className="right-area-upper">
-
-      
       {/* botao burguer menu mobile */}
 
       <button className="menu-button" onClick={toggleMenu}>
