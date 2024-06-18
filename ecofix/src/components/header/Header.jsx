@@ -89,7 +89,7 @@ const Header = () => {
             </div>
 
             <div id='menu-burguer-Div'>
-                <button className="menu-button" onClick={toggleMenu}>
+                <button className="menu-button-search" onClick={toggleMenu}>
                     <img className="burguerMenu" src={menuOpen? menuOpenIcon : menuCloseIcon} alt="Menu Toggle" />
                 </button>
                 {menuOpen && (

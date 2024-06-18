@@ -251,20 +251,20 @@ function HomePage(){
           className="mySwiper">
 
           <SwiperSlide>
-            <img className="imagem-slider" src="https://images.unsplash.com/photo-1532673492-1b3cdb05d51b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2167&q=80" alt="video"/>
+            <img className="imagem-slider" src="src/assets/arvore-solar.jpg" alt="foto de arvore solar por IA"/>
             <div className="middle-slider">
-              <div className="title-slider"> <h2> titulo noticias </h2> </div>
-              <div className="news-content"> <p> conteudo da noticia </p> </div>
+              <div className="title-slider"> <h2> Arvores solares podem ser a solucao para gerar energia? </h2> </div>
+              <div className="news-content"> <p> Ja pensou em uma arvore solar que produz energia de maneira sustentavel? Ela existe e foi criada por pesquisadores brasileiros... </p> </div>
             </div>
           </SwiperSlide>
 
           <SwiperSlide>
-            <img className="imagem-slider" src="https://images.unsplash.com/photo-1502136969935-8d8eef54d77b?ixlib=rb-1.2.1&auto=format&fit=crop&w=2249&q=80"/> 
+            <img className="imagem-slider" src="src/assets/fazenda-solar.jpg" alt="foto de fazenda solar"/> 
 
             <div className="middle-slider">
 
-            <div className="title-slider"> <h2> titulo noticias </h2> </div>
-            <div className="news-content"> <p> conteudo da noticia </p> </div>
+            <div className="title-slider"> <h2> A maior fazenda solar do mundo entra em ação </h2> </div>
+            <div className="news-content"> <p> Na China, maior fazenda solar ja esta em operação... </p> </div>
 
             </div>
           </SwiperSlide>
@@ -296,11 +296,11 @@ function HomePage(){
 
           <a href="/news/1" className="item-noticia">
             <div>
-              <img src="https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?ixlib=rb-1.2.1&auto=format&fit=crop&w=2168&q=80" alt="video"/>
+              <img src="src/assets/energia-geotermica.jpg" alt="foto"/>
               {/* descricao */}
               <div className="noticia-description-div">
-                <h2 className="noticia-description-header">Minimal Photography</h2>
-                <p className="noticia-description-subheader">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa accusamus iste velit quae enim voluptate eaque ipsam porro optio cumque, in dolorum, non aperiam ullam, nihil consectetur iusto vitae blanditiis.</p>
+                <h3 className="noticia-description-header">Energia geotérmica</h3>
+                <p className="noticia-description-subheader"> Google utiliza energia geotermica para alimentar data centers...</p>
               </div>
             </div>
           </a>
@@ -310,11 +310,11 @@ function HomePage(){
 
           <a href="/news/1" className="item-noticia">
             <div>
-              <img src="https://images.unsplash.com/photo-1531736275454-adc48d079ce9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80" alt="video"/>
+              <img src="src/assets/energia-agua.jpg" alt="foto"/>
               {/*  Descricao */}
               <div className="noticia-description-div">
-                <h3 className="noticia-description-header">Puppet Theatre</h3>
-                <p className="noticia-description-subheader">By July</p>
+                <h3 className="noticia-description-header">Usina hidrelétrica de Itaipu</h3>
+                <p className="noticia-description-subheader"> Brasil possui a maior hidrelétrica em geração de energiia do mundo...</p>
               </div>
             </div>
           </a>
@@ -323,11 +323,11 @@ function HomePage(){
           {/* item 3 */}
             <a href="/news/1" className="item-noticia">
               <div>
-                <img src="https://images.unsplash.com/photo-1490535004195-099bc723fa1f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3280&q=80" alt="video"/>
+                <img src="src/assets/cidade-brasileira.jpg" alt="foto"/>
                 {/* descricao */}
                 <div className="noticia-description-div">
-                  <h3 className="noticia-description-header">Road Trip</h3>
-                  <p className="noticia-description-subheader">By Wallace</p>
+                  <h3 className="noticia-description-header"> Brasil lidera transição energética no mundo </h3>
+                  <p className="noticia-description-subheader"> Com 88% da matriz eletrica limpa, Brasil já é lider no mundo... </p>
                 </div>
               </div>
             </a>
@@ -336,11 +336,11 @@ function HomePage(){
             {/* item 4 */}
             <a href="/news/1" className="item-noticia">
               <div>
-                <img src="https://images.unsplash.com/photo-1494252713559-f26b4bf0b174?ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80" alt="video"/>
+                <img src="src/assets/energia-eolica.jpg" alt="video"/>
                 {/* descricao */}
                 <div className="noticia-description-div">
-                  <h3 className="noticia-description-header">Young Folks</h3>
-                  <p className="noticia-description-subheader">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione reprehenderit molestias error corrupti necessitatibus odio magni nihil rerum dicta nulla? Illo quaerat quo ipsum unde dolore? Eveniet incidunt voluptatum repudiandae.</p>
+                  <h3 className="noticia-description-header">Dia mundial do vento</h3>
+                  <p className="noticia-description-subheader">15 de junho: Dia mundial do vento. Revisamos as cinco vantagens da energia eolica...</p>
                 </div>
               </div>
             </a>
