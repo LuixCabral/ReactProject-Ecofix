@@ -103,3 +103,9 @@
 .sendMsg:hover{
 cursor: pointer;
 }
+
+.telefone{
+  display: flex;
+  flex-direction: column;
+
+}

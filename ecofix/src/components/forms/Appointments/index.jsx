@@ -23,6 +23,7 @@ const Appointments = () => {
   });
   const [specialists, setSpecialists] = useState([]);
   const [busyTimes, setBusyTimes] = useState([]);
+  const [errors, setErrors] = useState({ email: '', phone: '' });
 
   useEffect(() => {
     const fetchSpecialists = async () => {
@@ -65,16 +66,93 @@ const Appointments = () => {
     }
   }, [formData.specialist, formData.date]);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
 
-  const handleDateChange = (date) => {
-    setFormData({ ...formData, date });
-  };
+const handleChange = (e) => {
+  const { name, value } = e.target;
+
+  // Update form data
+  setFormData(prevFormData => ({
+    ...prevFormData,
+    [name]: value
+  }));
+
+  // Validate email and phone on change
+  if (name === 'email') {
+    setErrors(prevErrors => ({
+      ...prevErrors,
+      email: validateEmail(value) ? '' : 'Email inválido.'
+    }));
+  }
+
+  let newValue = value;
+
+  if (name === 'phone') {
+    // Remove todos os caracteres não numéricos
+    const newValue = value.replace(/\D/g, '');
+
+    // Atualiza o campo de telefone formatado
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      phone: formatPhone(newValue)
+    }));
+
+    // Valida o telefone formatado
+    setErrors(prevErrors => ({
+      ...prevErrors,
+      phone: validatePhone(newValue) ? '' : 'Telefone inválido.'
+    }));
+}
+};
+
+const handleDateChange = (date) => {
+  setFormData(prevFormData => ({
+    ...prevFormData,
+    date
+  }));
+};
+
+const validateEmail = (email) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+
+const validatePhone = (phone) => {
+  // Aceita números entre 9 e 11 dígitos
+  const phoneRegex = /^\d{11}$/;
+  return phoneRegex.test(phone);
+};
+
+const formatPhone = (phone) => {
+  // Formata o telefone inserindo parênteses e hífen
+  let formattedPhone = phone.replace(/\D/g, '');
+
+  if (formattedPhone.length > 2) {
+    formattedPhone = `(${formattedPhone.substring(0, 2)})${formattedPhone.substring(2)}`;
+  }
+
+  return formattedPhone;
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const emailValid = validateEmail(formData.email);
+    const phoneValid = validatePhone(formData.phone);
+
+    if (!emailValid || !phoneValid) {
+      setErrors({
+        email: emailValid ? '' : 'email inválido.',
+        phone: phoneValid ? '' : 'telefone inválido.'
+      });
+      setFormData({
+        email:'',
+        phone:'',
+      })
+      return;
+    } else {
+      setErrors({ email: '', phone: '' });
+    }
+
     try {
       const appointmentData = {
         ...formData,
@@ -87,8 +165,8 @@ const Appointments = () => {
         return;
       }
 
-      await addDoc(collection(db, "appointments"), appointmentData);
       alert('Agendamento realizado com sucesso!');
+
       setFormData({
         name: '',
         email: '',
@@ -128,7 +206,7 @@ const Appointments = () => {
               required
             />
           </div>
-          <div className="form-group">
+          <div className="form-group email">
             <label htmlFor="email">Email:</label>
             <input
               type="email"
@@ -136,10 +214,12 @@ const Appointments = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
+              placeholder='exemplo@email.com'
               required
             />
+            {errors.email && <div className="errorEmail">{errors.email}</div>}
           </div>
-          <div className="form-group">
+          <div className="form-group telefone">
             <label htmlFor="phone">Telefone:</label>
             <input
               type="text"
@@ -147,8 +227,10 @@ const Appointments = () => {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
+              placeholder='Somente números.'
               required
             />
+            {errors.phone && <div className="errorPhone">{errors.phone}</div>}
           </div>
           <div className="form-group">
             <label htmlFor="specialist">Especialista:</label>
@@ -205,7 +287,7 @@ const Appointments = () => {
               onChange={handleChange}
             />
           </div>
-          <button type="submit" className="submit-button">Enviar</button>
+          <button onClick={handleSubmit} className="submit-button">Enviar</button>
         </form>
     </div>
   );
