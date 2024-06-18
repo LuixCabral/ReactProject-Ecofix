@@ -461,7 +461,7 @@ border-radius: 10px;
 
 .item-link{
   max-height: 55px;
-  
+  cursor: pointer;
 }
 .link-icon {
   background-position: center;
@@ -894,8 +894,7 @@ color: #a2a1a1; /* Cor do texto ao focar */
  .item-noticia {
     width: 48%;
   }
-}
-
+}.item-link
 .noticia-description {
   &-header {
     font-weight: bold;
@@ -909,4 +908,20 @@ color: #a2a1a1; /* Cor do texto ao focar */
     text-align: justify;
   }
 
+}
+
+
+// css do agendamento 
+.overlay-appoint {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001; 
 }

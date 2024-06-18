@@ -12,12 +12,13 @@ import edit from "../assets/editar.png";
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Sidebar } from './SidebarChat';
 import linkedinIcon from "../assets/linkedin.png";
-import mail from "../assets/mail.png";
-import handleDownload from "./BotaoDownload";
-import uploadIcon from "../assets/upload.png"; // Ícone de upload
-import DownloadFile from "../routes/DownloadFIle";
+import mail from "../assets/mail.png"
+import handleDownload from "./BotaoDownload"
+import Appointments from "./forms/Appointments";
+import "../styles/BotaoDownload.css"
 
 const Profile = ({ userId, isCurrentUser }) => {
+  const [appointmentsVisible, setAppointmentsVisible] = useState(false);
   const auth = getAuth();
   const [name, setName] = useState('');
   const [userPhoto, setUserPhoto] = useState(dbPhoto);
@@ -34,6 +35,7 @@ const Profile = ({ userId, isCurrentUser }) => {
   const [thisUser, setThisUser] = useState('');
   const [similarProfiles, setSimilarProfiles] = useState([]);
   const [sidebarVisible, setSidebarVisible] = useState(false);
+  const [appointmentsVisible, setAppointmentsVisible] = useState(false);
   const [activeTab, setActiveTab] = useState('about'); 
   const [expertise, setExpertise] = useState('');
   const navigate = useNavigate();
@@ -164,12 +166,20 @@ const Profile = ({ userId, isCurrentUser }) => {
 
   // Funções da lógica do chat
   const handleButtonChat = () => {
-    setSidebarVisible(true);
+    setSidebarVisible(!sidebarVisible);
   };
 
   const handleCloseSidebar = () => {
-    setSidebarVisible(false);
+    setSidebarVisible(!sidebarVisible);
   };
+
+  const handleButtonAppointments = () => {
+    setAppointmentsVisible(!appointmentsVisible);
+  };
+
+  const handleCloseAppointments = () => {
+    setAppointmentsVisible(!appointmentsVisible);
+  }
 
   return (
     <div className="container">
@@ -231,6 +241,12 @@ const Profile = ({ userId, isCurrentUser }) => {
                 <a href="/editar-perfil/">Editar Perfil</a>
               </li>
             )}
+            {isCurrentUser ?  (
+              <li className="sendMsg active">
+              <i className="ri-check-fill ri"></i>
+              <a onClick={handleButtonAppointments}>Agendamento</a>
+            </li>
+            ) : <span></span>}
           </ul>
         </div>
       </section>
@@ -293,7 +309,18 @@ const Profile = ({ userId, isCurrentUser }) => {
           </div>
         </div>
       )}
-      {/* Fim da lógica */}
+      {/* fim da lógica */}
+
+      {appointmentsVisible && (
+         <div className="overlay-appoint" onClick={handleCloseAppointments}>
+         
+           <Appointments />
+         
+       </div>
+      )}
+
+      
+
     </div>
   );
 };
