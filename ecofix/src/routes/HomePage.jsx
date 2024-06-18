@@ -4,7 +4,7 @@ import { getAuth } from "firebase/auth";
 
 import back from "../assets/back.png";
 import menu from "../assets/menu.png";
-import user from "../assets/user.png"
+import user from "../assets/user.png";
 
 import { useState, useEffect } from "react";
 
@@ -22,6 +22,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/scss';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
+import Footer from "../components/footer/Footer";
 
 
 function HomePage(){
@@ -30,9 +31,10 @@ function HomePage(){
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [appointmentsVisible, setAppointmentsVisible] = useState(false);
   const auth = getAuth();
-  const db = getFirestore(app)
+
   const menuOpenIcon = back;
   const menuCloseIcon = menu;
+
   const navigate = useNavigate();
   const [data, setData] = useState('');
   try {
@@ -82,7 +84,7 @@ function HomePage(){
   //   setShowDropdown(!showDropdown);
   // 
   navigate('/meu-perfil/');
-}
+  }
   
   const handleLogout = () => {
  
@@ -126,11 +128,11 @@ function HomePage(){
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-    // Função para verificar se a largura da tela é maior que 900px
-    const isDesktop = windowWidth > 900;
-    const handleNavigateToEspecialistas = () => {
-      navigate('/test'); // Navega para a rota '/especialistas' quando clicado
-    };
+  // Função para verificar se a largura da tela é maior que 900px
+  const isDesktop = windowWidth > 900;
+  const handleNavigateToEspecialistas = () => {
+    navigate('/test'); // Navega para a rota '/especialistas' quando clicado
+  };
 
 
     return(
@@ -362,7 +364,7 @@ function HomePage(){
       )}
       
     </div>
-)
+  )
 }
 export default  HomePage;
 

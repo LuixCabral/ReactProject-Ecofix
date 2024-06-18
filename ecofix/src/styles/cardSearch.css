@@ -1,3 +1,9 @@
+.CardTestPage {
+  width: 100vw;
+  height: 100vh;
+}
+
+
 .pesquisa-especialistas-container {
     position: fixed;
     top: 0;
