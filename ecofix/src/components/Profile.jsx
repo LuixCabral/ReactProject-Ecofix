@@ -13,7 +13,7 @@ import { Sidebar } from './SidebarChat';
 import linkedinIcon from "../assets/linkedin.png";
 import mail from "../assets/mail.png"
 import handleDownload from "./BotaoDownload"
-import "./cssBotaoDownload.css"
+import "../styles/BotaoDownload.css"
 
 const Profile = ({ userId, isCurrentUser }) => {
   const auth = getAuth();
