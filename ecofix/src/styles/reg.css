@@ -31,7 +31,7 @@ label {
 #userType {
     width: 100%;
     color: black;
-    border: 1px solid #ccc;
+    border: 1px solid black;
     border-radius: 4px;
     box-sizing: border-box;
 }

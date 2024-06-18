@@ -42,7 +42,9 @@ input, button {
 .animated-border {
   // allows you to override it with higher level variable
   --bw: var(--border-width, 3px);
-
+li.about:hover{
+  --opacity:1;
+}
   z-index: 2;
   position: absolute;
   inset: 0;
@@ -316,7 +318,12 @@ input, button {
     }
   }
 }
-
+.form-group input{
+  border: 1px solid black; 
+}
+#userType{
+  background-color: white;
+}
 .form {
   display: flex;
   flex-direction: column;

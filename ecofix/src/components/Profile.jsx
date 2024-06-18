@@ -2,9 +2,10 @@ import "../styles/profile.css";
 import "../styles/responsive.css";
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getFirestore, doc, getDoc, collection, query, where, getDocs, updateDoc, setDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc, collection, query, where, getDocs, updateDoc } from "firebase/firestore";
 import app from '../components/DatabaseConnection';
 import { getAuth } from "firebase/auth";
+import UploadFileComponent from "../components/UploadFileComponent"; 
 import dbPhoto from "../assets/user.png";
 import chat from "../assets/whitechat.png";
 import edit from "../assets/editar.png";
@@ -17,6 +18,7 @@ import Appointments from "./forms/Appointments";
 import "../styles/BotaoDownload.css"
 
 const Profile = ({ userId, isCurrentUser }) => {
+  const [appointmentsVisible, setAppointmentsVisible] = useState(false);
   const auth = getAuth();
   const [name, setName] = useState('');
   const [userPhoto, setUserPhoto] = useState(dbPhoto);
@@ -29,12 +31,12 @@ const Profile = ({ userId, isCurrentUser }) => {
   const [editMode, setEditMode] = useState(false);
   const [bioText, setBioText] = useState('');
   const [bioInput, setBioInput] = useState('');
-  const [location, setLocation] = useState('')
+  const [location, setLocation] = useState('');
   const [thisUser, setThisUser] = useState('');
   const [similarProfiles, setSimilarProfiles] = useState([]);
-  const [sidebarVisible, setSidebarVisible] = useState(false); 
+  const [sidebarVisible, setSidebarVisible] = useState(false);
   const [appointmentsVisible, setAppointmentsVisible] = useState(false);
-  const [chatEmail, setChatEmail] = useState(null);
+  const [activeTab, setActiveTab] = useState('about'); 
   const [expertise, setExpertise] = useState('');
   const navigate = useNavigate();
 
@@ -50,7 +52,6 @@ const Profile = ({ userId, isCurrentUser }) => {
           setName(userData.name);
           setLocation(userData.location);
           setBioText(userData.bio || '');
-          setChatEmail(userData.email);
           if (userData.role === 'Specialist') {
             setRole('Especialista');
           }
@@ -80,9 +81,16 @@ const Profile = ({ userId, isCurrentUser }) => {
 
     fetchUser();
   }, [db, userId, auth]);
+
   function capitalize(string){
-    return string.replace(string[0],string[0].uppercase);
+    const splited = string.split(" ");
+    let newWord = "";
+    for(let i = 0 ; i < splited.length;i++){
+      newWord += splited[i].replace(splited[i][0],splited[i][0].toUpperCase()) + " ";
+    }
+    return newWord
   }
+
   useEffect(() => {
     const fetchSimilarProfiles = async () => {
       try {
@@ -129,7 +137,6 @@ const Profile = ({ userId, isCurrentUser }) => {
     setEditMode(!editMode);
   };
 
-
   const handleBioChange = (e) => {
     setBioInput(e.target.value);
   };
@@ -144,11 +151,6 @@ const Profile = ({ userId, isCurrentUser }) => {
     }
   };
 
-  const handleLinkedinChange = (e) => {
-    setLinkedin(e.target.value);
-  };
-
-
   const goToProfile = (e) => {
     if (e.target.className === "userInList") {
       navigate('/user/' + e.target.lastChild.id);
@@ -157,7 +159,12 @@ const Profile = ({ userId, isCurrentUser }) => {
     navigate('/user/' + e.target.offsetParent.lastChild.id);
   };
 
-  //funções da lógica do chat
+  // Função para alternar entre as abas
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+  };
+
+  // Funções da lógica do chat
   const handleButtonChat = () => {
     setSidebarVisible(!sidebarVisible);
   };
@@ -179,7 +186,7 @@ const Profile = ({ userId, isCurrentUser }) => {
       {/* ===== Header/Navbar ===== */}
       <header>
         <div className="brandLogo">
-          <span style={{fontSize:'x-large'}}>Ecofix</span>
+          <span style={{ fontSize: 'x-large' }}>Ecofix</span>
         </div>
       </header>
 
@@ -198,8 +205,8 @@ const Profile = ({ userId, isCurrentUser }) => {
         <div className="work">
           <h1 className="heading">Contatos</h1>
           <div className="primary">
-            <a style={{marginBottom:'10px'}} href="#" target="_blank"><img style={{width:'20px', marginRight:'5px'}} src={linkedinIcon} alt="" />{"linkedin.com/in/"+linkedin}</a>
-            <p><img style={{width:'20px', marginRight:'5px'}} src={mail} alt="" />{user.email}</p>
+            <a style={{ marginBottom: '10px' }} href={linkedin === 'seu-linkedin'? "#":linkedin} target="_blank"><img style={{ width: '20px', marginRight: '5px' }} src={linkedinIcon} alt=""  />{linkedin}</a>
+            <p><img style={{ width: '20px', marginRight: '5px' }} src={mail} alt="" />{user.email}</p>
           </div>
         </div>
 
@@ -207,7 +214,7 @@ const Profile = ({ userId, isCurrentUser }) => {
         <div className="skills">
           <h1 className="heading">Especialista em:</h1>
           <ul>
-            <li>{expertise}</li>
+            <li>{capitalize(expertise)}</li>
           </ul>
         </div>
       </section>
@@ -218,7 +225,7 @@ const Profile = ({ userId, isCurrentUser }) => {
           <h1 className="name">{name}</h1>
           <div className="map">
             <i className="ri-map-pin-fill ri"></i>
-            <p>Localização:{location}</p>
+            <p>Localização: {location}</p>
           </div>
         </div>
 
@@ -248,49 +255,59 @@ const Profile = ({ userId, isCurrentUser }) => {
       <section className="timeline_about card">
         <div className="tabs">
           <ul>
-            <li className="about active">
+            <li
+              className={`about ${activeTab === 'about' ? 'active' : ''}`}
+              onClick={() => handleTabClick('about')}
+            >
               <i className="ri-user-3-fill ri"></i>
               <span>Sobre Mim</span>
+              {activeTab === 'about' && isCurrentUser && (
+                <img onClick={handleEdit} className="edit-icon" src={edit} alt="Editar" />
+              )}
             </li>
-            <img onClick={handleEdit} id="editIcon" style={{width:'30px', marginTop:'-1.5%', marginLeft:'-3%', cursor:'pointer'}} src={edit} alt="Editar" />
+            <li
+              className={`tips ${activeTab === 'tips' ? 'active' : ''}`}
+              onClick={() => handleTabClick('tips')}
+            >
+              <i className="ri-user-3-fill ri"></i>
+              <span>Dicas do especialista</span>
+            </li>
           </ul>
-          {editMode ? (
+        </div>
+
+        {activeTab === 'about' ? (
+          editMode ? (
             <>
-            <button className="btnTextField" onClick={handleEdit}>Salvar</button>
-            <textarea 
-              style={{textAlign: 'justify'}}
-              value={bioInput}
-              onChange={handleBioChange}
-              autoFocus
-            />
+              <button className="btnTextField" onClick={handleEdit}>Salvar</button>
+              <textarea
+                style={{ textAlign: 'justify' }}
+                value={bioInput}
+                onChange={handleBioChange}
+                autoFocus
+              />
             </>
           ) : (
-            <p style={{textAlign: 'justify'}}>{bioText}</p>
-          )}
-        </div>
+            <p style={{ textAlign: 'justify' }}>{bioText}</p>
+          )
+        ) : (
+          <section className="DownloadFiles">
+            <DownloadFile userId={userId} isCurrentUser={isCurrentUser}/>
+            {isCurrentUser && (
+              <div className="upload-section">
+                <UploadFileComponent />
+              </div>
+            )}
+          </section>
+        )}
       </section>
-      
-      <section className="DownloadFiles">
-        <div className="Arquivo">
-          <button className="BotaoDownload" onClick={() => handleDownload("files/teste1.txt", "teste1.txt")}>Download</button>
-        </div>
-        <div className="Arquivo">
-          <button className="BotaoDownload" onClick={() => handleDownload("files/teste1.txt", "teste1.txt")}>Download</button>
-        </div>
-        <div className="Arquivo">
-          <button className="BotaoDownload" onClick={() => handleDownload("files/teste1.txt", "teste1.txt")}>Download</button>
-        </div>
-      </section>
-
-
 
       {/* Lógica da abertura do chat na página de perfil */}
       {sidebarVisible && (
-         <div className="sidebar-overlay" onClick={handleCloseSidebar}>
-         <div className="sidebar-container" onClick={e => e.stopPropagation()}>
-           <Sidebar email={user.email} />
-         </div>
-       </div>
+        <div className="sidebar-overlay" onClick={handleCloseSidebar}>
+          <div className="sidebar-container" onClick={e => e.stopPropagation()}>
+            <Sidebar email={user.email} />
+          </div>
+        </div>
       )}
       {/* fim da lógica */}
 
