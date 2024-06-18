@@ -12,12 +12,13 @@ function EditProfile() {
   const auth = getAuth(app);
   const db = getFirestore(app);
   const storage = getStorage(app);
-  const [userId, setUserId] = useState(null); // Initialize userId as null
+  const [userId, setUserId] = useState(null);
   const [loading, setLoading] = useState(true);
   const [userPhoto, setUserPhoto] = useState(dbPhoto);
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [location, setLocation] = useState('');
+  const [linkedin, setLinkedin] = useState(''); // Novo estado para LinkedIn
   const [photoFile, setPhotoFile] = useState(null);
   const navigate = useNavigate();
 
@@ -32,6 +33,7 @@ function EditProfile() {
             setName(userData.name || '');
             setUserPhoto(userData.photoURL || dbPhoto);
             setLocation(userData.location || '');
+            setLinkedin(userData.linkedin || ''); // Buscar LinkedIn
           } else {
             console.log('Usuário não encontrado');
           }
@@ -63,7 +65,7 @@ function EditProfile() {
 
     try {
       const userRef = doc(db, 'usuarios', userId);
-      const updates = { name, location };
+      const updates = { name, location, linkedin }; 
 
       if (photoFile) {
         const photoRef = ref(storage, `userPhotos/${userId}`);
@@ -133,6 +135,15 @@ function EditProfile() {
             id="location"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="linkedin">LinkedIn:</label>
+          <input
+            type="text"
+            id="linkedin"
+            value={linkedin}
+            onChange={(e) => setLinkedin(e.target.value)}
           />
         </div>
         <button type="submit" className="submit-button">Salvar Alterações</button>

@@ -409,6 +409,7 @@ section.c-gdSlhB{
   margin-right: var(--m-2-5);
   padding-bottom: var(--p-0-8);
   cursor: pointer;
+  z-index: 5;
 }
 
 .timeline_about .tabs ul li span {
@@ -483,3 +484,59 @@ textarea{
 .timeline_about .contact_info ul .site span {
   color: var(--f5-color);
 }
+/* ===== Hover effect for the edit icon only on 'Sobre Mim' tab ===== */
+.timeline_about .tabs ul .about:hover .edit-icon {
+  display: inline-block;
+  opacity: 1; /* Ensures icon is visible */
+}
+
+.edit-icon {
+  display: none;
+  cursor: pointer;
+  margin-left: 5px;
+  width: 30px;
+}
+
+/* Optional: Add transition effect for smooth appearance */
+.edit-icon {
+  transition: opacity 0.3s ease-in-out;
+}
+/* profile.css */
+
+.tabs li.tips {
+  position: relative;
+}
+
+.tabs li.tips .upload-icon {
+  display: none;
+  position: absolute;
+  right: -34px;
+  top: 36%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.tabs li.tips:hover .upload-icon {
+  display: block;
+}
+
+.upload-section {
+  margin-top: 20px;
+}
+
+.upload-icon{
+  width: 30px;
+}
+
+.DownloadFiles {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.Arquivo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+

@@ -1,17 +1,26 @@
-import { getStorage, ref, uploadBytes } from "firebase/storage";
-import app from "./DatabaseConnection";
+import { getStorage, ref, uploadBytes } from 'firebase/storage';
+import { getAuth } from 'firebase/auth';
+import app from "../components/DatabaseConnection";
+async function uploadArquivos(file) {
+    const auth = getAuth(app);
+    const user = auth.currentUser;
 
-function uploadArquivos(file) {
-    const storage = getStorage(app);
-    const storageRef = ref(storage, 'testes/teste1.txt');
-    const myFile = new File(["conteúdo do arquivo"], "teste1.txt");
+  if (!user) {
+    console.error('Usuário não autenticado.');
+    return;
+  }
 
-    uploadBytes(storageRef, file).then((snapshot) => {
-        console.log('Upload realizado com sucesso!', snapshot);
-    }).catch((error) => {
-        console.error('Erro no upload:', error);
-    });
+  const userId = user.uid;
+  const storage = getStorage(app);
+  const storageRef = ref(storage, `users/${userId}/uploads/${file.name}`);
 
+  try {
+    const snapshot = await uploadBytes(storageRef, file);
+    console.log('Upload realizado com sucesso!', snapshot);
+  } catch (error) {
+    console.error('Erro no upload:', error);
+  }
 }
 
 export default uploadArquivos;
+
