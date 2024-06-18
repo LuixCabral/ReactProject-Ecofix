@@ -13,6 +13,7 @@ import { Sidebar } from './SidebarChat';
 import linkedinIcon from "../assets/linkedin.png";
 import mail from "../assets/mail.png"
 import handleDownload from "./BotaoDownload"
+import Appointments from "./forms/Appointments";
 import "../styles/BotaoDownload.css"
 
 const Profile = ({ userId, isCurrentUser }) => {
@@ -32,6 +33,7 @@ const Profile = ({ userId, isCurrentUser }) => {
   const [thisUser, setThisUser] = useState('');
   const [similarProfiles, setSimilarProfiles] = useState([]);
   const [sidebarVisible, setSidebarVisible] = useState(false); 
+  const [appointmentsVisible, setAppointmentsVisible] = useState(false);
   const [chatEmail, setChatEmail] = useState(null);
   const [expertise, setExpertise] = useState('');
   const navigate = useNavigate();
@@ -157,12 +159,20 @@ const Profile = ({ userId, isCurrentUser }) => {
 
   //funções da lógica do chat
   const handleButtonChat = () => {
-    setSidebarVisible(true);
+    setSidebarVisible(!sidebarVisible);
   };
 
   const handleCloseSidebar = () => {
-    setSidebarVisible(false);
+    setSidebarVisible(!sidebarVisible);
   };
+
+  const handleButtonAppointments = () => {
+    setAppointmentsVisible(!appointmentsVisible);
+  };
+
+  const handleCloseAppointments = () => {
+    setAppointmentsVisible(!appointmentsVisible);
+  }
 
   return (
     <div className="container">
@@ -224,6 +234,12 @@ const Profile = ({ userId, isCurrentUser }) => {
                 <a href="/editar-perfil/">Editar Perfil</a>
               </li>
             )}
+            {isCurrentUser ?  (
+              <li className="sendMsg active">
+              <i className="ri-check-fill ri"></i>
+              <a onClick={handleButtonAppointments}>Agendamento</a>
+            </li>
+            ) : <span></span>}
           </ul>
         </div>
       </section>
@@ -256,13 +272,13 @@ const Profile = ({ userId, isCurrentUser }) => {
       
       <section className="DownloadFiles">
         <div className="Arquivo">
-          <button className="BotaoDownload" onClick={() => handleDownload("testes/teste1.txt", "teste1.txt")}>Download</button>
+          <button className="BotaoDownload" onClick={() => handleDownload("files/teste1.txt", "teste1.txt")}>Download</button>
         </div>
         <div className="Arquivo">
-          <button className="BotaoDownload" onClick={() => handleDownload("testes/teste1.txt", "teste1.txt")}>Download</button>
+          <button className="BotaoDownload" onClick={() => handleDownload("files/teste1.txt", "teste1.txt")}>Download</button>
         </div>
         <div className="Arquivo">
-          <button className="BotaoDownload" onClick={() => handleDownload("testes/teste1.txt", "teste1.txt")}>Download</button>
+          <button className="BotaoDownload" onClick={() => handleDownload("files/teste1.txt", "teste1.txt")}>Download</button>
         </div>
       </section>
 
@@ -278,9 +294,15 @@ const Profile = ({ userId, isCurrentUser }) => {
       )}
       {/* fim da lógica */}
 
+      {appointmentsVisible && (
+         <div className="overlay-appoint" onClick={handleCloseAppointments}>
+         
+           <Appointments />
+         
+       </div>
+      )}
 
-
-
+      
 
     </div>
   );
