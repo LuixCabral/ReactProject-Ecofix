@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getStorage, ref, listAll, getDownloadURL, deleteObject } from "firebase/storage";
-
+import BotaoDownload from "./BotaoDownload"
 function DownloadFileComponent({ userId, isCurrentUser }) {
   const [fileList, setFileList] = useState([]);
 
@@ -27,7 +27,7 @@ function DownloadFileComponent({ userId, isCurrentUser }) {
   }, [userId]);
 
   const handleDownload = (url) => {
-    window.open(url, '_blank');
+    window.open(url, 'self');
   };
 
   const handleDelete = async (fullPath) => {

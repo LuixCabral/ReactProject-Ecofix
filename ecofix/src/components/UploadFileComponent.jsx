@@ -4,7 +4,7 @@ import upload from "../assets/upload.png"
 
 function UploadFileComponent() {
   const [selectedFile, setSelectedFile] = useState(null);
-
+  const [state, setState] = useState(null);
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
