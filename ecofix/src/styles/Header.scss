@@ -35,11 +35,10 @@ $green-light: #e6f1ed;
 }
 
 .menu-button {
-    @media screen and (max-width: 768px) {
-        display: block;
-        
-    }
+    display: block;
 }
+
+// Container do menu mobile
 
 .menu-div {
     height: 100vh;

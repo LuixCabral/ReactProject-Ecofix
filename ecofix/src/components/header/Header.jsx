@@ -10,6 +10,7 @@ import { getAuth } from "firebase/auth";
 import back from "../../assets/back.png";
 import menu from "../../assets/menu.png";
 import user from "../../assets/user.png";
+import chatIcon from '../../assets/chat.png'; 
 
 const Header = () => {
     // Para navegacao
@@ -109,7 +110,7 @@ const Header = () => {
                         </ul>
                         {/* botao de chat no menu */}
                         <button className="btn-chat" >
-                            <img  alt="" width='30' height='30'/>
+                            <img src={chatIcon}  alt="" width='30' height='30'/>
                         </button>
 
                     </div>

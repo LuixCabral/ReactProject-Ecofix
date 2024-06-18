@@ -62,46 +62,63 @@ export default function SearchExperts() {
     <div>
       <h1>Buscar Especialistas</h1>
       <form className='formulario-div'>
-        <input
-          type="text"
-          name="nome"
-          placeholder="Nome"
-          value={searchCriteria.nome}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="localizacao"
-          placeholder="Localização"
-          value={searchCriteria.localizacao}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="especialidade"
-          placeholder="Especialidade"
-          value={searchCriteria.especialidade}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="disponibilidade"
-          placeholder="Disponibilidade"
-          value={searchCriteria.disponibilidade}
-          onChange={handleChange}
-        />
+        <div className="form-group">
+          <label>Nome:</label>
+          <input
+            type="text"
+            name="nome"
+            placeholder="Nome"
+            value={searchCriteria.nome}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label>Localização:</label>
+          <input
+            type="text"
+            name="localizacao"
+            placeholder="Localização"
+            value={searchCriteria.localizacao}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label>Especialidade:</label>
+          <input
+            type="text"
+            name="especialidade"
+            placeholder="Especialidade"
+            value={searchCriteria.especialidade}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label>Disponibilidade:</label>
+          <input
+            type="text"
+            name="disponibilidade"
+            placeholder="Disponibilidade"
+            value={searchCriteria.disponibilidade}
+            onChange={handleChange}
+          />
+        </div>
       </form>
       
       <ul className='resultado-search-list'>
         {filteredUsers.map(user => (
-          <li key={user.id}>
-            <h2>{user.nome}</h2>
-            <p>Localização: {user.localizacao}</p>
-            <p>Especialidade: {user.especialidade}</p>
-            <p>Disponibilidade: {user.disponibilidade}</p>
+          <li key={user.id} className="profile-card">
+            <div className="profile-info">
+              <h2>{user.nome}</h2>
+              <p><strong>Localização:</strong> {user.localizacao}</p>
+              <p><strong>Especialidade:</strong> {user.especialidade}</p>
+              <p><strong>Disponibilidade:</strong> {user.disponibilidade}</p>
+            </div>
           </li>
         ))}
       </ul>
+
     </div>
   );
+  
+  
 }

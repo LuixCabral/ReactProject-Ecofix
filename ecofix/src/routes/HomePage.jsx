@@ -11,7 +11,7 @@ import { useState, useEffect } from "react";
 import app from "../components/DatabaseConnection";
 
 import { getFirestore, doc, getDoc } from "firebase/firestore";
-import chatIcon from '/src/assets/chatIcon.svg'; 
+import chatIcon from '/src/assets/chat.png'; 
 
 import { Sidebar } from "../components/SidebarChat";
 import Appointments from "../components/forms/Appointments";

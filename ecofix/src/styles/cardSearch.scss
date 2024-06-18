@@ -1,0 +1,62 @@
+
+.CardTestPage {
+  width: 100vw;
+  height: 100vh;
+  
+}
+
+.formulario-div {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+
+
+  .form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    label {
+      width: 150px; 
+      margin-right: 1rem; 
+    }
+
+    input {
+      flex: 1; 
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  }
+}
+
+.resultado-search-list {
+  list-style-type: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.profile-card {
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-info {
+  h2 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    margin: 0.5rem 0;
+  }
+
+  strong {
+    font-weight: bold;
+  }
+}
