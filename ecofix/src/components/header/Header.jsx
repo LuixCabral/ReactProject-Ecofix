@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import app from "../../components/DatabaseConnection";
 import { getAuth } from "firebase/auth";
-
+import Appointments from '../forms/Appointments';
 import back from "../../assets/back.png";
 import menu from "../../assets/menu.png";
 import user from "../../assets/user.png";
@@ -21,6 +21,9 @@ const Header = () => {
     // }catch (error) {
     //     navigate('/acesso-negado/');
     // }
+
+    
+
 
     // Lendo datos do Firebase do usuario
     const db = getFirestore(app)
@@ -67,6 +70,18 @@ const Header = () => {
         setMenuOpen((open) => !open);
     }
 
+
+    // funções de agendamento
+    const [appointmentsVisible, setAppointmentsVisible] = useState(false);
+
+    const handleButtonAppointments = () => {
+        setAppointmentsVisible(!appointmentsVisible);
+      };
+    
+      const handleCloseAppointments = () => {
+        setAppointmentsVisible(!appointmentsVisible);
+      };
+
     return(
         <header className='header'>
             <div className="profile-div" onClick={handleProfileClick}>
@@ -103,7 +118,7 @@ const Header = () => {
                             </li>
 
                             <li>
-                                <a className="item-link" id="page-link3">
+                                <a className="item-link" id="page-link3" onClick={handleButtonAppointments}>
                                     <svg className="link-icon feather feather-list" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" >
                                         <path d="M5 3l14 9-14 9V3z" />
                                     </svg>
@@ -121,7 +136,11 @@ const Header = () => {
                 )}
             
             </div>
-        
+            {appointmentsVisible && (
+         <div className="overlay-appoint" onClick={handleCloseAppointments}>
+           <Appointments />
+       </div>
+      )}
         </header>
     );
 };

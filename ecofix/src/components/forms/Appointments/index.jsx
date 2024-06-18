@@ -6,8 +6,7 @@ import { collection, getDocs, query, where, addDoc, getFirestore } from 'firebas
 import app from '../../DatabaseConnection';
 import ptBR from 'date-fns/locale/pt-BR';
 
-
-const db =getFirestore(app);
+const db = getFirestore(app);
 
 registerLocale('pt-BR', ptBR);
 
@@ -27,13 +26,17 @@ const Appointments = () => {
 
   useEffect(() => {
     const fetchSpecialists = async () => {
-      const q = query(collection(db, "usuarios"), where("role", "==", "specialist"));
-      const querySnapshot = await getDocs(q);
-      const specialistsList = querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      setSpecialists(specialistsList);
+      try {
+        const q = query(collection(db, "usuarios"), where("role", "==", "specialist"));
+        const querySnapshot = await getDocs(q);
+        const specialistsList = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setSpecialists(specialistsList);
+      } catch (error) {
+        console.error("Erro ao buscar especialistas:", error);
+      }
     };
 
     fetchSpecialists();
@@ -42,14 +45,18 @@ const Appointments = () => {
   useEffect(() => {
     if (formData.specialist && formData.date) {
       const fetchBusyTimes = async () => {
-        const q = query(
-          collection(db, "agendamentos"),
-          where("specialist", "==", formData.specialist),
-          where("date", "==", formData.date.toISOString().split('T')[0])
-        );
-        const querySnapshot = await getDocs(q);
-        const times = querySnapshot.docs.map(doc => doc.data().time);
-        setBusyTimes(times);
+        try {
+          const q = query(
+            collection(db, "appointments"),
+            where("specialist", "==", formData.specialist),
+            where("date", "==", formData.date.toISOString().split('T')[0])
+          );
+          const querySnapshot = await getDocs(q);
+          const times = querySnapshot.docs.map(doc => doc.data().time);
+          setBusyTimes(times);
+        } catch (error) {
+          console.error("Erro ao buscar horários ocupados:", error);
+        }
       };
 
       fetchBusyTimes();
@@ -69,10 +76,18 @@ const Appointments = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await addDoc(collection(db, "agendamentos"), {
+      const appointmentData = {
         ...formData,
-        date: formData.date.toISOString().split('T')[0]
-      });
+        date: formData.date ? formData.date.toISOString().split('T')[0] : null
+      };
+
+      // Check for missing fields
+      if (!appointmentData.name || !appointmentData.email || !appointmentData.phone || !appointmentData.specialist || !appointmentData.date || !appointmentData.time) {
+        alert('Por favor, preencha todos os campos obrigatórios.');
+        return;
+      }
+
+      await addDoc(collection(db, "appointments"), appointmentData);
       alert('Agendamento realizado com sucesso!');
       setFormData({
         name: '',
