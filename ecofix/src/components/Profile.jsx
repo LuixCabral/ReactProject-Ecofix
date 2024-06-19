@@ -1,4 +1,4 @@
-import "../styles/profile.css";
+import "../styles/profile.scss";
 import "../styles/responsive.css";
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -181,7 +181,7 @@ const Profile = ({ userId, isCurrentUser }) => {
       {/* ===== User Details Sections ===== */}
       <section className="userDetails card">
         <div className="userName">
-          <h1 className="name">{name}</h1>
+          <h1 className="name" style={{color: 'black'}}>{name}</h1>
           <div className="map">
             <i className="ri-map-pin-fill ri"></i>
             <p>Localização: {location}</p>
@@ -246,7 +246,7 @@ const Profile = ({ userId, isCurrentUser }) => {
               />
             </>
           ) : (
-            <p style={{ textAlign: 'justify' }}>{bioText}</p>
+            <p style={{ textAlign: 'justify', color: 'black' }}>{bioText}</p>
           )
         ) : (
           <section className="DownloadFiles">

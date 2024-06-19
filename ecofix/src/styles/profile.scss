@@ -352,7 +352,7 @@ header {
 .userDetails .btns ul li {
   margin-right: var(--m-2-5);
   border-radius: 0.5rem;
-  background-color: #1cc51a6e;
+  background-color: #1ca41a;
   padding: var(--p-0-5) var(--p-1-5);
   color: #000;
 }
@@ -369,7 +369,7 @@ header {
 }
 
 .userDetails .btns ul .active {
-  background: #1cc51a6e;
+  background: #1ca41a;
   padding: var(--p-0-5) var(--p-1-5);
 }
 
@@ -415,6 +415,7 @@ section.c-gdSlhB{
 .timeline_about .tabs ul li span {
   font-size: var(--l-fs);
   font-weight: 500;
+  color: black; // cor texto sobre mim e dicas do especialista
 }
 
 .timeline_about .tabs ul li .ri {
@@ -426,7 +427,7 @@ section.c-gdSlhB{
 }
 .btnTextField{
     right: -44%;
-    background-color: #1cc51a6e;
+    background-color: #1ca41a;
     outline: none;
 }
 textarea{

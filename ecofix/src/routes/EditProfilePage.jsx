@@ -2,10 +2,13 @@ import { useEffect, useState } from 'react';
 import { getFirestore, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { getAuth, updateProfile, onAuthStateChanged } from 'firebase/auth';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+
 import app from '../components/DatabaseConnection';
 import dbPhoto from '../assets/user.png';
 import LoadingSpinner from '../components/LoadingSpinner';
+
 import '../styles/editProfile.css';
+
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/header/Header';
 
@@ -100,7 +103,9 @@ function EditProfile() {
   return (
     <div className="edit-profile-container">
       <header><Header/></header>
+      
       <h2>Editar Perfil</h2>
+
       <form onSubmit={handleSubmit} className="edit-profile-form">
         <div className="form-group">
           <label htmlFor="photo">Foto do Perfil:</label>
