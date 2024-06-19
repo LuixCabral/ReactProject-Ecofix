@@ -43,7 +43,7 @@ Inicie o servidor
 
 
 ## Futuras melhorias
-- Melhorar a acessibilidade.
+- Criar a acessibilidade do site.
 - Criar comunidades
 - Melhorar a usabilidade do usuário
 
