@@ -45,7 +45,7 @@ Inicie o servidor
 ## Futuras melhorias
 - Melhorar a acessibilidade.
 - Criar comunidades
-- Aumentar a usabilidade do usuário
+- Melhorar a usabilidade do usuário
 
 ## Autores
 
